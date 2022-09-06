@@ -1,24 +1,21 @@
 package model.dao;
 
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import db.util.DBConnManager;
 import model.vo.History;
 
 public class HistoryDAO {
 
     public ArrayList<History> selectHistory(String id) {
 
-        Connection conn = ConnectionHelper.getConnection();
-        PreparedStatement pstmt = null;
+        PreparedStatement pstmt = DBConnManager.getInstance().getPreparedStatement("select * from history where id=? ");
         ResultSet rs = null;
-
         ArrayList<History> list = new ArrayList<>();
         try {
-            pstmt = conn.prepareStatement("select * from history where id=? ");
             pstmt.setString(1, id);
             rs = pstmt.executeQuery();
             while (rs.next()) {
@@ -30,20 +27,17 @@ public class HistoryDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            ConnectionHelper.close(rs);
-            ConnectionHelper.close(pstmt);
-            ConnectionHelper.close(conn);
+            DBConnManager.close(rs);
+            DBConnManager.close(pstmt);
         }
         return list;
     }
 
-    public ArrayList<History> selectAllHistory() { 
-        Connection conn = ConnectionHelper.getConnection();
-        PreparedStatement pstmt = null;
+    public ArrayList<History> selectAllHistory() {
+        PreparedStatement pstmt = DBConnManager.getInstance().getPreparedStatement("select * from history");
         ResultSet rs = null;
         ArrayList<History> list = new ArrayList<>();
         try {
-            pstmt = conn.prepareStatement("select * from history");
             rs = pstmt.executeQuery();
             while (rs.next()) {
                 list.add(new History(rs.getString("id"),
@@ -54,19 +48,15 @@ public class HistoryDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            ConnectionHelper.close(rs);
-            ConnectionHelper.close(pstmt);
-            ConnectionHelper.close(conn);
+            DBConnManager.close(rs);
+            DBConnManager.close(pstmt);
         }
         return list;
     }
 
     public boolean insertHistory(History h) {
-        Connection conn = ConnectionHelper.getConnection();
-        PreparedStatement pstmt = null;
-
+        PreparedStatement pstmt = DBConnManager.getInstance().getPreparedStatement("insert into history values (?,?,?,?)");
         try {
-            pstmt = conn.prepareStatement("insert into history values (?,?,?,?)");
             pstmt.setString(1, h.getId());
             pstmt.setInt(2, h.getIsbn());
             pstmt.setInt(3, h.getPrice());
@@ -76,17 +66,14 @@ public class HistoryDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            ConnectionHelper.close(pstmt);
-            ConnectionHelper.close(conn);
+            DBConnManager.close(pstmt);
         }
         return false;
     }
 
     public boolean updateHistory(History h) {
-        Connection conn = ConnectionHelper.getConnection();
-        PreparedStatement pstmt = null;
+        PreparedStatement pstmt = DBConnManager.getInstance().getPreparedStatement("update history set price= ?, clear=? where id=? and isbn=?");
         try {
-            pstmt = conn.prepareStatement("update history set price= ?, clear=? where id=? and isbn=?");
             pstmt.setInt(1, h.getPrice());
             pstmt.setInt(2, h.getClear());
             pstmt.setString(3, h.getId());
@@ -96,20 +83,16 @@ public class HistoryDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            ConnectionHelper.close(pstmt);
-            ConnectionHelper.close(conn);
+            DBConnManager.close(pstmt);
         }
         return false;
     }
 
     public int countClear(String id) {
-        Connection conn = ConnectionHelper.getConnection();
-        PreparedStatement pstmt = null;
+        PreparedStatement pstmt = DBConnManager.getInstance().getPreparedStatement(
+            "select count(*) as count from history where id=?");
         ResultSet rs = null;
         try {
-            String sql = "select count(*) as count from history"
-                    + " where id=?";
-            pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, id);
             rs = pstmt.executeQuery();
             rs.next();
@@ -117,9 +100,8 @@ public class HistoryDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            ConnectionHelper.close(rs);
-            ConnectionHelper.close(pstmt);
-            ConnectionHelper.close(conn);
+            DBConnManager.close(rs);
+            DBConnManager.close(pstmt);
         }
         return 0;
     }
