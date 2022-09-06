@@ -14,9 +14,9 @@
 - prent(person_rent 대여한 사람 수) : int
 - clearnum()  : int
 - originPrice(책의 실제 가격) : int 
-- summary(줄거리) : String
+- summary(줄거리) : String 
 <br> 
-<br> 
+
 **insertBook()**
 - 변수: isbn, genre, bname, writer, prent, clearNum, originPrice, summary
 - 기능: Book 전체 데이터 추가
