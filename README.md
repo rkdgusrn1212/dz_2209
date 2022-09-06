@@ -55,12 +55,55 @@
 <br> 
 
 **selectDuplicatedIsbn()**
-- 변수 : count
-- 기능 : isbn로 전체 건수를 조회
+- 변수 : isbn
+- 기능 : isbn로 book의 전체 건수를 조회
 - 특징 : count(*)를 통해 조회된 전체 행 건수를 반환
 <br>
 <br>  
 
+# ConnectionHelper
+**연결 및 CLOSE 함수**
+- Connection getConnection() : DB연결
+- close(Connection conn) : Connection close
+- close(Statement stmt) : Statement close
+- close(ResultSet rs) : ResultSet close
+
 # HISTORYDAO
 **컬럼종류 및 변수 타입**
+- id(사용자 아이디) : String
+- isbn(국제표준도서번호) : int
+- price(도서공유프로그램에서의 가격) : int 
+- clear()  : int
+<br>
+
+**ArrayList<History> selectHistory**
+- 변수 : id, isbn, price, clear
+- 기능 : id로 history의 데이터 조회
+- 특징 : ArrayList<History> 활용
+<br> 
+
+**ArrayList<History> selectAllHistory**
+- 변수 : id, isbn, price, clear
+- 기능 : history의 전체 데이터 조회
+- 특징 : ArrayList<History> 활용
+<br> 
+
+**insertHistory()**
+- 변수 : id, isbn, price, clear
+- 기능 : history의 데이터 삽입
+<br>
+
+**updateHistory()**
+- 변수 : id, isbn, price, clear
+- 기능 : id와 isbn 으로 데이터 수정
+- 특징 : where id and isbn
+<br>
+
+**countClear()**
+- 변수 : id
+- 기능 : id로 history의 전체 건수를 조회
+- 특징 : count(*)를 통해 조회된 전체 행 건수를 반환
+<br>
+<br>  
+
 
