@@ -2,19 +2,20 @@
 더존 3기 2팀 미니프로젝트
 
 # 개요
-- 컨텐츠 : 
-- 출력화면 : 콘솔
+- 컨텐츠 : 도서 공유 시스템
+- 출력화면 : GUI
 
 # BookDAO
+## BOOK 테이블
 **컬럼종류 및 변수 타입**
-- isbn(국제표준도서번호) : int
-- genre(책 장르) : String
-- bname(책이름) : String
-- wirter(저자) : String
-- prent(person_rent 대여한 사람 수) : int
-- clearNum()  : int
-- originPrice(책의 실제 가격) : int 
-- summary(줄거리) : String 
+- ISBN(국제표준도서번호) : 13자리 숫자
+- GENRE(책 장르) : 문자열
+- B_NAME(책이름) : 문자열
+- WRITER(저자) : 문자열
+- P_RENT(대여한 사람 수) : 정수
+- CLEAR_NUM()  : 정수
+- ORIGIN_PRICE(책의 실제 가격) : 정수 
+- SUMMARY(줄거리) : 문자열
 <br> 
 
 **insertBook()**
