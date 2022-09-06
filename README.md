@@ -8,11 +8,11 @@
 # BookDAO
 **컬럼종류 및 변수 타입**
 - isbn(국제표준도서번호) : int
-- genre(장르) : String
+- genre(책 장르) : String
 - bname(책이름) : String
 - wirter(저자) : String
 - prent(person_rent 대여한 사람 수) : int
-- clearnum()  : int
+- clearNum()  : int
 - originPrice(책의 실제 가격) : int 
 - summary(줄거리) : String 
 <br> 
@@ -67,6 +67,8 @@
 - close(Connection conn) : Connection close
 - close(Statement stmt) : Statement close
 - close(ResultSet rs) : ResultSet close
+<br>  
+<br>
 
 # HISTORYDAO
 **컬럼종류 및 변수 타입**
@@ -104,6 +106,102 @@
 - 기능 : id로 history의 전체 건수를 조회
 - 특징 : count(*)를 통해 조회된 전체 행 건수를 반환
 <br>
-<br>  
+<br> 
 
+# MemberDAO
+**컬럼종류 및 변수 타입**
+- id(사용자의 아이디) : String
+- pass(사용자의 비밀번호) : String
+- ename(사용자의 이름) : String
+- email(사용자의 이메일) : String
+- genre(책의 장르) : String
+- egrade(사용자의 등급) : int
+- point(사용자의 포인트) : int
+- cash(사용자의 캐쉬) : int
+<br>
+-checkstr(@ 문자열 포함 여부 확인): String
+<br>
+
+**loginCheck()**
+- 변수 : id, pass
+- 기능 : id와 isbn 으로 데이터 수정
+- 특징1 : count(*)를 통해 조회된 전체 행 건수를 반환
+- 특징2 : where id and pass
+<br> 
+
+**insertJoin()**
+- 변수 : id,pass,ename,email,genre
+- 기능 : member에 데이터 삽입
+<br>
+
+**findIdPass()**
+- 변수 : id, pass, email
+- 기능 : email로 사용자의 id, pass 찾기
+<br>
+
+**selectMypage()**
+- 변수 : id, ename, egrade, point,cash
+- 기능 : id로 사용자의 마이페이지 데이터 조회
+<br>
+
+**selectGenre()**
+- 변수 : id, gerne
+- 기능 : id로 사용자의 장르 데이터 조회
+<br>
+
+**selectMemberInfo()**
+- 변수 : id, ename, email,genre
+- 기능 : id로 사용자의 데이터 조회
+<br>
+
+**ArrayList<Member> selectMember()**
+- 변수 : id, ename, email,genre
+- 기능 : id로 사용자의 데이터 조회
+- 특징 : ArrayList<Member> 활용
+<br>
+
+**ArrayList<Member> selectAllMember()**
+- 변수 : id, ename, email,genre
+- 기능 : 전체 member 데이터 조회
+- 특징 : ArrayList<Member> 활용
+<br> 
+
+**updateMemberInfo()**
+- 변수 : id, pass
+- 기능 : id로 pass 수정
+<br>
+
+**dupliCheck()**
+- 변수 : id, email
+- 기능 : @이 있으면 email의 건수 확인 없으면 id의 건수 확인
+- 특징1 : count(*)를 통해 조회된 전체 행 건수를 반환
+- 특징2 : checkStr.contains("@") 즉 "@" 문자열 확인
+<br>
+
+**updateGenre()**
+- 변수 : id, gerne
+- 기능 : id로 사용자의 genre 데이터 수정
+<br>
+
+**updateCashCharge()**
+- 변수 : id, cash
+- 기능 : id로 사용자의 cash 데이터 수정
+- 특징 : cash = cash+
+<br>
+
+**updateAfterPay()**
+- 변수 : id, cash
+- 기능 : id로 사용자의 cash 데이터 수정
+- 특징 : cash = cash-
+<br>
+
+**selectGrade()**
+- 변수 : id, egrade
+- 기능 : id로 사용자의 egrade 데이터 조회
+<br>
+
+**updateGrade()**
+- 변수 : id, egrade
+- 기능 : id로 사용자의 egrade 데이터 수정
+<br>
 
