@@ -6,16 +6,16 @@
 - 출력화면 : GUI
 
 # BookDAO
-## BOOK 테이블
-**컬럼종류 및 변수 타입**
-- ISBN(국제표준도서번호) : 13자리 숫자
-- GENRE(책 장르) : 문자열
-- B_NAME(책이름) : 문자열
-- WRITER(저자) : 문자열
-- P_RENT(대여한 사람 수) : 정수
-- CLEAR_NUM()  : 정수
-- ORIGIN_PRICE(책의 실제 가격) : 정수 
-- SUMMARY(줄거리) : 문자열
+
+**BOOK 테이블**
+> ISBN(국제표준도서번호) : 13자리 숫자<br>
+> GENRE(책 장르) : 문자열<br>
+> B_NAME(책이름) : 문자열<br>
+> WRITER(저자) : 문자열<br>
+> P_RENT(대여한 사람 수) : 정수<br>
+> CLEAR_NUM()  : 정수<br>
+> ORIGIN_PRICE(책의 실제 가격) : 정수 <br>
+> SUMMARY(줄거리) : 문자열<br>
 <br> 
 
 **insertBook()**
