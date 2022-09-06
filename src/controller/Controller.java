@@ -7,6 +7,7 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.Random;
 
+import db.util.DBConnManager;
 import model.dao.BookDAO;
 import model.dao.MemberDAO;
 import model.vo.Book;

@@ -18,7 +18,7 @@ public class DBConnManager {
 
     private static DBConnManager mInstance = null;
     private Connection mConn = null;
-    private String mDsn;
+    private String mURL;
     private String mUser;
     private String mPwd;
 
@@ -29,7 +29,7 @@ public class DBConnManager {
         try {
             Properties pro = new Properties();
             pro.load(new FileReader("db.properties"));
-            mDsn = pro.getProperty("dsn");
+            mURL = pro.getProperty("url");
             mUser = pro.getProperty("user");
             mPwd = pro.getProperty("pwd");
             Class.forName(pro.getProperty("driver"));
@@ -60,7 +60,7 @@ public class DBConnManager {
     private Connection getConnection() {
         try {
             if(mConn==null||mConn.isClosed()) {//mConn객체가 GC 대상(혹은 진짜 없거나)이거나, 닫혀있다면.
-                mConn = DriverManager.getConnection(mDsn, mUser, mPwd);//새로 연결해서 래퍼런스 저장.
+                mConn = DriverManager.getConnection(mURL, mUser, mPwd);//새로 연결해서 래퍼런스 저장.
             }
         } catch (SQLException e) {
             System.out.println("DB 연결 생성 실패");
