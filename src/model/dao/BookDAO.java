@@ -1,11 +1,11 @@
 package model.dao;
 
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import db.util.DBConnManager;
 import model.vo.Book;
 
 public class BookDAO {
@@ -14,12 +14,9 @@ public class BookDAO {
 
     public boolean insertBook(Book b) {
 
-        Connection conn = ConnectionHelper.getConnection();
-        PreparedStatement pstmt = null;
+        PreparedStatement pstmt = DBConnManager.getInstance().getPreparedStatement(
+                "insert into book (isbn,genre,b_name,writer,p_rent,clear_num,origin_price,summary) values(?,?,?,?,?,?,?,?)");
         try {
-
-            pstmt = conn.prepareStatement("insert into book (isbn,genre,bname,writer,prent,clearNum,originPrice,summary) "
-                    + "values(?,?,?,?,?,?,?,?)");
             pstmt.setInt(1, b.getIsbn());
             pstmt.setString(2, b.getGenre());
             pstmt.setString(3, b.getBname());
@@ -29,46 +26,38 @@ public class BookDAO {
             pstmt.setInt(7, b.getOriginPrice());
             pstmt.setString(8, b.getSummary());
             pstmt.executeUpdate();
-
             return true;
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            ConnectionHelper.close(pstmt);//close()에 nullable 처리로직이 구현되있다.
-            ConnectionHelper.close(conn);
+        }finally {
+            DBConnManager.close(pstmt);
         }
         return false;
     }
     
-    public boolean updatePrent(Book b) {
+     public boolean updatePrent(Book b) {
 
-        Connection conn = ConnectionHelper.getConnection();
-        PreparedStatement pstmt = null;
-        try {
-            pstmt = conn.prepareStatement("update book set prent=?"
+        PreparedStatement pstmt = DBConnManager.getInstance().getPreparedStatement("update book set p_rent=?"
                     +"where isbn=?");
+        try {
             pstmt.setInt(1, b.getPrent() + 1);
             pstmt.setInt(2, b.getIsbn());
             pstmt.executeUpdate();
-
             return true;
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            ConnectionHelper.close(pstmt);//close()에 nullable 처리로직이 구현되있다.
-            ConnectionHelper.close(conn);
+            DBConnManager.close(pstmt);
         }
         return false;
     }
     
-    public boolean updateclearNum(Book b) {
+    public boolean updateClearNum(Book b) {
 
-        Connection conn = ConnectionHelper.getConnection();
-        PreparedStatement pstmt = null;
+        PreparedStatement pstmt = DBConnManager.getInstance().getPreparedStatement("update book set clear_num=?"
+                +"where isbn=?");
         try {
 
-            pstmt = conn.prepareStatement("update book set clearNum=?"
-                    +"where isbn=?");
             pstmt.setInt(1, b.getClearNum() + 1);
             pstmt.setInt(2, b.getIsbn());
             pstmt.executeUpdate();
@@ -77,18 +66,15 @@ public class BookDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            ConnectionHelper.close(pstmt);//close()에 nullable 처리로직이 구현되있다.
-            ConnectionHelper.close(conn);
+            DBConnManager.close(pstmt);
         }
         return false;
     }
 
     public boolean deleteBook(String isbn) {
 
-        Connection conn = ConnectionHelper.getConnection();
-        PreparedStatement pstmt = null;
+        PreparedStatement pstmt = DBConnManager.getInstance().getPreparedStatement("delete from book where isbn=?");
         try {
-            pstmt = conn.prepareStatement("delete from book where isbn=?");
             pstmt.setString(1, isbn);
             int t = pstmt.executeUpdate();
             if(t == 1) {
@@ -97,100 +83,85 @@ public class BookDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            ConnectionHelper.close(pstmt);//close()에 nullable 처리로직이 구현되있다.
-            ConnectionHelper.close(conn);
+            DBConnManager.close(pstmt);
         }
         return false;
     }
 
     public Book selectBook(int isbn) {
 
-        Connection conn = ConnectionHelper.getConnection();
-        PreparedStatement pstmt = null;
+        PreparedStatement pstmt = DBConnManager.getInstance().getPreparedStatement(
+                "select genre, b_name, writer, p_rent, clear_num, origin_price, summary, image where isbn=?");
         ResultSet rs = null;
         Book b = null;
 
         try {
-            String sql="select genre, bname, writer, prent, clearNum, originPrice, summary, image "
-                    +"where isbn=?";
-
-            pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, isbn);
             rs = pstmt.executeQuery();
             if(rs.next()) {
                 b = new Book(isbn, 
                         rs.getString("genre"),
-                        rs.getString("bname"),
+                        rs.getString("b_name"),
                         rs.getString("writer"),
-                        rs.getInt("prent"),
-                        rs.getInt("clearNum"),
-                        rs.getInt("originPrice"),
+                        rs.getInt("p_rent"),
+                        rs.getInt("clear_num"),
+                        rs.getInt("origin_price"),
                         rs.getString("summary"),
                         rs.getString("image "));
             }
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            ConnectionHelper.close(rs);
-            ConnectionHelper.close(pstmt);
-            ConnectionHelper.close(conn);
+            DBConnManager.close(rs);
+            DBConnManager.close(pstmt);
         }
         return b;
     }//selectBook
 
     public ArrayList<Book> recommendBook(String genre) {
 
-        Connection conn = ConnectionHelper.getConnection();
-        PreparedStatement pstmt = null;
+        PreparedStatement pstmt = DBConnManager.getInstance().getPreparedStatement(
+                "select b_name, writer, origin_price, summary from book where genre=?");
         ArrayList<Book> bookList = new ArrayList<>();
         ResultSet rs = null;
 
         try {
-            String sql = "select bname, writer, originPrice, summary from book"
-                    +"where genre=?";
-
-            pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, genre);
             rs = pstmt.executeQuery();
             if(rs.next()) {
                 Book b = new Book(
-                        rs.getString("bname"),
+                        rs.getString("b_name"),
                         rs.getString("writer"),
-                        rs.getInt("originPrice"),
+                        rs.getInt("origin_price"),
                         rs.getString("summary"));
                 bookList.add(b);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            ConnectionHelper.close(rs);
-            ConnectionHelper.close(pstmt);
-            ConnectionHelper.close(conn);
+            DBConnManager.close(rs);
+            DBConnManager.close(pstmt);
         }
         return bookList;
     }//recommendBook
 
     public ArrayList<Book> selectAllBook() {
-        
-        Connection conn = ConnectionHelper.getConnection();
-        PreparedStatement pstmt = null;
+
+        PreparedStatement pstmt = DBConnManager.getInstance().getPreparedStatement(
+                "select isbn, genre, b_name, writer, p_rent, clear_num, origin_price, summary, image from book");
         ArrayList<Book> bookList = new ArrayList<>();
         ResultSet rs = null;
         try {
-            String sql = "select isbn, genre, bname, writer, prent, clearNum, originPrice, summary, image from book";
-
-            pstmt = conn.prepareStatement(sql);
             rs = pstmt.executeQuery();
-
             while(rs.next()) {
                 Book b = new Book(
                         rs.getInt("isbn"),
                         rs.getString("genre"),
-                        rs.getString("bname"),
+                        rs.getString("b_name"),
                         rs.getString("writer"),
-                        rs.getInt("prent"),
-                        rs.getInt("clearNum"),
-                        rs.getInt("originPrice"),
+                        rs.getInt("p_rent"),
+                        rs.getInt("clear_num"),
+                        rs.getInt("origin_price"),
                         rs.getString("summary"),
                         rs.getString("image"));
                 bookList.add(b);
@@ -198,34 +169,28 @@ public class BookDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            ConnectionHelper.close(rs);
-            ConnectionHelper.close(pstmt);
-            ConnectionHelper.close(conn);
+            DBConnManager.close(rs);
+            DBConnManager.close(pstmt);
         }
         return bookList;
     }//selectAllBook
 
 
     public boolean selectDuplicatedIsbn(String isbn) {
-        Connection conn = ConnectionHelper.getConnection();
-        PreparedStatement pstmt = null;
-
+        PreparedStatement pstmt = DBConnManager.getInstance().getPreparedStatement(
+                "select count(*) count from book where isbn=?");
         ResultSet rs = null;
         try {
-            String sql = "select count(*) count from book where isbn=?";
-            pstmt = conn.prepareStatement(sql);
             pstmt.setString(1,isbn);
             rs = pstmt.executeQuery();
-
             rs.next();
             int count = rs.getInt("count");
             if(count==1) return true;
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            ConnectionHelper.close(rs);
-            ConnectionHelper.close(pstmt);
-            ConnectionHelper.close(conn);
+            DBConnManager.close(rs);
+            DBConnManager.close(pstmt);
         }
         return false;
     }//selectDuplicatedIsbn
