@@ -10,13 +10,13 @@ import model.vo.Member;
 
 public class MemberDAO {
 
-    public boolean loginCheck(String id, String pass) {
+    public boolean loginCheck(String id, String pwd) {
         PreparedStatement pstmt = DBConnManager.getInstance().getPreparedStatement(
-                "select count(*) from member  where id=? and pass=?");
+                "select count(*) from member  where id=? and pwd=?");
         ResultSet rs = null;
         try {
             pstmt.setString(1, id);
-            pstmt.setString(2, pass);
+            pstmt.setString(2, pwd);
             rs = pstmt.executeQuery();
             rs.next();
             int t = rs.getInt(1);
@@ -33,7 +33,7 @@ public class MemberDAO {
 
     public boolean insertJoin(Member m) {
         PreparedStatement pstmt = DBConnManager.getInstance().getPreparedStatement(
-                "insert into member (id,pass,ename,email,genre) values (?,?,?,?,?)");
+                "insert into member (id,pwd,name,email,genre) values (?,?,?,?,?)");
         try {
             pstmt.setString(1, m.getId());
             pstmt.setString(2, m.getPass());
@@ -51,9 +51,9 @@ public class MemberDAO {
         return false;
     }
 
-    public Member findIdPass(String email) {
+    public Member findIdpwd(String email) {
         PreparedStatement pstmt = DBConnManager.getInstance().getPreparedStatement(
-                "select id,pass from member where email = ?");
+                "select id,pwd from member where email = ?");
         ResultSet rs = null;
         try {
             pstmt.setString(1, email);
@@ -61,7 +61,7 @@ public class MemberDAO {
             if(rs.next()) {
                 Member m = new Member();
                 m.setId(rs.getString("id"));
-                m.setPass(rs.getString("pass"));
+                m.setPass(rs.getString("pwd"));
                 return m;
             }
         } catch (SQLException e) {
@@ -75,14 +75,14 @@ public class MemberDAO {
 
     public Member selectMypage(String id) {
         PreparedStatement pstmt = DBConnManager.getInstance().getPreparedStatement(
-                "select ename, egrade, point,cash from member where id=?");
+                "select name, grade, point,cash from member where id=?");
         ResultSet rs = null;
         try {
             pstmt.setString(1, id);
             rs = pstmt.executeQuery();
             if (rs.next()) {
-                return new Member(rs.getString("ename"),
-                        rs.getInt("egrade"),
+                return new Member(rs.getString("name"),
+                        rs.getInt("grade"),
                         rs.getInt("point"), 
                         rs.getInt("cash"));
             }
@@ -115,7 +115,7 @@ public class MemberDAO {
 
     public Member selectMemberInfo(String id) {
         PreparedStatement pstmt = DBConnManager.getInstance().getPreparedStatement(
-                "select ename, email,genre from member");
+                "select name, email,genre from member");
         ResultSet rs = null;
         try {
             pstmt.setString(1, id);
@@ -123,7 +123,7 @@ public class MemberDAO {
             if (rs.next()) {
                 Member m  = new Member();
                 m.setId(id);
-                m.setEname(rs.getString("ename"));
+                m.setEname(rs.getString("name"));
                 m.setEmail(rs.getString("email"));
                 m.setGenre(rs.getString("genre"));
                 return m;
@@ -139,7 +139,7 @@ public class MemberDAO {
 
     public ArrayList<Member> selectMember(String id){
         PreparedStatement pstmt = DBConnManager.getInstance().getPreparedStatement(
-                "select ename, email,genre from member");
+                "select name, email,genre from member");
         ResultSet rs = null;
         ArrayList<Member> list = new ArrayList<>();
         try {
@@ -148,7 +148,7 @@ public class MemberDAO {
             if (rs.next()) {
                 Member m  = new Member();
                 m.setId(id);
-                m.setEname(rs.getString("ename"));
+                m.setEname(rs.getString("name"));
                 m.setEmail(rs.getString("email"));
                 m.setGenre(rs.getString("genre"));
                 list.add(m);
@@ -164,7 +164,7 @@ public class MemberDAO {
 
     public ArrayList<Member> selectAllMember(){
         PreparedStatement pstmt = DBConnManager.getInstance().getPreparedStatement(
-                "select id, ename, email,genre from member");
+                "select id, name, email,genre from member");
         ResultSet rs = null;
         ArrayList<Member> list = new ArrayList<>();
         try {
@@ -172,7 +172,7 @@ public class MemberDAO {
             while (rs.next()) {
                 Member m  = new Member();
                 m.setId(rs.getString("id"));
-                m.setEname(rs.getString("ename"));
+                m.setEname(rs.getString("name"));
                 m.setEmail(rs.getString("email"));
                 m.setGenre(rs.getString("genre"));
                 list.add(m);
@@ -186,11 +186,11 @@ public class MemberDAO {
         return list;
     }
 
-    public boolean updateMemberInfo(String id,String pass) {
+    public boolean updateMemberInfo(String id,String pwd) {
         PreparedStatement pstmt = DBConnManager.getInstance().getPreparedStatement(
-                "update member set pass=? where id=?");
+                "update member set pwd=? where id=?");
         try {
-            pstmt.setString(1, pass);
+            pstmt.setString(1, pwd);
             pstmt.setString(2, id);
             int t = pstmt.executeUpdate();
             if(t>0) return true;
@@ -277,13 +277,13 @@ public class MemberDAO {
     }
 
     public int selectGrade(String id) {
-        PreparedStatement pstmt = DBConnManager.getInstance().getPreparedStatement("select egrade from member where id=?");
+        PreparedStatement pstmt = DBConnManager.getInstance().getPreparedStatement("select grade from member where id=?");
         ResultSet rs = null;
         try {
             pstmt.setString(1, id);
             rs = pstmt.executeQuery();
             if(rs.next()) {
-                return rs.getInt("egrade");
+                return rs.getInt("grade");
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -294,11 +294,11 @@ public class MemberDAO {
         return 0;
     }
 
-    public boolean updateGrade(String id, int egrade) {
-        PreparedStatement pstmt = DBConnManager.getInstance().getPreparedStatement("update member set egrade=? where id=?");
+    public boolean updatgrade(String id, int grade) {
+        PreparedStatement pstmt = DBConnManager.getInstance().getPreparedStatement("update member set grade=? where id=?");
         ResultSet rs = null;
         try {
-            pstmt.setInt(1, egrade);
+            pstmt.setInt(1, grade);
             pstmt.setString(2, id);
             int t = pstmt.executeUpdate();
             if(t>0) return true;
