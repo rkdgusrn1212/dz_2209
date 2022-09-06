@@ -127,7 +127,7 @@
 - 기능 : id와 isbn 으로 데이터 수정
 - 특징1 : count(*)를 통해 조회된 전체 행 건수를 반환
 - 특징2 : where id and pass
-<br>
+<br> 
 
 **insertJoin()**
 - 변수 : id,pass,ename,email,genre
