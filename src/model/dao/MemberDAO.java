@@ -33,13 +33,16 @@ public class MemberDAO {
 
     public boolean insertJoin(Member m) {
         PreparedStatement pstmt = DBConnManager.getInstance().getPreparedStatement(
-                "insert into member (id,pwd,name,email,genre) values (?,?,?,?,?)");
+                "insert into member values (?,?,?,?,?,?,?,?)");
         try {
             pstmt.setString(1, m.getId());
             pstmt.setString(2, m.getPass());
             pstmt.setString(3, m.getEname());
             pstmt.setString(4, m.getEmail());
             pstmt.setString(5, m.getGenre());
+            pstmt.setInt(6, 3);
+            pstmt.setInt(7, 0);
+            pstmt.setInt(8, 0);
             int t = pstmt.executeUpdate();
             if (t > 0)
                 return true;
