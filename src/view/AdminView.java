@@ -17,7 +17,7 @@ public class AdminView extends JFrame {
     public JTable table, table2;
     JLabel la_id, la_book;
     public JScrollPane sp, sp2;
-    public JButton bt_back, bt_addquiz, bt_selectmember, bt_addbook, bt_selectbook, bt_selectallmember, bt_selectallbook;
+    public JButton btnBack, btnAddQuiz, btnSelectMember, btnAddBook, btnSelectBook, btnSelectAllMember, btnSelectAllBook;
     Object rowData[][]= new String[0][5];
     Object columnnames[] = {"아이디", "이름", "이메일", "장르"};
     
@@ -29,13 +29,13 @@ public class AdminView extends JFrame {
         
         la_id = new JLabel("회원 정보");
         la_book = new JLabel("도서 정보");      
-        bt_back = new JButton("로그아웃");
-        bt_addquiz = new JButton("퀴즈 변경");
-        bt_selectmember = new JButton("회원 조회");
-        bt_addbook = new JButton("도서 추가");
-        bt_selectbook = new JButton("도서 조회");
-        bt_selectallmember = new JButton("회원 전체 조회");
-        bt_selectallbook = new JButton("도서 전체 조회");
+        btnBack = new JButton("로그아웃");
+        btnAddQuiz = new JButton("퀴즈 변경");
+        btnSelectMember = new JButton("회원 조회");
+        btnAddBook = new JButton("도서 추가");
+        btnSelectBook = new JButton("도서 조회");
+        btnSelectAllMember = new JButton("회원 전체 조회");
+        btnSelectAllBook = new JButton("도서 전체 조회");
         
 //member table
         dtm = new DefaultTableModel(rowData,columnnames);
@@ -53,25 +53,25 @@ public class AdminView extends JFrame {
         la_book.setBounds(550, 20, 100, 30);
         sp.setBounds(20, 50, 380, 300);
         sp2.setBounds(550, 50, 380, 300);
-        bt_back.setBounds(20, 400, 100, 30);
-        bt_addquiz.setBounds(620, 400, 100, 30);
-        bt_addbook.setBounds(760, 400, 100, 30);        
-        bt_selectbook.setBounds(690, 10, 100, 30);      
-        bt_selectallbook.setBounds(810, 10, 120, 30);       
-        bt_selectmember.setBounds(160, 10, 100, 30);
-        bt_selectallmember.setBounds(280, 10, 120, 30);
+        btnBack.setBounds(20, 400, 100, 30);
+        btnAddQuiz.setBounds(620, 400, 100, 30);
+        btnAddBook.setBounds(760, 400, 100, 30);        
+        btnSelectBook.setBounds(690, 10, 100, 30);      
+        btnSelectAllBook.setBounds(810, 10, 120, 30);       
+        btnSelectMember.setBounds(160, 10, 100, 30);
+        btnSelectAllMember.setBounds(280, 10, 120, 30);
 //add
         add(la_id);
         add(la_book);
         add(sp);
         add(sp2);
-        add(bt_back);
-        add(bt_addquiz);
-        add(bt_addbook);
-        add(bt_selectbook);
-        add(bt_selectmember);
-        add(bt_selectallbook);
-        add(bt_selectallmember);
+        add(btnBack);
+        add(btnAddQuiz);
+        add(btnAddBook);
+        add(btnSelectBook);
+        add(btnSelectMember);
+        add(btnSelectAllBook);
+        add(btnSelectAllMember);
         
         setVisible(false);
         setSize(1000, 530);

@@ -10,46 +10,46 @@ import javax.swing.JButton;
 import javax.swing.JTextField;
 
 public class QuizView extends JFrame{
-    JPanel panel_Q;
-    JLabel label_quizQ;
-    JLabel label_nameQ;
-    JLabel label_contentQ;
-    JLabel la_answer;
-    public JTextField tf_answer;
-    public JButton confirm_Q;
-    public JButton cancel_Q;
+    JPanel panelQuiz;
+    JLabel labelQuiz;
+    JLabel labelTitle;
+    JLabel labelContent;
+    JLabel labelAnswer;
+    public JTextField tfAnswer;
+    public JButton btnConfirm;
+    public JButton btnCancel;
     public QuizView() {
         setTitle("퀴즈");
-        confirm_Q = new JButton("확인");
-        cancel_Q = new JButton("취소");
-        label_quizQ = new JLabel("퀴즈");
-        label_nameQ = new JLabel("책제목");
-        label_contentQ = new JLabel("질문내용");
-        tf_answer = new JTextField();
-        panel_Q = new JPanel();
-        panel_Q.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, Color.ORANGE, Color.YELLOW, null, null));
+        btnConfirm = new JButton("확인");
+        btnCancel = new JButton("취소");
+        labelQuiz = new JLabel("퀴즈");
+        labelTitle = new JLabel("책제목");
+        labelContent = new JLabel("질문내용");
+        tfAnswer = new JTextField();
+        panelQuiz = new JPanel();
+        panelQuiz.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, Color.ORANGE, Color.YELLOW, null, null));
         
-        panel_Q.setLayout(null);
+        panelQuiz.setLayout(null);
         getContentPane().setLayout(null);
-        panel_Q.setBounds(14, 12, 714, 64);
-        tf_answer.setColumns(10);
-        label_contentQ.setBounds(51, 151, 654, 130);
-        label_nameQ.setBounds(24, 88, 147, 51);
-        label_quizQ.setBounds(306, 12, 111, 40);
-        tf_answer.setBounds(216, 316, 463, 36);
-        confirm_Q.setBounds(185, 393, 160, 64);
-        cancel_Q.setBounds(377, 393, 160, 64);
+        panelQuiz.setBounds(14, 12, 714, 64);
+        tfAnswer.setColumns(10);
+        labelContent.setBounds(51, 151, 654, 130);
+        labelTitle.setBounds(24, 88, 147, 51);
+        labelQuiz.setBounds(306, 12, 111, 40);
+        tfAnswer.setBounds(216, 316, 463, 36);
+        btnConfirm.setBounds(185, 393, 160, 64);
+        btnCancel.setBounds(377, 393, 160, 64);
 
-        panel_Q.add(label_quizQ);
-        getContentPane().add(panel_Q);
-        getContentPane().add(label_nameQ);
-        getContentPane().add(label_contentQ);
-        getContentPane().add(tf_answer);
-        getContentPane().add(confirm_Q);
-        getContentPane().add(cancel_Q);
-        la_answer = new JLabel("정답");
-        la_answer.setBounds(83, 314, 105, 40);
-        getContentPane().add(la_answer);
+        panelQuiz.add(labelQuiz);
+        getContentPane().add(panelQuiz);
+        getContentPane().add(labelTitle);
+        getContentPane().add(labelContent);
+        getContentPane().add(tfAnswer);
+        getContentPane().add(btnConfirm);
+        getContentPane().add(btnCancel);
+        labelAnswer = new JLabel("정답");
+        labelAnswer.setBounds(83, 314, 105, 40);
+        getContentPane().add(labelAnswer);
     }
 }
 

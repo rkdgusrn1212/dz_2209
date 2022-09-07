@@ -9,36 +9,36 @@ import javax.swing.JTextField;
 
 public class LoginView extends JFrame
 {
-        public JTextField tf_id;
-        public JPasswordField tf_pass;
-        public JButton bt_login,bt_join;
+        public JTextField tfId;
+        public JPasswordField tfPwd;
+        public JButton btnLogin,btnJoin;
      JLabel la_id, la_pass;
      
       public LoginView()
      {  
       setTitle("LoginView");
       
-      tf_id = new JTextField();     
-      tf_pass = new JPasswordField();
+      tfId = new JTextField();     
+      tfPwd = new JPasswordField();
       
-      bt_login = new JButton("로그인");
-      bt_join = new JButton("신규가입");
+      btnLogin = new JButton("로그인");
+      btnJoin = new JButton("신규가입");
      
          la_id = new JLabel("I  D");
       la_pass = new JLabel("Password");
       
-      tf_id.setBounds(80,30,100,25);
-      tf_pass.setBounds(80,65,100,25);
-      bt_login.setBounds(90,110,80,25);
-      bt_join.setBounds(190,30,90,25);
+      tfId.setBounds(80,30,100,25);
+      tfPwd.setBounds(80,65,100,25);
+      btnLogin.setBounds(90,110,80,25);
+      btnJoin.setBounds(190,30,90,25);
       la_id.setBounds(8,30,80,25);
       la_pass.setBounds(8,65,90,25);
       
       setLayout(null);
-      add(tf_id);
-      add(tf_pass);
-      add(bt_login);
-      add(bt_join);
+      add(tfId);
+      add(tfPwd);
+      add(btnLogin);
+      add(btnJoin);
       add(la_id);
       add(la_pass);
       
@@ -58,7 +58,7 @@ public class LoginView extends JFrame
         return num; //0->예, 1->아니오, 2->취소
        }
        public void setEmpty() {
-        tf_id.setText("");
-        tf_pass.setText("");
+        tfId.setText("");
+        tfPwd.setText("");
        }      
 }//LoginView

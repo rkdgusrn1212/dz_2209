@@ -16,9 +16,9 @@ public class BookPayView extends JFrame {
     public JLabel la_image, la_book, la_writer, la_price;
     public JTextArea ta_content;
     
-    public JLabel la_id, la_grade, la_point, la_lend, la_showpoint;
+    public JLabel labelId, labelGrade, labelPoint, la_lend, la_showpoint;
     public JTextField tf_point;
-    public JButton bt_pay, bt_back;
+    public JButton btnPay, btnBack;
     
     public BookPayView() {
         setTitle("BookPayView");
@@ -29,31 +29,31 @@ public class BookPayView extends JFrame {
         p_book.setLayout(null);
 //p_pay
         p_pay.setLayout(null);
-        la_id = new JLabel("회원 id");
-        la_grade = new JLabel("회원 등급");
-        la_point = new JLabel("회원 포인트");
+        labelId = new JLabel("회원 id");
+        labelGrade = new JLabel("회원 등급");
+        labelPoint = new JLabel("회원 포인트");
         la_lend = new JLabel("대여금액: 2000원");
         la_showpoint = new JLabel("사용 포인트: ");
         tf_point = new JTextField(10);
-        bt_pay = new JButton("결제");
-        bt_back = new JButton("도서선택창");
+        btnPay = new JButton("결제");
+        btnBack = new JButton("도서선택창");
         
-        la_id.setBounds(50, 50, 100, 30);
-        la_grade.setBounds(50, 120, 100, 30);
-        la_point.setBounds(50, 190, 100, 30);
-        p_pay.add(la_id);
-        p_pay.add(la_grade);
-        p_pay.add(la_point);
+        labelId.setBounds(50, 50, 100, 30);
+        labelGrade.setBounds(50, 120, 100, 30);
+        labelPoint.setBounds(50, 190, 100, 30);
+        p_pay.add(labelId);
+        p_pay.add(labelGrade);
+        p_pay.add(labelPoint);
         la_lend.setBounds(300, 50, 100, 30);
         la_showpoint.setBounds(300, 120, 100, 30);
         tf_point.setBounds(400, 120, 100, 30);
-        bt_pay.setBounds(300, 200, 100, 30);
-        bt_back.setBounds(480, 200, 100, 30);
+        btnPay.setBounds(300, 200, 100, 30);
+        btnBack.setBounds(480, 200, 100, 30);
         p_pay.add(la_lend);
         p_pay.add(la_showpoint);
         p_pay.add(tf_point);
-        p_pay.add(bt_back);
-        p_pay.add(bt_pay);
+        p_pay.add(btnBack);
+        p_pay.add(btnPay);
         
 //p_book
         la_image = new JLabel("도서 이미지");

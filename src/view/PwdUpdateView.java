@@ -7,25 +7,25 @@ import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
-public class PassUpdateView extends JFrame {
-    public JTextField tf_id,tf_name,tf_email;
-    public JPasswordField tf_pass,tf_pass2;
-    public JButton bt_submit,bt_reset;
+public class PwdUpdateView extends JFrame {
+    public JTextField tfId,tfName,tfEmail;
+    public JPasswordField tfPwd,tfPwd2;
+    public JButton btnSubmit,btnReset;
     JLabel la_id,la_pass1,la_pass2,la_n,la_email;
     
     
-     public PassUpdateView()
+     public PwdUpdateView()
     {   
      setTitle("PassUpdateView");
      
-     tf_id = new JTextField();
-     tf_pass = new JPasswordField();
-     tf_pass2 = new JPasswordField();
-     tf_name= new JTextField();
-     tf_email = new JTextField();
+     tfId = new JTextField();
+     tfPwd = new JPasswordField();
+     tfPwd2 = new JPasswordField();
+     tfName= new JTextField();
+     tfEmail = new JTextField();
      
-        bt_submit = new JButton("등록");
-        bt_reset = new JButton("취소");
+        btnSubmit = new JButton("등록");
+        btnReset = new JButton("취소");
      
      la_id = new JLabel("I  D:");
      la_pass1 = new JLabel("비  번:");
@@ -34,14 +34,14 @@ public class PassUpdateView extends JFrame {
      la_email = new JLabel("이메일:"); 
      
      
-     tf_id.setBounds(80,30,100,25);
-     tf_pass.setBounds(80,70,100,25);
-     tf_pass2.setBounds(80,110,100,25);
-     tf_name.setBounds(80,150,100,25);
-     tf_email.setBounds(80,190,180,25);
+     tfId.setBounds(80,30,100,25);
+     tfPwd.setBounds(80,70,100,25);
+     tfPwd2.setBounds(80,110,100,25);
+     tfName.setBounds(80,150,100,25);
+     tfEmail.setBounds(80,190,180,25);
      
-     bt_submit.setBounds(50,240,90,25);
-     bt_reset.setBounds(150,240,90,25);
+     btnSubmit.setBounds(50,240,90,25);
+     btnReset.setBounds(150,240,90,25);
      
      la_id.setBounds(10,30,100,25);
      la_pass1.setBounds(10,70,100,25);
@@ -50,14 +50,14 @@ public class PassUpdateView extends JFrame {
      la_email.setBounds(10, 190, 100, 25);
      
      setLayout(null);
-     add(tf_id);
-     add(tf_pass);
-     add(tf_pass2);
-     add(tf_name);
-     add(tf_email); 
+     add(tfId);
+     add(tfPwd);
+     add(tfPwd2);
+     add(tfName);
+     add(tfEmail); 
      
-     add(bt_submit);
-     add(bt_reset);
+     add(btnSubmit);
+     add(btnReset);
      
      add(la_id); 
      add(la_pass1); 
@@ -65,8 +65,8 @@ public class PassUpdateView extends JFrame {
      add(la_n);
      add(la_email);
      
-     tf_name.setEnabled(false);
-     tf_id.setEnabled(false);
+     tfName.setEnabled(false);
+     tfId.setEnabled(false);
      
      setBounds(350,200,300,340); 
      setVisible(false);
@@ -76,10 +76,10 @@ public class PassUpdateView extends JFrame {
     }
      
      public void setEmpty() {
-      tf_id.setText("");
-      tf_email.setText("");
-      tf_name.setText("");
-      tf_pass.setText("");
-      tf_pass2.setText("");
+      tfId.setText("");
+      tfEmail.setText("");
+      tfName.setText("");
+      tfPwd.setText("");
+      tfPwd2.setText("");
      }
 }//PassUpdateView
