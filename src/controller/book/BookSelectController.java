@@ -30,7 +30,7 @@ public class BookSelectController extends Controller {
         }else if (s == viewBookSelect.btnMyPage) {// 마이페이지로 이동
             new MyPageController(this, getArgs(0));
         }else if(s==viewBookSelect.btnSelect){
-            //viewBookPay.setVisible(true);
+            new BookController(this);
         }
     }
     @Override

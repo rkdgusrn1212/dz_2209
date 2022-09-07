@@ -14,7 +14,8 @@ public class LoginView extends View
     public JTextField tfId;
     public JPasswordField tfPwd;
     public JButton btnLogin,btnJoin;
-    JLabel la_id, la_pass;
+    public JButton btnFindIdPw;
+    JLabel labelId, labelPass;
 
     public LoginView(){
         setTitle("LoginView");
@@ -24,29 +25,31 @@ public class LoginView extends View
 
         btnLogin = new JButton("로그인");
         btnJoin = new JButton("신규가입");
+        btnFindIdPw = new JButton("ID/PW 찾기");
 
-        la_id = new JLabel("I  D");
-        la_pass = new JLabel("Password");
+        labelId = new JLabel("I  D");
+        labelPass = new JLabel("Password");
+        
 
         tfId.setBounds(80,30,100,25);
         tfPwd.setBounds(80,65,100,25);
         btnLogin.setBounds(90,110,80,25);
         btnJoin.setBounds(190,30,90,25);
-        la_id.setBounds(8,30,80,25);
-        la_pass.setBounds(8,65,90,25);
+        btnFindIdPw.setBounds(190,65,80,25);
+        labelId.setBounds(8,30,80,25);
+        labelPass.setBounds(8,65,90,25);
 
         setLayout(null);
         add(tfId);
         add(tfPwd);
         add(btnLogin);
         add(btnJoin);
-        add(la_id);
-        add(la_pass);
+        add(btnFindIdPw);
+        add(labelId);
+        add(labelPass);
 
         setBounds(400,300,300,180);
         setResizable(false);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
-
     }//생성자
 
     public void showMsg(String msg) {

@@ -28,19 +28,16 @@ public class MyPageController extends Controller {
            // viewPwdUpdate.tfEmail.setText(m.getEmail());
            // viewPwdUpdate.tfPwd.setText("");
            // viewPwdUpdate.tfPwd2.setText("");
-           // viewPwdUpdate.tfPwd.requestFocus();
-            viewMyPage.setVisible(false);
+           // viewPwdUpdate.tfPwd.requestFocus()
            // viewPwdUpdate.setVisible(true);
         }else if (s == viewMyPage.btnHistory) {
 
-            viewMyPage.setVisible(false);
            // viewHistory.setVisible(true);
         }else if (s == viewMyPage.btnCash) {
             //Member m = new MemberDAO().selectMypage(userId);
             //viewCash.la_nowcash.setText("현재 캐시: " + m.getCash()+"원");
             //viewCash.tf_cash.setText("");
             //viewCash.tf_cash.requestFocus();
-            viewMyPage.setVisible(false);
             //viewCash.setVisible(true);
         }
     }

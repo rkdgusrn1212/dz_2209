@@ -5,14 +5,16 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
+import view.View;
 
-public class FindIdPass extends JFrame{
+
+public class FindIdPwdView extends View{
 
     public JTextField tfEmail;
     JLabel labelEmail; //"로그인시 입력한 이메일을 입력하세요"
     public JButton btnSubmit;
 
-    public FindIdPass() {
+    public FindIdPwdView() {
 
         setTitle("아이디 비번 찾기");
 
@@ -29,10 +31,5 @@ public class FindIdPass extends JFrame{
         add(btnSubmit);
 
         setBounds(800,300,300,300);
-        setVisible(true);   
-    }
-    
-    public static void main(String[] args) {
-        new FindIdPass().setVisible(true);
     }
 }

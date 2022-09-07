@@ -54,6 +54,8 @@ public class LoginController extends Controller{
             }
         }else if(s == viewLogin.btnJoin) {
             new JoinController(this);
+        }else if(s == viewLogin.btnFindIdPw) {
+            new FindIdPwdController(this);
         }
     }
     @Override
@@ -61,5 +63,6 @@ public class LoginController extends Controller{
         viewLogin = (LoginView)windowView;
         viewLogin.btnLogin.addActionListener(this);
         viewLogin.btnJoin.addActionListener(this);
+        viewLogin.btnFindIdPw.addActionListener(this);
     }
 }

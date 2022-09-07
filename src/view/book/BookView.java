@@ -7,10 +7,12 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+
+import view.View;
 import view.member.MyPageView;
-public class BookView extends JFrame{
+public class BookView extends View{
     JLabel labelBook ;
-    JButton btnBack ;
+    public JButton btnBack ;
     JButton btnNext ;
     JButton btnPrev;
     JPanel panelBook ;
@@ -39,16 +41,6 @@ public class BookView extends JFrame{
         getContentPane().add(btnNext);
         
         setBounds(500,200,1000,700);
-        setVisible(true);
-        
-        
-        btnBack.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                new BookSelectView();
-                setVisible(false);              
-            }        
-        });
         
     }
     
