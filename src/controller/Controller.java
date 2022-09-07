@@ -222,7 +222,7 @@ public class Controller implements ActionListener {
             viewMyPage.labelMsg.setText(userId + "님 환영합니다.");
 
             Member m = new MemberDAO().selectMypage(userId);
-            viewMyPage.labelGrade.setText("등급: " + grade[m.getEgrade() - 1]);
+            viewMyPage.labelGrade.setText("등급: " + grade[m.getGrade() - 1]);
             viewMyPage.labelCash.setText("캐시: " + m.getCash() + "원");
             viewMyPage.labelPoint.setText("잔여포인트: " + m.getPoint() + "P");
 
@@ -233,7 +233,7 @@ public class Controller implements ActionListener {
 
             Member m = new MemberDAO().selectMypage("회원 ID: " +userId);
             viewBookPay.labelId.setText(m.getId());
-            viewBookPay.labelGrade.setText("회원 등급: "+grade[m.getEgrade()-1]);
+            viewBookPay.labelGrade.setText("회원 등급: "+grade[m.getGrade()-1]);
             viewBookPay.labelPoint.setText("회원 포인트: "+m.getPoint()+"P");
 
 

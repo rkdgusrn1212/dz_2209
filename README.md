@@ -113,10 +113,10 @@
 **컬럼종류 및 변수 타입**
 - id(사용자의 아이디) : String
 - pass(사용자의 비밀번호) : String
-- ename(사용자의 이름) : String
+- name(사용자의 이름) : String
 - email(사용자의 이메일) : String
 - genre(책의 장르) : String
-- egrade(사용자의 등급) : int
+- grade(사용자의 등급) : number(1), 1: VVIP 2: VIP 3: 일반
 - point(사용자의 포인트) : int
 - cash(사용자의 캐쉬) : int
 <br>

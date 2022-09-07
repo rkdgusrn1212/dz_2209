@@ -5,7 +5,7 @@ public class Member {
 	private String pass;
 	private String ename;
 	private String email;
-	private int egrade; // high <- 1,2,3 <- low
+	private int grade; // high <- 1,2,3 <- low
 	private int point;
 	private int cash;
 	private String genre;
@@ -14,22 +14,22 @@ public class Member {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Member(String ename, int egrade, int point, int cash) {
+	public Member(String ename, int grade, int point, int cash) {
 		this.ename = ename;
-		this.egrade = egrade;
+		this.grade = grade;
 		this.point = point;
 		this.cash = cash;
 	}
 
 
-	public Member(String id, String pass, String ename, String email, int egrade, int point, int cash, String genre,
+	public Member(String id, String pass, String ename, String email, int grade, int point, int cash, String genre,
 			String passQ, String passA) {
 		super();
 		this.id = id;
 		this.pass = pass;
 		this.ename = ename;
 		this.email = email;
-		this.egrade = egrade;
+		this.grade = grade;
 		this.point = point;
 		this.cash = cash;
 		this.genre = genre;
@@ -69,12 +69,12 @@ public class Member {
 		this.email = email;
 	}
 
-	public int getEgrade() {
-		return egrade;
+	public int getGrade() {
+		return grade;
 	}
 
-	public void setEgrade(int egrade) {
-		this.egrade = egrade;
+	public void setGrade(int grade) {
+		this.grade = grade;
 	}
 
 	public int getPoint() {
@@ -103,7 +103,7 @@ public class Member {
 
 	@Override
 	public String toString() {
-		return "Member [id=" + id + ", pass=" + pass + ", ename=" + ename + ", email=" + email + ", egrade=" + egrade
+		return "Member [id=" + id + ", pass=" + pass + ", ename=" + ename + ", email=" + email + ", grade=" + grade
 				+ ", point=" + point + ", cash=" + cash + ", genre=" + genre + "]";
 	}
 
