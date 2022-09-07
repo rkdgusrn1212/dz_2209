@@ -13,7 +13,7 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 import model.vo.Member;
-import view.AddQuizView;
+import view.quiz.AddQuizView;
 import view.book.AddBookView;
 
 public class AdminView extends JFrame {
@@ -21,7 +21,7 @@ public class AdminView extends JFrame {
     public JTable table, table2;
     JLabel labelMember, labelBook;
     public JScrollPane sp, sp2;
-    public JButton btnSelectMember, btnSelectAllMember, btnSelectBook, btnSelectAllBook, btnAddBook, btnAddQuiz; //btnBack 삭제
+    public JButton btnSelectMember, btnSelectAllMember, btnSelectBook, btnSelectAllBook, btnAddBook, btnAddQuiz, btnBack;
     Object rowData[][]= new String[0][5];
     Object columnnames[] = {"아이디", "이름", "이메일", "장르"};
     
@@ -43,7 +43,7 @@ public class AdminView extends JFrame {
         btnAddBook = new JButton("도서 추가");
         btnAddQuiz = new JButton("퀴즈 추가");
         
-//      bt_back = new JButton("로그아웃");
+        btnBack = new JButton("로그아웃");
      
         
         
@@ -75,7 +75,7 @@ public class AdminView extends JFrame {
         btnAddBook.setBounds(620, 400, 100, 30);
         btnAddQuiz.setBounds(760, 400, 100, 30); 
         
-//      bt_back.setBounds(20, 400, 100, 30);  
+        btnBack.setBounds(20, 400, 100, 30);  
         
         
         
@@ -93,7 +93,7 @@ public class AdminView extends JFrame {
         add(btnAddBook);
         add(btnAddQuiz);
         
-//      add(bt_back);
+        add(btnBack);
         
         setVisible(false);
         setSize(1000, 530);

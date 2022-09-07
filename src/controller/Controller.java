@@ -22,6 +22,7 @@ import view.member.JoinView;
 import view.member.LoginView;
 import view.member.MyPageView;
 import view.member.PwdUpdateView;
+import view.quiz.AddQuizView;
 
 public class Controller implements ActionListener {
     LoginView viewLogin;
