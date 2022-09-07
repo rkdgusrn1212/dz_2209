@@ -75,6 +75,7 @@ public abstract class Controller implements ActionListener, WindowListener{
         /*
          * 프로그램 강제종료 로직.
          */
+        System.exit(0);
     }
 
     @Override
