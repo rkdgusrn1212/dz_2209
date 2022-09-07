@@ -12,7 +12,7 @@ public class BookSelectView extends JFrame {
     public BookSelectView() {
         setTitle("BookSelectView");
         setLayout(null);
-//new   
+        //new   
         la_msg = new JLabel("도서를 선택하세요");
         labelId = new JLabel("id");
         btnSelect = new JButton("도서 선택");
@@ -21,27 +21,27 @@ public class BookSelectView extends JFrame {
         viewBookClick = new BookClickView[3];
         btnMyPage = new JButton("마이페이지");
         btnLogout = new JButton("로그아웃");
-//setBounds
+        //setBounds
         labelId.setBounds(100, 20, 80, 30);
         la_msg.setBounds(500, 20, 120, 30);
         btnSelect.setBounds(250, 700, 100, 30);
         btnGenre.setBounds(580, 700, 100, 30);
         btnMyPage.setBounds(680, 20, 100, 30);
         btnLogout.setBounds(820, 20, 100, 30);
-//add
+        //add
         add(labelId);
         add(la_msg);
         add(btnSelect);
         add(btnGenre);
         add(btnMyPage);
         add(btnLogout);
-//add BookClickView
+        //add BookClickView
         for(int i=0; i<viewBookClick.length; i++) {
             viewBookClick[i] = new BookClickView();
             viewBookClick[i].setBounds(310*i+60, 100, 250, 500);
             add(viewBookClick[i]);
         }
-        
+
         setSize(1000,800);
         setVisible(false);
     }

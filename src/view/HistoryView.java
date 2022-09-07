@@ -17,7 +17,7 @@ public class HistoryView extends JFrame {
     public HistoryView() {
         setTitle("HistoryView");
         setLayout(null);
-        
+
         btnBack = new JButton("마이페이지창으로");
         bt_quiz = new JButton("퀴즈");
         bt_read = new JButton("도서 읽기");
@@ -26,7 +26,7 @@ public class HistoryView extends JFrame {
 
         JScrollPane sp = new JScrollPane(table);
         table.setFillsViewportHeight(true);
-        
+
         sp.setBounds(50, 50, 300, 300);
         btnBack.setBounds(20, 400, 150, 30);
         bt_quiz.setBounds(200, 400, 80, 30);
@@ -35,17 +35,17 @@ public class HistoryView extends JFrame {
         add(btnBack);
         add(bt_quiz);
         add(bt_read);
-        
+
         setSize(600, 600);
     }
     public void displayTable(ArrayList<Object> list) {
-           dtm.setRowCount(0);//출력될 시작행의 위치 0 ---> 첫번째행
-             
-           for(int i=0; i< list.size(); i++) {
-           Object p = list.get(i);
-//         Object rowData[]= {p.getNo(),p.getName(),p.getAge(),p.getJob()};
-           dtm.addRow(rowData);
-           }//for
-        }//displayTable
+        dtm.setRowCount(0);//출력될 시작행의 위치 0 ---> 첫번째행
+
+        for(int i=0; i< list.size(); i++) {
+            Object p = list.get(i);
+            //         Object rowData[]= {p.getNo(),p.getName(),p.getAge(),p.getJob()};
+            dtm.addRow(rowData);
+        }//for
+    }//displayTable
 }
 

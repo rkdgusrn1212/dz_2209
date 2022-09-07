@@ -19,25 +19,25 @@ public class CashView extends JFrame{
         tf_cash = new JTextField("충전 금액");
         btnSubmit = new JButton("충전");
         btnBack = new JButton("취소");
-        
+
         la_msg.setBounds(30, 30, 150, 30);
         la_nowcash.setBounds(30, 60, 150, 30);
         tf_cash.setBounds(30, 90, 150, 30);
         la_aftercash.setBounds(30,120,150,30);
         btnSubmit.setBounds(10, 150, 100, 30);
         btnBack.setBounds(150, 150, 100, 30);
-        
+
         add(la_msg);
         add(la_nowcash);
         add(la_aftercash);
         add(tf_cash);
         add(btnSubmit);
         add(btnBack);
-        
-        
+
+
         setSize(300,300);
     }
-      public void showMsg(String msg) {
-      JOptionPane.showMessageDialog(this, msg);
-     }
+    public void showMsg(String msg) {
+        JOptionPane.showMessageDialog(this, msg);
+    }
 }

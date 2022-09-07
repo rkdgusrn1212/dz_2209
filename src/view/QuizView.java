@@ -28,7 +28,7 @@ public class QuizView extends JFrame{
         tfAnswer = new JTextField();
         panelQuiz = new JPanel();
         panelQuiz.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, Color.ORANGE, Color.YELLOW, null, null));
-        
+
         panelQuiz.setLayout(null);
         getContentPane().setLayout(null);
         panelQuiz.setBounds(14, 12, 714, 64);

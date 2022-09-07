@@ -15,11 +15,11 @@ public class BookPayView extends JFrame {
     public JPanel p_book, p_pay;
     public JLabel la_image, la_book, la_writer, la_price;
     public JTextArea ta_content;
-    
+
     public JLabel labelId, labelGrade, labelPoint, la_lend, la_showpoint;
     public JTextField tf_point;
     public JButton btnPay, btnBack;
-    
+
     public BookPayView() {
         setTitle("BookPayView");
         p_book = new JPanel();
@@ -27,7 +27,7 @@ public class BookPayView extends JFrame {
         p_pay = new JPanel();
         p_pay.setBackground(Color.BLUE);
         p_book.setLayout(null);
-//p_pay
+        //p_pay
         p_pay.setLayout(null);
         labelId = new JLabel("회원 id");
         labelGrade = new JLabel("회원 등급");
@@ -37,7 +37,7 @@ public class BookPayView extends JFrame {
         tf_point = new JTextField(10);
         btnPay = new JButton("결제");
         btnBack = new JButton("도서선택창");
-        
+
         labelId.setBounds(50, 50, 100, 30);
         labelGrade.setBounds(50, 120, 100, 30);
         labelPoint.setBounds(50, 190, 100, 30);
@@ -54,8 +54,8 @@ public class BookPayView extends JFrame {
         p_pay.add(tf_point);
         p_pay.add(btnBack);
         p_pay.add(btnPay);
-        
-//p_book
+
+        //p_book
         la_image = new JLabel("도서 이미지");
         la_book = new JLabel("도서명");
         ta_content = new JTextArea();
@@ -71,11 +71,11 @@ public class BookPayView extends JFrame {
         p_book.add(la_price);
         p_book.add(la_writer);
         p_book.add(ta_content);
-        
+
         p_book.setPreferredSize(new Dimension(0, 270));
         add(p_book, BorderLayout.PAGE_START);
         add(p_pay, BorderLayout.CENTER);
-        
+
         setSize(800,600);
         setVisible(false);
     }

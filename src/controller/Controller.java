@@ -85,7 +85,7 @@ public class Controller implements ActionListener {
         viewAdmin.btnAddQuiz.addActionListener(this);
         viewAdmin.btnAddBook.addActionListener(this);
 
-        
+
         viewBookPay.btnPay.addActionListener(this);
         viewBookPay.btnBack.addActionListener(this);
 
@@ -169,7 +169,7 @@ public class Controller implements ActionListener {
                 genre = viewBookGenre.rb_3.getText();             
             }
             new MemberDAO().updateGenre(userId, genre);
-            
+
             viewBookGenre.setVisible(false);
             viewBookSelect.setVisible(true);
         } else if (ob == viewBookSelect.btnLogout) {
@@ -229,14 +229,14 @@ public class Controller implements ActionListener {
             viewBookSelect.setVisible(false);
             viewMyPage.setVisible(true);
         }else if(ob==viewBookSelect.btnSelect){
-            
-            
+
+
             Member m = new MemberDAO().selectMypage("회원 ID: " +userId);
             viewBookPay.labelId.setText(m.getId());
             viewBookPay.labelGrade.setText("회원 등급: "+grade[m.getEgrade()-1]);
             viewBookPay.labelPoint.setText("회원 포인트: "+m.getPoint()+"P");
-            
-            
+
+
             viewBookSelect.setVisible(false);
             viewBookPay.setVisible(true);
         }else if (ob == viewMyPage.btnBack) {
@@ -277,7 +277,7 @@ public class Controller implements ActionListener {
             viewPwdUpdate.setVisible(false);
             viewMyPage.setVisible(true);
         } else if (ob == viewMyPage.btnHistory) {
-            
+
             viewMyPage.setVisible(false);
             viewHistory.setVisible(true);
         } else if (ob == viewHistory.btnBack) {
@@ -311,23 +311,23 @@ public class Controller implements ActionListener {
         } else if(ob == viewAdmin.btnSelectAllMember) {
             ArrayList<Member> list = new MemberDAO().selectAllMember();
             viewAdmin.displayTable(list);
-            
+
         } else if(ob == viewAdmin.btnSelectMember) {
             String id = viewAdmin.showInputMsg("조회할 회원의 아이디를 입력하세요");
             ArrayList<Member> list = new MemberDAO().selectMember(id);
             viewAdmin.displayTable(list);
         }else if(ob == viewAdmin.btnAddQuiz) {
-            
+
         }else if(ob == viewAdmin.btnAddBook) {
-            
+
         }else if(ob == viewAdmin.btnSelectAllBook) {
-            
+
         }else if(ob == viewAdmin.btnSelectBook) {
-            
+
         }else if(ob == viewBookPay.btnPay) {
-            
+
         }else if(ob == viewBookPay.btnBack) {
-            
+
         }
 
     }
