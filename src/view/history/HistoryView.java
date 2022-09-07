@@ -21,7 +21,7 @@ public class HistoryView extends JFrame {
     public JTable table;
     public JButton btnBack, btnQuiz, btnRead;
     Object rowData[][]= new String[0][3];
-    Object columnnames[] = {"도서명", "저자명", "완독여부"};
+    Object columnnames[] = {"ISBN", "도서명", "저자명"};
     public HistoryView() {
         setTitle("HistoryView");
         setLayout(null);

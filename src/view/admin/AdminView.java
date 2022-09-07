@@ -22,10 +22,10 @@ public class AdminView extends JFrame {
     JLabel labelMember, labelBook;
     public JScrollPane sp, sp2;
     public JButton btnSelectAllMember, btnSelectMember, btnDeleteMember, btnSelectAllBook, btnSelectBook, btnDeleteBook, btnAddQuiz, btnBack; //btnAddBook 삭제
-    Object rowData[][]= new String[0][4];
+    Object rowData[][]= new String[0][5];
     Object columnnames[] = {"아이디", "이름", "이메일", "장르"};
     
-    Object rowData2[][]= new String[0][4];
+    Object rowData2[][]= new String[0][6];
     Object columnnames2[] = {"도서명", "저자명", "줄거리", "장르"};
     
     public AdminView() {
@@ -98,7 +98,7 @@ public class AdminView extends JFrame {
         
 //        add(btnAddBook);
         add(btnAddQuiz);
-
+        
         add(btnBack);
         
         setVisible(false);
