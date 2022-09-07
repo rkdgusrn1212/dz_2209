@@ -8,7 +8,8 @@ import view.View;
 
 public class MyPageView extends View {
     public JLabel labelMsg, labelGrade, labelCash, labelPoint;
-    public JButton  btnUpdate, btnHistory, btnCash, btnLogout, btnBack;
+    public JButton  btnIdPwFind, btnUpdate, btnHistory, btnCash, btnLogout, btnBack;
+    
     public MyPageView() {
         setTitle("MypageView");
         setLayout(null);
@@ -16,7 +17,7 @@ public class MyPageView extends View {
         labelGrade = new JLabel("등급: VIP");
         labelCash = new JLabel("등급: 10000 원");
         labelPoint = new JLabel("잔여포인트: 7500 P");
-
+        btnIdPwFind = new JButton("ID/PW 찾기");
         btnUpdate = new JButton("비밀번호 수정");
         btnHistory = new JButton("이용 내역");
         btnCash = new JButton("캐쉬 충전");
@@ -29,6 +30,7 @@ public class MyPageView extends View {
         labelCash.setBounds(50, 140, 150, 30);
         labelPoint.setBounds(50, 190, 150, 30);
 
+        btnIdPwFind.setBounds(66, 190, 150, 30);
         btnUpdate.setBounds(66, 230, 150, 30);
         btnHistory.setBounds(66, 280, 150, 30);
         btnCash.setBounds(66, 330, 150, 30);
@@ -39,6 +41,7 @@ public class MyPageView extends View {
         add(labelCash);
         add(labelPoint);
 
+        add(btnIdPwFind);
         add(btnUpdate);
         add(btnCash);
         add(btnHistory);

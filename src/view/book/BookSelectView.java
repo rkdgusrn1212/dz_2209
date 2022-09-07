@@ -7,32 +7,33 @@ import javax.swing.JLabel;
 import view.View;
 
 public class BookSelectView extends View {
-    public JLabel la_msg, labelId;
-    public JButton btnSelect, btnGenre, bt_back;
+    public JLabel labelMsg, labelId;
+    public JButton btnSelect, btnGenre, btnBack;
     public BookClickView[] viewBookClick;
     public JButton btnMyPage, btnLogout;
     public BookSelectView() {
         setTitle("BookSelectView");
         setLayout(null);
         //new   
-        la_msg = new JLabel("도서를 선택하세요");
+        labelMsg = new JLabel("도서를 선택하세요");
         labelId = new JLabel("id");
         btnSelect = new JButton("도서 선택");
         btnGenre = new JButton("장르 선택");
-        bt_back = new JButton("로그 아웃");
+//        btnBack = new JButton("로그 아웃");
+        
         viewBookClick = new BookClickView[3];
         btnMyPage = new JButton("마이페이지");
         btnLogout = new JButton("로그아웃");
         //setBounds
         labelId.setBounds(100, 20, 80, 30);
-        la_msg.setBounds(500, 20, 120, 30);
+        labelMsg.setBounds(500, 20, 120, 30);
         btnSelect.setBounds(250, 700, 100, 30);
         btnGenre.setBounds(580, 700, 100, 30);
         btnMyPage.setBounds(680, 20, 100, 30);
         btnLogout.setBounds(820, 20, 100, 30);
         //add
         add(labelId);
-        add(la_msg);
+        add(labelMsg);
         add(btnSelect);
         add(btnGenre);
         add(btnMyPage);
@@ -45,6 +46,5 @@ public class BookSelectView extends View {
         }
 
         setSize(1000,800);
-        setVisible(false);
     }
 }

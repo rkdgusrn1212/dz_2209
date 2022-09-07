@@ -1,44 +1,63 @@
 package view.book;
-
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JRadioButton;
-
+import view.member.MyPageView;
 public class BookGenreView extends JFrame {
-    public JLabel la_msg;
-    public JRadioButton rBtnFiction, rBtnAssay, rb_3;
-    public ButtonGroup bg;
+    public JLabel labelMsg;
+    public JRadioButton rBtnFiction, rBtnAssay, rBtnThriller;
+    public ButtonGroup btnGroup;
     public JButton btnSelect;
     public BookGenreView() {
         setTitle("BookGenreView");
         setLayout(null);
         //new
-        la_msg = new JLabel("장르를 선택하세요");
+        labelMsg = new JLabel("장르를 선택하세요");
         rBtnFiction = new JRadioButton("소설");
         rBtnAssay = new JRadioButton("수필");
-        rb_3 = new JRadioButton("스릴러");
-        bg = new ButtonGroup();
+        rBtnThriller = new JRadioButton("스릴러");
+        btnGroup = new ButtonGroup();
         btnSelect = new JButton("장르 선택");
-        bg.add(rBtnFiction);
-        bg.add(rBtnAssay);
-        bg.add(rb_3);
+        btnGroup.add(rBtnFiction);
+        btnGroup.add(rBtnAssay);
+        btnGroup.add(rBtnThriller);
         //setBounds
-        la_msg.setBounds(80, 30, 120, 30);
+        labelMsg.setBounds(90, 30, 120, 30);
         rBtnFiction.setBounds(20, 100 , 80, 30);
-        rBtnAssay.setBounds(120, 100 , 80, 30);
-        rb_3.setBounds(200, 100 , 80, 30);
+        rBtnAssay.setBounds(115, 100 , 80, 30);
+        rBtnThriller.setBounds(200, 100 , 80, 30);
         btnSelect.setBounds(90, 200, 100, 30);
         // frame
-        add(la_msg);
+        add(labelMsg);
         add(rBtnFiction);
         add(rBtnAssay);
-        add(rb_3);
+        add(rBtnThriller);
         add(btnSelect);
-
+        
+        //메인 창 출력 위치
         rBtnFiction.setSelected(true);
-        setSize(300, 300);
-        setVisible(false);
+        setBounds(800,300,300,300);
+        setVisible(true);
+        
+        //버튼클릭시 화면 전환  
+        btnSelect.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {               
+                JOptionPane.showMessageDialog(null, "장르가 선택되었습니다"); 
+                new BookSelectView();
+                setVisible(false); 
+            }
+        });      
+        
     }
+  
+    public static void main(String[] args) {
+        new BookGenreView().setVisible(true);
+    }
+    
 }
