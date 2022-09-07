@@ -46,5 +46,10 @@ public class MyPageView extends View {
         add(btnBack);
 
         setSize(300,500);
+        setVisible(true);
+    }
+    
+    public static void main(String[] args) {
+        new MyPageView();
     }
 }
