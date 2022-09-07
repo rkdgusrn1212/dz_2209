@@ -1,5 +1,7 @@
 package view.history;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
@@ -8,19 +10,25 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
+import view.member.MyPageView;
+import view.quiz.QuizView;
+
 public class HistoryView extends JFrame {
+	public static void main(String[] args) {
+		new HistoryView().setVisible(true);
+	}
     DefaultTableModel dtm;
     public JTable table;
-    public JButton btnBack, bt_quiz, bt_read;
+    public JButton btnBack, btnQuiz, btnRead;
     Object rowData[][]= new String[0][3];
     Object columnnames[] = {"도서명", "저자명", "완독여부"};
     public HistoryView() {
         setTitle("HistoryView");
         setLayout(null);
 
-        btnBack = new JButton("마이페이지창으로");
-        bt_quiz = new JButton("퀴즈");
-        bt_read = new JButton("도서 읽기");
+        btnBack = new JButton("마이페이지");
+        btnQuiz = new JButton("퀴즈");
+        //btnRead = new JButton("도서 읽기"); // 도서 읽기 뭐랑 연결해야할지 난감해 주석처리
         dtm = new DefaultTableModel(rowData,columnnames);
         table = new JTable(dtm);
 
@@ -28,16 +36,38 @@ public class HistoryView extends JFrame {
         table.setFillsViewportHeight(true);
 
         sp.setBounds(50, 50, 300, 300);
-        btnBack.setBounds(20, 400, 150, 30);
-        bt_quiz.setBounds(200, 400, 80, 30);
-        bt_read.setBounds(300, 400, 100, 30);
+        btnBack.setBounds(47, 400, 140, 30);
+        btnQuiz.setBounds(210, 400, 140, 30);
+        //btnRead.setBounds(300, 400, 100, 30);
         add(sp);
         add(btnBack);
-        add(bt_quiz);
-        add(bt_read);
+        add(btnQuiz);
+        //add(btnRead);
 
-        setSize(600, 600);
-    }
+        setSize(410, 500);
+        setVisible(true);
+        
+        // 버튼 이벤트 처리(화면 전환)
+        btnQuiz.addActionListener(new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            new QuizView();
+            setVisible(false); 
+        }
+    });
+        // 버튼 이벤트 처리(화면 전환)
+        btnBack.addActionListener(new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            new MyPageView();
+            setVisible(false);
+        }
+    });
+
+
+        
+  }// end HistoryView 
+    
     public void displayTable(ArrayList<Object> list) {
         dtm.setRowCount(0);//출력될 시작행의 위치 0 ---> 첫번째행
 
