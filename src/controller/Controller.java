@@ -12,16 +12,16 @@ import model.dao.BookDAO;
 import model.dao.MemberDAO;
 import model.vo.Book;
 import model.vo.Member;
-import view.AdminView;
-import view.BookGenreView;
-import view.BookPayView;
-import view.BookSelectView;
-import view.CashView;
-import view.HistoryView;
-import view.JoinView;
-import view.LoginView;
-import view.MyPageView;
-import view.PwdUpdateView;
+import view.admin.AdminView;
+import view.book.BookGenreView;
+import view.book.BookPayView;
+import view.book.BookSelectView;
+import view.history.HistoryView;
+import view.member.CashView;
+import view.member.JoinView;
+import view.member.LoginView;
+import view.member.MyPageView;
+import view.member.PwdUpdateView;
 
 public class Controller implements ActionListener {
     LoginView viewLogin;

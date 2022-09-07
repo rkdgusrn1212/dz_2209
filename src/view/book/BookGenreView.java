@@ -1,4 +1,4 @@
-package view;
+package view.book;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;

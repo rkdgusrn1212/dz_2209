@@ -1,4 +1,4 @@
-package view;
+package view.admin;
 
 import java.util.ArrayList;
 
@@ -13,6 +13,9 @@ import javax.swing.table.DefaultTableModel;
 import model.vo.Member;
 
 public class AdminView extends JFrame {
+    public static void main(String args[]) {
+        new AdminView().setVisible(true);
+    }
     DefaultTableModel dtm, dtm2;
     public JTable table, table2;
     JLabel la_id, la_book;

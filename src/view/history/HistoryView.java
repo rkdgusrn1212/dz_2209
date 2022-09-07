@@ -1,4 +1,4 @@
-package view;
+package view.history;
 
 import java.util.ArrayList;
 

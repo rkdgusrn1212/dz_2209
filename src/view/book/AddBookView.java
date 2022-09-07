@@ -1,4 +1,4 @@
-package view;
+package view.book;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
