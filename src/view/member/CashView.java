@@ -36,6 +36,7 @@ public class CashView extends JFrame{
 
 
         setSize(300,300);
+        setVisible(true);
     }
     public void showMsg(String msg) {
         JOptionPane.showMessageDialog(this, msg);

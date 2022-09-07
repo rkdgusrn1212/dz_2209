@@ -21,26 +21,28 @@ public class AdminView extends JFrame {
     public JTable table, table2;
     JLabel labelMember, labelBook;
     public JScrollPane sp, sp2;
-    public JButton btnSelectMember, btnSelectAllMember, btnSelectBook, btnSelectAllBook, btnAddBook, btnAddQuiz, btnBack;
-    Object rowData[][]= new String[0][5];
+    public JButton btnSelectAllMember, btnSelectMember, btnDeleteMember, btnSelectAllBook, btnSelectBook, btnDeleteBook, btnAddQuiz, btnBack; //btnAddBook 삭제
+    Object rowData[][]= new String[0][4];
     Object columnnames[] = {"아이디", "이름", "이메일", "장르"};
     
-    Object rowData2[][]= new String[0][6];
+    Object rowData2[][]= new String[0][4];
     Object columnnames2[] = {"도서명", "저자명", "줄거리", "장르"};
     
     public AdminView() {
         setTitle("AdminView");
         setLayout(null);
         
-        labelMember = new JLabel("회원 정보");
-        btnSelectMember = new JButton("회원 조회");
         btnSelectAllMember = new JButton("회원 전체 조회");
+        btnSelectMember = new JButton("회원 조회");
+        btnDeleteMember =  new JButton("회원 삭제");
+        labelMember = new JLabel("<회원 정보>");
         
-        labelBook = new JLabel("도서 정보"); 
-        btnSelectBook = new JButton("도서 조회");
         btnSelectAllBook = new JButton("도서 전체 조회");
+        btnSelectBook = new JButton("도서 조회");
+        btnDeleteBook =  new JButton("도서 삭제");
+        labelBook = new JLabel("<도서 정보>"); 
         
-        btnAddBook = new JButton("도서 추가");
+//        btnAddBook = new JButton("도서 추가");
         btnAddQuiz = new JButton("퀴즈 추가");
         
         btnBack = new JButton("로그아웃");
@@ -62,37 +64,41 @@ public class AdminView extends JFrame {
         
         
         //setBounds 
-        labelMember.setBounds(50, 20, 100, 30);
-        btnSelectMember.setBounds(160, 10, 100, 30);
-        btnSelectAllMember.setBounds(280, 10, 120, 30);
-        sp.setBounds(20, 50, 380, 300);
+        btnSelectAllMember.setBounds(22, 10, 120, 30); //회원 전체 조회
+        btnSelectMember.setBounds(160, 10, 110, 30); //회원 조회
+        btnDeleteMember.setBounds(290, 10, 110, 30); //회원 삭제
+        sp.setBounds(20, 50, 380, 300); //회원 테이블
+        labelMember.setBounds(180, 20, 100, 750); //<회원정보>
         
-        labelBook.setBounds(550, 20, 100, 30);
-        btnSelectBook.setBounds(690, 10, 100, 30);      
-        btnSelectAllBook.setBounds(810, 10, 120, 30);       
-        sp2.setBounds(550, 50, 380, 300);
+        btnSelectAllBook.setBounds(550, 10, 120, 30); //도서 전체 조회
+        btnSelectBook.setBounds(690, 10, 110, 30); //도서 조회  
+        btnDeleteBook.setBounds(820, 10, 110, 30); //도서 삭제
+        sp2.setBounds(550, 50, 380, 300); //도서 테이블
+        labelBook.setBounds(710, 20, 100, 750); //<도서정보>
         
-        btnAddBook.setBounds(620, 400, 100, 30);
-        btnAddQuiz.setBounds(760, 400, 100, 30); 
+        btnAddQuiz.setBounds(430, 380, 100, 30); //퀴즈 추가
+//      btnAddBook.setBounds(830, 380, 100, 30); //도서 추가
         
-        btnBack.setBounds(20, 400, 100, 30);  
+        btnBack.setBounds(20, 450, 100, 30);  
         
         
         
         //add
-        add(labelMember);
-        add(btnSelectMember);
         add(btnSelectAllMember);
+        add(btnSelectMember);
+        add(btnDeleteMember);
         add(sp);
+        add(labelMember);
         
-        add(labelBook);
-        add(btnSelectBook);
         add(btnSelectAllBook);
+        add(btnSelectBook);
+        add(btnDeleteBook);
         add(sp2);
+        add(labelBook);
         
-        add(btnAddBook);
+//        add(btnAddBook);
         add(btnAddQuiz);
-        
+
         add(btnBack);
         
         setVisible(false);
@@ -101,25 +107,23 @@ public class AdminView extends JFrame {
         
         
         //이벤트 (버튼 클릭시 화면전환)
-        btnAddBook.addActionListener(new ActionListener() {
-
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                new AddBookView();
-                setVisible(false); 
-            }
-            
-        });
-        
         btnAddQuiz.addActionListener(new ActionListener() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                new AddQuizView();
-                setVisible(false); 
+                new view.quiz.AddQuizView();
             }
             
         });
+        
+//      btnAddBook.addActionListener(new ActionListener() {
+//
+//          @Override
+//          public void actionPerformed(ActionEvent e) {
+//              new AddBookView();
+//          }
+//          
+//      });
         
         
     } //end AdminView()

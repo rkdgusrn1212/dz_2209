@@ -6,6 +6,8 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JToggleButton;
 
+import view.member.MyPageView;
+
 public class BookClickView extends JPanel {
     public JToggleButton tglBtnImage;
     public JLabel labelName, labelWriter, labelPrice;
@@ -33,9 +35,13 @@ public class BookClickView extends JPanel {
         add(labelPrice);
 
         taContent.setFocusable(true);
-        taContent.setVisible(false);
+        taContent.setVisible(true);
 
-        setSize(250,500);
+        setSize(400,500);
+    }
+    
+    public static void main(String[] args) {
+        new BookClickView().setVisible(true);
     }
 }
 

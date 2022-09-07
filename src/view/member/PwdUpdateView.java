@@ -68,8 +68,8 @@ public class PwdUpdateView extends JFrame {
         tfName.setEnabled(false);
         tfId.setEnabled(false);
 
-        setBounds(350,200,300,340); 
-        setVisible(false);
+        setBounds(800,300,300,300);
+        setVisible(true);
     }//생성자  
     public void showMsg(String msg) {
         JOptionPane.showMessageDialog(this, msg);
@@ -82,4 +82,5 @@ public class PwdUpdateView extends JFrame {
         tfPwd.setText("");
         tfPwd2.setText("");
     }
+   
 }//PassUpdateView

@@ -28,7 +28,11 @@ public class FindIdPass extends JFrame{
         add(labelEmail);
         add(btnSubmit);
 
-        setBounds(350, 200, 300, 250);
+        setBounds(800,300,300,300);
         setVisible(true);   
+    }
+    
+    public static void main(String[] args) {
+        new FindIdPass().setVisible(true);
     }
 }

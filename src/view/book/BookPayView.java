@@ -77,7 +77,7 @@ public class BookPayView extends JFrame {
         add(p_pay, BorderLayout.CENTER);
 
         setSize(800,600);
-        setVisible(false);
+        setVisible(true);
     }
     public static void main(String[] args) {
         new BookPayView();

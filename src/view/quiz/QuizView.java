@@ -1,3 +1,5 @@
+
+
 package view.quiz;
 
 import javax.swing.JFrame;

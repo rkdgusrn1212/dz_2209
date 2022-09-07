@@ -6,6 +6,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JRadioButton;
 
+import view.member.FindIdPass;
+
 public class BookGenreView extends JFrame {
     public JLabel la_msg;
     public JRadioButton rBtnFiction, rBtnAssay, rb_3;
@@ -39,6 +41,10 @@ public class BookGenreView extends JFrame {
 
         rBtnFiction.setSelected(true);
         setSize(300, 300);
-        setVisible(false);
+        setVisible(true);
+    }
+    
+    public static void main(String[] args) {
+        new BookGenreView().setVisible(true);
     }
 }

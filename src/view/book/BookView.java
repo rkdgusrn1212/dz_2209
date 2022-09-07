@@ -32,6 +32,11 @@ public class BookView extends JFrame{
         getContentPane().add(btnPrev);
         getContentPane().add(btnNext);
 
+        setSize(300,500);
         setVisible(true);
+    }
+    
+    public static void main(String[] args) {
+        new BookView().setVisible(true);
     }
 }

@@ -32,14 +32,13 @@ public class AddQuizView extends JFrame
          
          //setBounds 
          labelQuestion.setBounds(10,30,100,25);
-         labelAnswer.setBounds(10,70,100,25);
-         
-//         tfWriter.setBounds(80,110,100,25);
-//         tfGenre.setBounds(80,150,100,25);
-//         tfPrice.setBounds(80,190,100,25);
          sp = new JScrollPane(taQuestion);
-         sp.setBounds(80,230,180,60);
-         tfAnswer.setBounds(80,70,100,25);
+//       sp.setBounds(80,230,180,60);
+         sp.setBounds(80,30,180,200);
+       
+         labelAnswer.setBounds(10,250,100,25);
+         tfAnswer.setBounds(80,250,100,25);
+
           
          btnSubmit.setBounds(50,310,90,25);
          btnReset.setBounds(150,310,90,25);
