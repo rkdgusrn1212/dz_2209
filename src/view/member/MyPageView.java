@@ -4,7 +4,9 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
-public class MyPageView extends JFrame {
+import view.View;
+
+public class MyPageView extends View {
     public JLabel labelMsg, labelGrade, labelCash, labelPoint;
     public JButton  btnUpdate, btnHistory, btnCash, btnLogout, btnBack;
     public MyPageView() {
@@ -44,6 +46,5 @@ public class MyPageView extends JFrame {
         add(btnBack);
 
         setSize(300,500);
-        setVisible(false);
     }
 }

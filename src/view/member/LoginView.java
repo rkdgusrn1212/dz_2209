@@ -1,21 +1,22 @@
 package view.member;
 
+
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
-public class LoginView extends JFrame
+import view.View;
+
+public class LoginView extends View
 {
     public JTextField tfId;
     public JPasswordField tfPwd;
     public JButton btnLogin,btnJoin;
     JLabel la_id, la_pass;
 
-    public LoginView()
-    {  
+    public LoginView(){
         setTitle("LoginView");
 
         tfId = new JTextField();     
@@ -43,7 +44,6 @@ public class LoginView extends JFrame
         add(la_pass);
 
         setBounds(400,300,300,180);
-        setVisible(true);
         setResizable(false);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 

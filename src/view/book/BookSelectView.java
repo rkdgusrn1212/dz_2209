@@ -4,7 +4,9 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
-public class BookSelectView extends JFrame {
+import view.View;
+
+public class BookSelectView extends View {
     public JLabel la_msg, labelId;
     public JButton btnSelect, btnGenre, bt_back;
     public BookClickView[] viewBookClick;
