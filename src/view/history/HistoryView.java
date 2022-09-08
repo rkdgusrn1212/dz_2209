@@ -1,11 +1,13 @@
 package view.history;
 
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -20,12 +22,14 @@ public class HistoryView extends JFrame {
     DefaultTableModel dtm;
     public JTable table;
     public JButton btnBack, btnQuiz, btnRead;
+    public JLabel labelMsg;
     Object rowData[][]= new String[0][3];
     Object columnnames[] = {"ISBN", "도서명", "저자명"};
     public HistoryView() {
-        setTitle("HistoryView");
+        setTitle("이용내역");
         setLayout(null);
-
+        
+        labelMsg = new JLabel("도서 이용 내역");
         btnBack = new JButton("마이페이지");
         btnQuiz = new JButton("퀴즈");
         //btnRead = new JButton("도서 읽기"); // 도서 읽기 뭐랑 연결해야할지 난감해 주석처리
@@ -35,35 +39,25 @@ public class HistoryView extends JFrame {
         JScrollPane sp = new JScrollPane(table);
         table.setFillsViewportHeight(true);
 
-        sp.setBounds(50, 50, 300, 300);
-        btnBack.setBounds(47, 400, 140, 30);
-        btnQuiz.setBounds(210, 400, 140, 30);
+        sp.setBounds(40, 60, 450, 400);
+        btnBack.setBounds(40, 470, 140, 35);
+        btnQuiz.setBounds(350, 470, 140, 35);
+        labelMsg.setBounds(210, 10, 140, 35);
+        
         //btnRead.setBounds(300, 400, 100, 30);
+        
+        Font font=new Font("맑은고딕", Font.BOLD, 16);
+        btnBack.setFont(font);
+        btnQuiz.setFont(font);
+        labelMsg.setFont(font);
+        
         add(sp);
         add(btnBack);
         add(btnQuiz);
+        add(labelMsg);
         //add(btnRead);
 
-        setSize(410, 500);
-        setVisible(true);
-        
-        // 버튼 이벤트 처리(화면 전환)
-        btnQuiz.addActionListener(new ActionListener() {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            new QuizView();
-            setVisible(false); 
-        }
-    });
-        // 버튼 이벤트 처리(화면 전환)
-        btnBack.addActionListener(new ActionListener() {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            new MyPageView();
-            setVisible(false);
-        }
-    });
-
+        setBounds(700,200,550,580);
 
         
   }// end HistoryView 
