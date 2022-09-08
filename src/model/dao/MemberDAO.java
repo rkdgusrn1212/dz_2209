@@ -35,27 +35,29 @@ public class MemberDAO {
         return m;
     }//selectPayBook
 
+    //로그인체크
     public boolean loginCheck(String id, String pwd) {
-        PreparedStatement pstmt = DBConnManager.getInstance().getPreparedStatement(
-                "select count(*) from member  where id=? and pwd=?");
-        ResultSet rs = null;
-        try {
-            pstmt.setString(1, id);
-            pstmt.setString(2, pwd);
-            rs = pstmt.executeQuery();
-            rs.next();
-            int t = rs.getInt(1);
-            if(t>0)
-                return true;
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            DBConnManager.close(rs);
-            DBConnManager.close(pstmt);
-        }
-        return false;
+    PreparedStatement pstmt = DBConnManager.getInstance().getPreparedStatement(
+          "select count(*) from member  where id=? and pwd=?");
+    ResultSet rs = null;
+    try {
+      pstmt.setString(1, id);
+      pstmt.setString(2, pwd);
+      rs = pstmt.executeQuery();
+      rs.next();
+      int t = rs.getInt(1);
+      if(t>0)
+          return true;
+    } catch (SQLException e) {
+      e.printStackTrace();
+    } finally {
+      DBConnManager.close(rs);
+      DBConnManager.close(pstmt);
     }
-
+    return false;
+    }
+    
+//회원가입
     public boolean insertJoin(Member m) {
         PreparedStatement pstmt = DBConnManager.getInstance().getPreparedStatement(
                 "insert into member values (?,?,?,?,?,?,?)");
@@ -77,7 +79,8 @@ public class MemberDAO {
         }
         return false;
     }
-
+    
+//비밀번호, 아이디 찾기
     public Member findIdpwd(String email) {
         PreparedStatement pstmt = DBConnManager.getInstance().getPreparedStatement(
                 "select id,pwd from member where email = ?");
@@ -100,6 +103,7 @@ public class MemberDAO {
         return null;
     }
 
+//마이페이지 포인트 캐쉬 조회    
     public Member selectMyPage(String id) {
         PreparedStatement pstmt = DBConnManager.getInstance().getPreparedStatement(
                 "select name, point ,cash from member where id=?");
@@ -121,15 +125,23 @@ public class MemberDAO {
         return null;
     }
 
-    public String selectInterestCategory(String id) {
+
+// 관리자 뷰의 전체 조회 
+    public Member selectMemberInfoAll(String id) {
         PreparedStatement pstmt = DBConnManager.getInstance().getPreparedStatement(
-                "select interest_category from member where id=?");
+                "select id, name, email, interest_category from member");
         ResultSet rs = null;
         try {
             pstmt.setString(1, id);
             rs = pstmt.executeQuery();
-            rs.next();
-            return rs.getString("interest_category");
+            if (rs.next()) {
+                Member m  = new Member();
+                m.setId(rs.getString("id"));
+                m.setName(rs.getString("name"));
+                m.setEmail(rs.getString("email"));
+                m.setInterestCategory(rs.getInt("interest_category"));
+                return m;
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -139,21 +151,100 @@ public class MemberDAO {
         return null;
     }
 
+ // 관리자 뷰에서 아이디로 회원 조회 
     public Member selectMemberInfo(String id) {
         PreparedStatement pstmt = DBConnManager.getInstance().getPreparedStatement(
-                "select name, email, interest_category from member");
+                "select id, name, email, interest_category from member where id = ?");
         ResultSet rs = null;
         try {
             pstmt.setString(1, id);
             rs = pstmt.executeQuery();
             if (rs.next()) {
                 Member m  = new Member();
-                m.setId(id);
+                m.setId(rs.getString("id"));
                 m.setName(rs.getString("name"));
                 m.setEmail(rs.getString("email"));
                 m.setInterestCategory(rs.getInt("interest_category"));
                 return m;
             }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBConnManager.close(rs);
+            DBConnManager.close(pstmt);
+        }
+        return null;
+    }
+
+// 관리자 뷰에서 아이디로 회원 삭제
+    public boolean deleteMemberInfo(String id) {
+        PreparedStatement pstmt = DBConnManager.getInstance().getPreparedStatement(
+                "delete from member where id=?");
+        try {
+            pstmt.setString(1, id);
+            int t = pstmt.executeUpdate();
+            if(t == 1) {
+                return true;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBConnManager.close(pstmt);
+        }
+        return false;
+    }
+
+// 캐쉬 충전
+    public boolean updateCashCharge(String id,int cash) { 
+        PreparedStatement pstmt = DBConnManager.getInstance().getPreparedStatement(
+                "update member set cash=cash+? where id=?");
+        try {
+            pstmt.setInt(1, cash);
+            pstmt.setString(2, id);
+            int t = pstmt.executeUpdate();
+            if(t>0) return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBConnManager.close(pstmt);
+        }
+        return false;
+    }
+
+ //캐쉬, 포인트차감
+    public boolean updateAfterPay(Member m) {
+        PreparedStatement pstmt = DBConnManager.getInstance().getPreparedStatement(
+                "update member set cash = cash-?, point = point-? where id=?");
+        try {
+            pstmt.setInt(1, m.getCash());
+            pstmt.setInt(2, m.getPoint());
+            pstmt.setString(3, m.getId());
+            int t = pstmt.executeUpdate();
+            if(t>0) return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBConnManager.close(pstmt);
+        }	
+        return false;
+    }
+    
+}
+
+
+
+/*
+
+
+    public String selectInterestCategory(String id) {
+        PreparedStatement pstmt = DBConnManager.getInstance().getPreparedStatement(
+                "select interest_category from member where id=?");
+        ResultSet rs = null;
+        try {
+            pstmt.setString(1, id);
+            rs = pstmt.executeQuery();
+            rs.next();
+            return rs.getString("interest_category");
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -187,66 +278,7 @@ public class MemberDAO {
         }
         return list;
     }
-
-    public ArrayList<Member> selectAllMember(){
-        PreparedStatement pstmt = DBConnManager.getInstance().getPreparedStatement(
-                "select id, name, email,interest_category from member");
-        ResultSet rs = null;
-        ArrayList<Member> list = new ArrayList<>();
-        try {
-            rs = pstmt.executeQuery();
-            while (rs.next()) {
-                Member m  = new Member();
-                m.setId(rs.getString("id"));
-                m.setName(rs.getString("name"));
-                m.setEmail(rs.getString("email"));
-                m.setInterestCategory(rs.getInt("interest_category"));
-                list.add(m);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            DBConnManager.close(rs);
-            DBConnManager.close(pstmt);
-        }
-        return list;
-    }
-
-    public boolean updateMemberInfo(String id,String pwd) {
-        PreparedStatement pstmt = DBConnManager.getInstance().getPreparedStatement(
-                "update member set pwd=? where id=?");
-        try {
-            pstmt.setString(1, pwd);
-            pstmt.setString(2, id);
-            int t = pstmt.executeUpdate();
-            if(t>0) return true;
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            DBConnManager.close(pstmt);
-        }
-        return false;
-    }
     
-    public boolean checkEmail(String email) {
-        PreparedStatement pstmt = DBConnManager.getInstance().getPreparedStatement(
-                "select email from member where email = ?");
-        ResultSet rs = null;
-        try {
-            pstmt.setString(1,email);
-            rs = pstmt.executeQuery();;
-            if (rs.next()) {
-                return true;
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            DBConnManager.close(rs);
-            DBConnManager.close(pstmt);
-        }
-        return false;
-    }
-
     public boolean dupliCheck(String checkStr) {
         String sql;
         if(checkStr.contains("@")) {
@@ -272,6 +304,7 @@ public class MemberDAO {
         return false;
     }
 
+ 
     public boolean updateinterest_category(String id,String interest_category) {
 
         PreparedStatement pstmt = DBConnManager.getInstance().getPreparedStatement("update member set interest_category=? where id=?");
@@ -288,37 +321,5 @@ public class MemberDAO {
         return false;
     }
 
-    public boolean updateCashCharge(String id,int cash) { 
-        PreparedStatement pstmt = DBConnManager.getInstance().getPreparedStatement(
-                "update member set cash=cash+? where id=?");
-        try {
-            pstmt.setInt(1, cash);
-            pstmt.setString(2, id);
-            int t = pstmt.executeUpdate();
-            if(t>0) return true;
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            DBConnManager.close(pstmt);
-        }
-        return false;
-    }
 
-    public boolean updateAfterPay(Member m) {
-        PreparedStatement pstmt = DBConnManager.getInstance().getPreparedStatement(
-                "update member set cash = cash-?, point = point-? where id=?");
-        try {
-            pstmt.setInt(1, m.getCash());
-            pstmt.setInt(2, m.getPoint());
-            pstmt.setString(3, m.getId());
-            int t = pstmt.executeUpdate();
-            if(t>0) return true;
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            DBConnManager.close(pstmt);
-        }	
-        return false;
-    }
-    
-}
+*/
