@@ -1,5 +1,8 @@
 package view.book;
 
+import java.awt.Color;
+import java.awt.Graphics;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -33,6 +36,10 @@ public class BookSelectView extends View {
         
         
         //setBounds
+
+        btnPick1.setBounds(150, 560, 80,30);
+        btnPick2.setBounds(460, 560, 80,30);
+        btnPick3.setBounds(770, 560, 80,30);
         labelId.setBounds(100, 20, 80, 30);
         labelMsg.setBounds(440, 20, 120, 30);
         tfSearch.setBounds(550, 700, 180, 30);
@@ -42,11 +49,12 @@ public class BookSelectView extends View {
         btnSearch.setBounds(730, 700, 100, 30);
         btnMyPage.setBounds(680, 20, 100, 30);
         btnLogout.setBounds(820, 20, 100, 30);
-        btnPick1.setBounds(150, 560, 80,30);
-        btnPick2.setBounds(460, 560, 80,30);
-        btnPick3.setBounds(770, 560, 80,30);
         
         //add
+
+        add(btnPick1);
+        add(btnPick2);
+        add(btnPick3);
         add(labelId);
         add(labelMsg);
         add(tfSearch);
@@ -56,9 +64,6 @@ public class BookSelectView extends View {
         add(btnQuiz);
         add(btnMyPage);
         add(btnLogout);
-        add(btnPick1);
-        add(btnPick2);
-        add(btnPick3);
         
         //add BookClickView
         for(int i=0; i<viewBookClick.length; i++) {
@@ -66,7 +71,6 @@ public class BookSelectView extends View {
             viewBookClick[i].setBounds(310*i+60, 100, 250, 500);
             add(viewBookClick[i]);
         }
-
         setSize(1000,800);
     }
 }

@@ -14,11 +14,13 @@ import view.View;
 
 public class AddBookView extends View 
 {
-     public JTextField tfIsbn, tfBook, tfWriter, tfCategory, tfPrice; 
+     public JTextField tfIsbn, tfBook, tfWriter, tfPrice; 
      public JTextArea taContent;
      public JButton btnSubmit, btnReset;
      JLabel labelIsbn,labelBook,labelWriter,labelCategory,labelPrice, labelContent;
+     public JComboBox<String> cbInterestCategory;
      JScrollPane sp;
+     String items[] = {"총류", "철학, 심리학, 윤리학", "종교", "사회과학", "순수과학", "기술과학", "예술", "어학", "문학", "역사, 지리, 관광"};
      
      public AddBookView(){   
          setTitle("AddBookView");
@@ -28,7 +30,6 @@ public class AddBookView extends View
 //          tf_writer = new JPasswordField();
          tfBook = new JTextField();
          tfWriter = new JTextField();
-         tfCategory = new JTextField();
          tfPrice = new JTextField();
          taContent = new JTextArea();
           
@@ -41,13 +42,16 @@ public class AddBookView extends View
          labelCategory = new JLabel("도서장르 : ");
          labelPrice = new JLabel("도서원가 :"); 
          labelContent = new JLabel("줄거리 :");
-          
+
+         cbInterestCategory = new JComboBox<>(items);
+
+
          
          //setBounds 
          tfIsbn.setBounds(80,30,100,25);
          tfBook.setBounds(80,70,100,25);
          tfWriter.setBounds(80,110,100,25);
-         tfCategory.setBounds(80,150,100,25);
+         cbInterestCategory.setBounds(80,150,100,25);
          tfPrice.setBounds(80,190,100,25);
          sp = new JScrollPane(taContent);
          sp.setBounds(80,230,180,60);
@@ -68,7 +72,6 @@ public class AddBookView extends View
           add(tfIsbn);
           add(tfBook);
           add(tfWriter);
-          add(tfCategory);
           add(tfPrice);
 //          add(taContent);
           
@@ -82,6 +85,7 @@ public class AddBookView extends View
           add(labelPrice);
           add(labelContent);
           add(sp);
+          add(cbInterestCategory);
           
           setBounds(350,200,300,400); 
           
@@ -98,7 +102,6 @@ public class AddBookView extends View
               tfIsbn.setText("");
               tfBook.setText("");
               tfWriter.setText("");
-              tfCategory.setText("");
               tfPrice.setText("");
           }
           

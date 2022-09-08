@@ -25,7 +25,7 @@ public class AddBookController extends Controller {
             finish();
         } else if (s==addviewBook.btnSubmit) {
     		String isbn=addviewBook.tfIsbn.getText();
-    		int category=Integer.parseInt(addviewBook.tfCategory.getText());
+    		int category=addviewBook.cbInterestCategory.getSelectedIndex();
     		String bName=addviewBook.tfBook.getText();
     		String writer=addviewBook.tfWriter.getText();
     		int originPrice=Integer.parseInt(addviewBook.tfPrice.getText());
