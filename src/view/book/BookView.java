@@ -1,15 +1,11 @@
 package view.book;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JTable;
 
 import view.View;
-import view.member.MyPageView;
+
 public class BookView extends View{
     JLabel labelBook, labelName, labelWriter, labelPrice, labelSummary;
     public JButton btnBack;
