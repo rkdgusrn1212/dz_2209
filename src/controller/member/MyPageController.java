@@ -51,7 +51,7 @@ public class MyPageController extends Controller {
         viewMyPage.btnUpdate.addActionListener(this);
         viewMyPage.btnHistory.addActionListener(this);
         viewMyPage.btnCash.addActionListener(this);
-        viewMyPage.labelMsg.setText(getArgs(0) + "님 환영합니다.");
+        viewMyPage.labelMsg.setText(getArgs(0) + "의 MyPage");
     }
 
     @Override
