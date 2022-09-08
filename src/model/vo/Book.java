@@ -11,23 +11,18 @@ public class Book {
 	String summary;
 //	String imange;
 	
-	
-	public Book(int i, String j, String writer, int k) {
-	    this.isbn = i;
-		this.bname = j;
-		this.writer = writer;
-		this.prent = k;
-	}
+    public Book(String bname, String writer, int i, int k) {
+        this.bname = bname;
+        this.writer = writer;
+        this.category = i;
+        this.prent = k;
+    }
 
-    public Book(int isbn, int category, String bname, String writer, int prent, int originPrice,
-			String summary ) {
+    public Book(String bname, int originPrice, String writer,String summary ) {
 		super();
-		this.isbn = isbn;
-		this.category = category;
 		this.bname = bname;
+        this.originPrice = originPrice;
 		this.writer = writer;
-		this.prent = prent;
-		this.originPrice = originPrice;
 		this.summary = summary;
 //		this.imange = imange;
 	}
@@ -41,7 +36,8 @@ public class Book {
 //		this.imange = imange;
 //	}
 
-	public String getSummary() {
+
+    public String getSummary() {
 		return summary;
 	}
 
