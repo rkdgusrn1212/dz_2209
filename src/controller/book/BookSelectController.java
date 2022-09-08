@@ -29,6 +29,8 @@ public class BookSelectController extends Controller {
             new MyPageController(this, getArgs(0));
         }else if(s==viewBookSelect.btnAllList) {
             new BookListController(this);
+        }else if(s==viewBookSelect.btnAdd) {
+            new AddBookController(this);
         }
     }
     @Override
@@ -38,6 +40,7 @@ public class BookSelectController extends Controller {
         viewBookSelect.btnLogout.addActionListener(this);
         viewBookSelect.btnMyPage.addActionListener(this);
         viewBookSelect.btnAllList.addActionListener(this);
+        viewBookSelect.btnAdd.addActionListener(this);
         for (int i = 0; i < viewBookSelect.viewBookClick.length; i++) {
             viewBookSelect.viewBookClick[i].tglBtnImage.addMouseListener(new MouseAdapter() {
                 @Override

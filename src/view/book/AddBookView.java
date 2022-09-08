@@ -10,7 +10,9 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-public class AddBookView extends JFrame 
+import view.View;
+
+public class AddBookView extends View 
 {
      public JTextField tfIsbn, tfBook, tfWriter, tfCategory, tfPrice; 
      public JTextArea taContent;
