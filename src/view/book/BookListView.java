@@ -27,7 +27,7 @@ public class BookListView extends View{
     Object columnnames[] = {"제목", "저자", "카테고리", "대여여부"};
     
     public BookListView() {
-        setTitle("BookListView");
+        setTitle("도서 목록 조회");
         setLayout(null);
         
         
