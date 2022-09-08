@@ -11,16 +11,17 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 import model.vo.Book;
+import view.View;
 
 
-public class BookListView extends JFrame{
+public class BookListView extends View{
 	DefaultTableModel dtm;
 	public JTable table;
 	public JScrollPane sp;
 	
     public JLabel labelMsg;
     public ButtonGroup btnGroup;
-    public JButton btnBookSelect;
+    public JButton btnBack;//누르면 북 셀렉트 뷰로 돌아감
     Object rowData[][]= new String[0][4];
     Object columnnames[] = {"제목", "저자", "카테고리", "대여여부"};
     
@@ -36,18 +37,18 @@ public class BookListView extends JFrame{
         table.setFillsViewportHeight(true);
         
         // 버튼 생성
-        btnBookSelect= new JButton("이전메뉴");
+        btnBack= new JButton("이전메뉴");
         labelMsg = new JLabel("도서 목록 조회");
         
         //setBounds
         sp.setBounds(20, 50, 645, 540); // 도서 리스트 테이블
-        btnBookSelect.setBounds(20, 600, 110, 30);
+        btnBack.setBounds(20, 600, 110, 30);
         labelMsg.setBounds(300, 10, 120, 30);
         
         
         //add
         add(sp);
-        add(btnBookSelect);
+        add(btnBack);
         add(labelMsg);
 
         

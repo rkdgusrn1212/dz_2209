@@ -27,6 +27,8 @@ public class BookSelectController extends Controller {
             new LoginController(null);
         }else if (s == viewBookSelect.btnMyPage) {// 마이페이지로 이동
             new MyPageController(this, getArgs(0));
+        }else if(s==viewBookSelect.btnAllList) {
+            new BookListController(this);
         }
     }
     @Override
@@ -35,6 +37,7 @@ public class BookSelectController extends Controller {
         viewBookSelect.labelId.setText(getArgs(0) + "님");
         viewBookSelect.btnLogout.addActionListener(this);
         viewBookSelect.btnMyPage.addActionListener(this);
+        viewBookSelect.btnAllList.addActionListener(this);
         for (int i = 0; i < viewBookSelect.viewBookClick.length; i++) {
             viewBookSelect.viewBookClick[i].tglBtnImage.addMouseListener(new MouseAdapter() {
                 @Override
