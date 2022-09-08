@@ -1,5 +1,7 @@
 package view.quiz;
 
+import java.awt.event.WindowAdapter;
+
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -11,7 +13,8 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 public class AddQuizView extends JFrame {
-    public JTextField tfQuestion;
+//    public JTextField tfQuestion;
+    public JTextArea tfQuestion;
     public JTextField tfAnswer;
     public JButton btnSubmit, btnReset;
     JLabel labelQuestion, labelAnswer;
@@ -21,7 +24,8 @@ public class AddQuizView extends JFrame {
         setTitle("AddQuizView");
 
         labelQuestion = new JLabel("퀴즈 문제 : ");
-        tfQuestion = new JTextField();
+//        tfQuestion = new JTextField();
+        tfQuestion = new JTextArea();
 
         labelAnswer = new JLabel("퀴즈 정답 : ");
         tfAnswer = new JTextField();
@@ -32,6 +36,7 @@ public class AddQuizView extends JFrame {
         // setBounds
         labelQuestion.setBounds(10, 30, 80, 50);
         tfQuestion.setBounds(75, 45, 165, 180);
+        tfQuestion.setLineWrap(true);
 
         labelAnswer.setBounds(10, 250, 100, 25);
         tfAnswer.setBounds(75, 250, 165, 25);
@@ -50,6 +55,7 @@ public class AddQuizView extends JFrame {
         add(btnReset);
 
         setBounds(350, 200, 300, 400);
+  
 
         setVisible(true);
     }
