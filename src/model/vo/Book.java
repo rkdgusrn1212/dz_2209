@@ -1,38 +1,39 @@
 package model.vo;
 
 public class Book {
-
+    
+    int bookId;
     String isbn;
     int category;
-    String bname;
+    String bName;
     String writer;
-    int prent;
+    int pRent;
     int originPrice;
     String summary;
     //	String imange;
 
-    public Book(String bname, String writer, int i, int k) {
-        this.bname = bname;
+    public Book(String bName, String writer, int i, int k) {
+        this.bName = bName;
         this.writer = writer;
         this.category = i;
-        this.prent = k;
+        this.pRent = k;
     }
 
-    public Book(String bname, int originPrice, String writer,String summary ) {
+    public Book(String bName, int originPrice, String writer,String summary ) {
         super();
-        this.bname = bname;
+        this.bName = bName;
         this.originPrice = originPrice;
         this.writer = writer;
         this.summary = summary;
         //		this.imange = imange;
     }
 
-    public Book(String isbn, int category, String bname, String writer, int originPrice, String summary) {
+    public Book(String isbn, int category, String bName, String writer, int originPrice, String summary) {
         this.isbn = isbn;
         this.category = category;
-        this.bname = bname;
+        this.bName = bName;
         this.writer = writer;
-        this.prent = 0;
+        this.pRent = 0;
         this.originPrice = originPrice;
         this.summary = summary;
     }
@@ -46,6 +47,13 @@ public class Book {
     //		this.imange = imange;
     //	}
 
+    public int getBookId() {
+        return bookId;
+    }
+    
+    public void setBookId(int bookId) {
+        this.bookId = bookId;
+    }
 
     public String getSummary() {
         return summary;
@@ -72,11 +80,11 @@ public class Book {
     }
 
     public String getBname() {
-        return bname;
+        return bName;
     }
 
     public void setBname(String bname) {
-        this.bname = bname;
+        this.bName = bname;
     }
 
     public String getWriter() {
@@ -88,11 +96,11 @@ public class Book {
     }
 
     public int getPrent() {
-        return prent;
+        return pRent;
     }
 
-    public void setPrent(int prent) {
-        this.prent = prent;
+    public void setPRent(int pRent) {
+        this.pRent = pRent;
     }
 
 
@@ -106,10 +114,8 @@ public class Book {
 
     @Override
     public String toString() {
-        return "Book [isbn=" + isbn + ", category=" + category + ", bname=" + bname + ", writer=" + writer + ", prent="
-                + prent + ", originPrice=" + originPrice + ", summary=" + summary
-                //+ ", imange=" + imange 
-                + "]";
+        return "Book [book_id="+bookId + ", isbn=" + isbn + ", category=" + category + ", b_name=" + bName + ", writer=" + writer + ", p_rent="
+                + pRent + ", origin_price=" + originPrice + ", summary=" + summary+ "]";
     }
 
 }

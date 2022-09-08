@@ -12,20 +12,20 @@ import model.vo.Book;
 
 public class BookDAO {
 
-
     //addbookview와 mypage에 활용
     public boolean insertBook(Book b) {
 
         PreparedStatement pstmt = DBConnManager.getInstance().getPreparedStatement(
-                "insert into book (isbn,category,bname,writer,pRent,originPrice,summary) values(?,?,?,?,?,?,?)");
+                "insert into book (book_id, isbn, category,b_name,writer,p_rent,origin_price,summary) values(?,?,?,?,?,?,?)");
         try {
             pstmt.setString(1, b.getIsbn());
-            pstmt.setInt(2, b.getCategory());
-            pstmt.setString(3, b.getBname());
-            pstmt.setString(4, b.getWriter());			  
-            pstmt.setInt(5, 0);
-            pstmt.setInt(6, b.getOriginPrice());
-            pstmt.setString(7, b.getSummary());
+            pstmt.setString(2, b.getIsbn());
+            pstmt.setInt(3, b.getCategory());
+            pstmt.setString(4, b.getBname());
+            pstmt.setString(5, b.getWriter());			  
+            pstmt.setInt(6, 0);
+            pstmt.setInt(7, b.getOriginPrice());
+            pstmt.setString(8, b.getSummary());
             pstmt.executeUpdate();
             return true;
         } catch (SQLException e) {
@@ -38,11 +38,11 @@ public class BookDAO {
 
 
     //mypage에서 사용
-    public boolean deleteBook(String isbn) {
+    public boolean deleteBook(int bookId) {
 
-        PreparedStatement pstmt = DBConnManager.getInstance().getPreparedStatement("delete from book where isbn=?");
+        PreparedStatement pstmt = DBConnManager.getInstance().getPreparedStatement("delete from book where book_id =?");
         try {
-            pstmt.setString(1, isbn);
+            pstmt.setInt(1, bookId);
             int t = pstmt.executeUpdate();
             if(t == 1) {
                 return true;
@@ -56,22 +56,22 @@ public class BookDAO {
     }//DeleteBook
 
     //도서검색 조회  => booksearchview
-    public Book selectSearchBook(String bname) {
+    public Book selectSearchBook(String bName) {
 
         PreparedStatement pstmt = DBConnManager.getInstance().getPreparedStatement(
-                "select bname, writer,category, pRent from book where bname  like '%' || ? || '%'");
+                "select b_name, writer,category, p_rent from book where bname  like '%' || ? || '%'");
         ResultSet rs = null;
         Book b = null;
 
         try {
-            pstmt.setString(1, bname);
+            pstmt.setString(1, bName);
             rs = pstmt.executeQuery();
             if(rs.next()) {
                 b = new Book(
-                        rs.getString("bname"),
+                        rs.getString("b_name"),
                         rs.getString("writer"),
                         rs.getInt("category"),
-                        rs.getInt("prent"));
+                        rs.getInt("p_rent"));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -87,7 +87,7 @@ public class BookDAO {
     public Book selectAllBook() {
 
         PreparedStatement pstmt = DBConnManager.getInstance().getPreparedStatement(
-                "select bname, writer,category, pRent from book ");
+                "select b_name, writer,category, p_rent from book ");
         ArrayList<Book> bookList = new ArrayList<>();
         ResultSet rs = null;
         Book b = null;
@@ -96,10 +96,10 @@ public class BookDAO {
             rs = pstmt.executeQuery();
             while(rs.next()) {
                 b = new Book(
-                        rs.getString("bname"),
+                        rs.getString("b_name"),
                         rs.getString("writer"),
                         rs.getInt("category"),
-                        rs.getInt("prent"));
+                        rs.getInt("p_rent"));
                 bookList.add(b);
             }
         } catch (SQLException e) {
@@ -112,20 +112,20 @@ public class BookDAO {
     }//SelectAllBook
 
     //도서상세내용 조회  => booksearchview
-    public Book selectBook(String bname) {
+    public Book selectBook(String bName) {
 
         PreparedStatement pstmt = DBConnManager.getInstance().getPreparedStatement(
-                "select bname,  originPrice, writer, summary from book where bname like '%' || ? || '%'");
+                "select b_name,  origin_price, writer, summary from book where bname like '%' || ? || '%'");
         ResultSet rs = null;
         Book b = null;
 
         try {
-            pstmt.setString(1, bname);
+            pstmt.setString(1, bName);
             rs = pstmt.executeQuery();
             if(rs.next()) {
                 b = new Book(
-                        rs.getString("bname"),
-                        rs.getInt("originPrice"),
+                        rs.getString("b_name"),
+                        rs.getInt("origin_price"),
                         rs.getString("writer"),
                         rs.getString("summary"));
             }
