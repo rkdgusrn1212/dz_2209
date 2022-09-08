@@ -1,5 +1,7 @@
 package view.book;
 
+import java.awt.Font;
+
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -23,7 +25,7 @@ public class AddBookView extends View
      String items[] = {"총류", "철학, 심리학, 윤리학", "종교", "사회과학", "순수과학", "기술과학", "예술", "어학", "문학", "역사, 지리, 관광"};
      
      public AddBookView(){   
-         setTitle("AddBookView");
+         setTitle("도서추가");
       
          tfIsbn = new JTextField();
 //          tf_book = new JPasswordField();
@@ -36,35 +38,52 @@ public class AddBookView extends View
          btnSubmit = new JButton("등록");
          btnReset = new JButton("취소");
           
-         labelIsbn = new JLabel("도서번호 : ");
-         labelBook = new JLabel("도서명 : ");
-         labelWriter = new JLabel("저자명 : ");
-         labelCategory = new JLabel("도서장르 : ");
-         labelPrice = new JLabel("도서원가 :"); 
-         labelContent = new JLabel("줄거리 :");
+         labelIsbn = new JLabel("도서번호");
+         labelBook = new JLabel("도서명");
+         labelWriter = new JLabel("저자명");
+         labelCategory = new JLabel("도서장르");
+         labelPrice = new JLabel("도서원가"); 
+         labelContent = new JLabel("줄거리");
 
          cbInterestCategory = new JComboBox<>(items);
 
 
          
          //setBounds 
-         tfIsbn.setBounds(80,30,100,25);
-         tfBook.setBounds(80,70,100,25);
-         tfWriter.setBounds(80,110,100,25);
-         cbInterestCategory.setBounds(80,150,100,25);
-         tfPrice.setBounds(80,190,100,25);
+         tfIsbn.setBounds(150,30,200,35);
+         tfBook.setBounds(150,80,200,35);
+         tfWriter.setBounds(150,130,200,35);
+         cbInterestCategory.setBounds(150,180,200,35);
+         tfPrice.setBounds(150,230,200,35);
          sp = new JScrollPane(taContent);
-         sp.setBounds(80,230,180,60);
+         sp.setBounds(150,280,200,145);
           
-         btnSubmit.setBounds(50,310,90,25);
-         btnReset.setBounds(150,310,90,25);
+         btnSubmit.setBounds(40,450,130,35);
+         btnReset.setBounds(220,450,130,35);
           
-         labelIsbn.setBounds(10,30,100,25);
-         labelBook.setBounds(10,70,100,25);
-         labelWriter.setBounds(10,110,100,25);
-         labelCategory.setBounds(10,150,100,25);
-         labelPrice.setBounds(10, 190, 100, 25);
-         labelContent.setBounds(10, 230, 100, 25);
+         labelIsbn.setBounds(40,30,100,35);
+         labelBook.setBounds(40,80,100,35);
+         labelWriter.setBounds(40,130,100,35);
+         labelCategory.setBounds(40, 180, 100,35);
+         labelPrice.setBounds(40, 230, 100, 35);
+         labelContent.setBounds(40, 273, 100, 35);
+         
+         Font font=new Font("맑은고딕", Font.BOLD, 16);
+         tfIsbn.setFont(font);
+         tfBook.setFont(font);
+         tfWriter.setFont(font);
+         cbInterestCategory.setFont(font);
+         tfPrice.setFont(font);
+         sp.setFont(font);
+         btnSubmit.setFont(font);
+         btnReset.setFont(font);
+         labelIsbn.setFont(font);
+         labelBook.setFont(font);
+         labelWriter.setFont(font);
+         labelCategory.setFont(font);
+         labelPrice.setFont(font);
+         labelContent.setFont(font);
+         
          
          
           //add
@@ -87,7 +106,7 @@ public class AddBookView extends View
           add(sp);
           add(cbInterestCategory);
           
-          setBounds(350,200,300,400); 
+          setBounds(700,200,410,550); 
           
           setVisible(true);
          }
@@ -104,7 +123,6 @@ public class AddBookView extends View
               tfWriter.setText("");
               tfPrice.setText("");
           }
-          
 
       
 }//AddBookView
