@@ -1,5 +1,7 @@
 package model.vo;
 
+import java.net.URL;
+
 public class Book {
     
     int bookId;
@@ -10,7 +12,7 @@ public class Book {
     int pRent;
     int originPrice;
     String summary;
-    //	String imange;
+    URL img;
 
     public Book(String bName, String writer, int i, int k) {
         this.bName = bName;
@@ -25,7 +27,6 @@ public class Book {
         this.originPrice = originPrice;
         this.writer = writer;
         this.summary = summary;
-        //		this.imange = imange;
     }
 
     public Book(String isbn, int category, String bName, String writer, int originPrice, String summary) {
@@ -36,6 +37,17 @@ public class Book {
         this.pRent = 0;
         this.originPrice = originPrice;
         this.summary = summary;
+    }
+    
+    public Book(int book_id, String isbn, int category, String bName, String writer, int pRent, int originPrice, String summary, URL img) {
+        this.isbn = isbn;
+        this.category = category;
+        this.bName = bName;
+        this.writer = writer;
+        this.pRent = pRent;
+        this.originPrice = originPrice;
+        this.summary = summary;
+        this.img = img;
     }
     
     //	public String getImange() {
