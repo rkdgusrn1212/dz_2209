@@ -12,10 +12,10 @@ import javax.swing.JTextField;
 
 public class AddBookView extends JFrame 
 {
-     public JTextField tfIsbn, tfBook, tfWriter, tfGenre, tfPrice; 
+     public JTextField tfIsbn, tfBook, tfWriter, tfCategory, tfPrice; 
      public JTextArea taContent;
      public JButton btnSubmit, btnReset;
-     JLabel labelIsbn,labelBook,labelWriter,labelGenre,labelPrice, labelContent;
+     JLabel labelIsbn,labelBook,labelWriter,labelCategory,labelPrice, labelContent;
      JScrollPane sp;
      
      public AddBookView(){   
@@ -26,7 +26,7 @@ public class AddBookView extends JFrame
 //          tf_writer = new JPasswordField();
          tfBook = new JTextField();
          tfWriter = new JTextField();
-         tfGenre = new JTextField();
+         tfCategory = new JTextField();
          tfPrice = new JTextField();
          taContent = new JTextArea();
           
@@ -36,7 +36,7 @@ public class AddBookView extends JFrame
          labelIsbn = new JLabel("도서번호 : ");
          labelBook = new JLabel("도서명 : ");
          labelWriter = new JLabel("저자명 : ");
-         labelGenre = new JLabel("도서장르 : ");
+         labelCategory = new JLabel("도서장르 : ");
          labelPrice = new JLabel("도서원가 :"); 
          labelContent = new JLabel("줄거리 :");
           
@@ -45,7 +45,7 @@ public class AddBookView extends JFrame
          tfIsbn.setBounds(80,30,100,25);
          tfBook.setBounds(80,70,100,25);
          tfWriter.setBounds(80,110,100,25);
-         tfGenre.setBounds(80,150,100,25);
+         tfCategory.setBounds(80,150,100,25);
          tfPrice.setBounds(80,190,100,25);
          sp = new JScrollPane(taContent);
          sp.setBounds(80,230,180,60);
@@ -56,7 +56,7 @@ public class AddBookView extends JFrame
          labelIsbn.setBounds(10,30,100,25);
          labelBook.setBounds(10,70,100,25);
          labelWriter.setBounds(10,110,100,25);
-         labelGenre.setBounds(10,150,100,25);
+         labelCategory.setBounds(10,150,100,25);
          labelPrice.setBounds(10, 190, 100, 25);
          labelContent.setBounds(10, 230, 100, 25);
          
@@ -66,7 +66,7 @@ public class AddBookView extends JFrame
           add(tfIsbn);
           add(tfBook);
           add(tfWriter);
-          add(tfGenre);
+          add(tfCategory);
           add(tfPrice);
 //          add(taContent);
           
@@ -76,7 +76,7 @@ public class AddBookView extends JFrame
           add(labelIsbn); 
           add(labelBook); 
           add(labelWriter); 
-          add(labelGenre);
+          add(labelCategory);
           add(labelPrice);
           add(labelContent);
           add(sp);
@@ -96,7 +96,7 @@ public class AddBookView extends JFrame
               tfIsbn.setText("");
               tfBook.setText("");
               tfWriter.setText("");
-              tfGenre.setText("");
+              tfCategory.setText("");
               tfPrice.setText("");
           }
           
