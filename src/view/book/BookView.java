@@ -7,10 +7,13 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+
+import view.View;
 import view.member.MyPageView;
-public class BookView extends JFrame{
+public class BookView extends View{
     JLabel labelBook, labelName, labelWriter, labelPrice, labelSummary;
-    JButton btnBack, btnPay;
+    public JButton btnBack;
+    JButton btnPay;
     JPanel panelBook;
     
 //    JTable table; //검색과 전체 보기를 위한 테이블 객체 생성
