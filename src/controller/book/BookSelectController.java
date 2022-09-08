@@ -8,6 +8,7 @@ import controller.Controller;
 import controller.member.LoginController;
 import controller.member.MyPageController;
 import view.View;
+import view.book.BookClickView;
 import view.book.BookSelectView;
 
 public class BookSelectController extends Controller {
@@ -31,8 +32,15 @@ public class BookSelectController extends Controller {
             new BookListController(this);
         }else if(s==viewBookSelect.btnAdd) {
             new AddBookController(this);
+        }else if(s==viewBookSelect.btnPick1) {
+            new BookController(this);
+        }else if(s==viewBookSelect.btnPick2) {
+            new BookController(this);
+        }else if(s==viewBookSelect.btnPick3) {
+            new BookController(this);
         }
     }
+    
     @Override
     protected void create(View windowView) { 
         viewBookSelect = (BookSelectView) windowView;
@@ -41,6 +49,9 @@ public class BookSelectController extends Controller {
         viewBookSelect.btnMyPage.addActionListener(this);
         viewBookSelect.btnAllList.addActionListener(this);
         viewBookSelect.btnAdd.addActionListener(this);
+        viewBookSelect.btnPick1.addActionListener(this);
+        viewBookSelect.btnPick2.addActionListener(this);
+        viewBookSelect.btnPick3.addActionListener(this);
         for (int i = 0; i < viewBookSelect.viewBookClick.length; i++) {
             viewBookSelect.viewBookClick[i].tglBtnImage.addMouseListener(new MouseAdapter() {
                 @Override
