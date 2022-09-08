@@ -25,12 +25,8 @@ public class BookSelectController extends Controller {
         if (s == viewBookSelect.btnLogout) {
             finish();
             new LoginController(null);
-        } else if (s == viewBookSelect.btnGenre) {
-            // viewBookGenre.setVisible(true);
         }else if (s == viewBookSelect.btnMyPage) {// 마이페이지로 이동
             new MyPageController(this, getArgs(0));
-        }else if(s==viewBookSelect.btnSelect){
-            new BookController(this);
         }
     }
     @Override
@@ -38,8 +34,6 @@ public class BookSelectController extends Controller {
         viewBookSelect = (BookSelectView) windowView;
         viewBookSelect.labelId.setText(getArgs(0) + "님");
         viewBookSelect.btnLogout.addActionListener(this);
-        viewBookSelect.btnGenre.addActionListener(this);
-        viewBookSelect.btnSelect.addActionListener(this);
         viewBookSelect.btnMyPage.addActionListener(this);
         for (int i = 0; i < viewBookSelect.viewBookClick.length; i++) {
             viewBookSelect.viewBookClick[i].tglBtnImage.addMouseListener(new MouseAdapter() {

@@ -13,7 +13,7 @@ public class BookClickView extends JPanel {
         setLayout(null);
         
         //new
-        tglBtnImage = new JToggleButton(new ImageIcon("image/sample.jpg"));
+        tglBtnImage = new JToggleButton(new ImageIcon("asset/dooboo.jpg"));
         labelName = new JLabel("도서명");
         labelWriter = new JLabel("저자명");
         taContent = new JTextArea("간단줄거리");
@@ -37,7 +37,6 @@ public class BookClickView extends JPanel {
         taContent.setVisible(false);
         //메인 창 출력 위치
         setSize(250,500);
-        setVisible(true);   
     }
     public static void main(String[] args) {
         new BookClickView().setVisible(true);

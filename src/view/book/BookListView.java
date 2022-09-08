@@ -53,8 +53,6 @@ public class BookListView extends JFrame{
         
         //메인 창 출력 위치
         setBounds(600,200,700,700);
-        setVisible(true);
-        
         
     }
     //displayTable
