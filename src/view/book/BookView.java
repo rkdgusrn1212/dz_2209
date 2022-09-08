@@ -1,4 +1,6 @@
 package view.book;
+import java.awt.Font;
+
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -8,13 +10,12 @@ import view.View;
 
 public class BookView extends View{
     JLabel labelBook, labelName, labelWriter, labelPrice, labelSummary;
-    public JButton btnBack;
-    JButton btnPay;
-    JPanel panelBook;
+    public JButton btnBack, btnPay;
     
 //    JTable table; //검색과 전체 보기를 위한 테이블 객체 생성
     public BookView() {
-        getContentPane().setLayout(null);
+    	setTitle("도서상세보기");
+        setLayout(null);
         labelBook = new JLabel("도서 상세 보기");
         labelName = new JLabel("도서명");
         labelWriter = new JLabel("저자명");
@@ -22,24 +23,28 @@ public class BookView extends View{
         labelSummary = new JLabel("줄거리");
         btnBack = new JButton("메인페이지");
         btnPay = new JButton("결제");
-        panelBook = new JPanel();
         
         // setBounds
-        panelBook.setBounds(133, 54, 1164, 615);
-        btnBack.setBounds(20, 13, 105, 27);
-        btnPay.setBounds(150, 13, 105, 27);
-        labelBook.setBounds(450, 12, 105, 28);
-        labelName.setBounds(40, 100, 105, 28);
-        labelPrice.setBounds(40, 170, 105, 27);
-        labelWriter.setBounds(40, 240, 50, 28);
-        labelSummary.setBounds(40, 310, 50, 28);
+        btnBack.setBounds(680, 20, 130, 35);
+        btnPay.setBounds(830, 20, 130, 35);
+        labelBook.setBounds(450, 12, 105, 35);
+        labelName.setBounds(40, 120, 105, 35);
+        labelPrice.setBounds(40, 280, 105, 35);
+        labelWriter.setBounds(40, 200, 50, 35);
+        labelSummary.setBounds(40, 360, 50, 35);
         
+        Font font=new Font("맑은고딕", Font.BOLD, 16);
+        btnBack.setFont(font);
+        btnPay.setFont(font);
+        labelBook.setFont(font);
+        labelName.setFont(font);
+        labelPrice.setFont(font);
+        labelWriter.setFont(font);
+        labelSummary.setFont(font);
         
         //테이블 객체 생성
-        add(new JScrollPane(panelBook = new JPanel()), "Center");
-        getContentPane().add(labelBook);
-        getContentPane().add(btnBack);
-        getContentPane().add(panelBook);
+        add(labelBook);
+        add(btnBack);
         add(btnPay);
         add(labelName);
         add(labelWriter);
@@ -47,7 +52,6 @@ public class BookView extends View{
         add(labelSummary);
         
         setBounds(500,200,1000,700);
-        
         
     }
 } 

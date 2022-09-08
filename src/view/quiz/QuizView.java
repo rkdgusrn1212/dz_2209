@@ -1,15 +1,11 @@
-
-
 package view.quiz;
 
 import java.awt.Color;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.Font;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
@@ -17,7 +13,6 @@ import javax.swing.border.BevelBorder;
 import javax.swing.border.SoftBevelBorder;
 
 import view.View;
-import view.history.HistoryView;
 
 public class QuizView extends View{
     JPanel panelQuiz;
@@ -43,7 +38,6 @@ public class QuizView extends View{
         panelQuiz.setLayout(null);
         getContentPane().setLayout(null);
         panelQuiz.setBounds(14, 12, 714, 40);
-        
         labelQuiz.setBounds(340, 2, 111, 40);
         labelContent.setBounds(51,75, 654, 130);
         
@@ -75,16 +69,31 @@ public class QuizView extends View{
         rBtnAs3.setBounds(360, 319, 80, 30);
         rBtnAs4.setBounds(460, 319, 80, 30);
         rBtnAs5.setBounds(560, 319, 80, 30);
+        // 확인 취소 창 위치 및 크기 조정
+        btnConfirm.setBounds(185, 393, 160, 45);
+        btnCancel.setBounds(377, 393, 160, 45);
+
+
+        
+        Font font=new Font("맑은고딕", Font.BOLD, 16);
+        panelQuiz.setFont(font);
+        labelQuiz.setFont(font);
+        labelContent.setFont(font);
+        rBtnAs1.setFont(font);
+        rBtnAs2.setFont(font);
+        rBtnAs3.setFont(font);
+        rBtnAs4.setFont(font);
+        rBtnAs5.setFont(font);
+        btnConfirm.setFont(font);
+        btnCancel.setFont(font);
+        labelAnswer.setFont(font);
+        
         // frame
         add(rBtnAs1);
         add(rBtnAs2);
         add(rBtnAs3);
         add(rBtnAs4);
         add(rBtnAs5);
-        // 확인 취소 창 위치 및 크기 조정
-        btnConfirm.setBounds(185, 393, 160, 45);
-        btnCancel.setBounds(377, 393, 160, 45);
-
 
         panelQuiz.add(labelQuiz);
         getContentPane().add(panelQuiz);
@@ -92,12 +101,10 @@ public class QuizView extends View{
         getContentPane().add(tfAnswer);
         getContentPane().add(btnConfirm);
         getContentPane().add(btnCancel);
+        
 
-        setSize(757, 500);
+        setBounds(700,200,760,510); 
         
     }
-    public static void main(String[] args) {
-		new QuizView();
-	}
 }
 

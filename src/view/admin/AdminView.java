@@ -1,5 +1,6 @@
 package view.admin;
 
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -29,7 +30,7 @@ public class AdminView extends JFrame {
     Object columnnames2[] = {"도서명", "저자명", "줄거리", "분류"};
     
     public AdminView() {
-        setTitle("AdminView");
+        setTitle("관리자 메뉴");
         setLayout(null);
         
         btnSelectAllMember = new JButton("회원 전체 조회");
@@ -42,9 +43,7 @@ public class AdminView extends JFrame {
         btnDeleteBook =  new JButton("도서 삭제");
         labelBook = new JLabel("<도서 정보>"); 
         
-//        btnAddBook = new JButton("도서 추가");
         btnAddQuiz = new JButton("퀴즈 추가");
-        
         btnBack = new JButton("로그아웃");
      
         
@@ -64,24 +63,32 @@ public class AdminView extends JFrame {
         
         
         //setBounds 
-        btnSelectAllMember.setBounds(22, 10, 120, 30); //회원 전체 조회
-        btnSelectMember.setBounds(160, 10, 110, 30); //회원 조회
-        btnDeleteMember.setBounds(290, 10, 110, 30); //회원 삭제
-        sp.setBounds(20, 50, 380, 300); //회원 테이블
-        labelMember.setBounds(180, 20, 100, 750); //<회원정보>
+        btnSelectAllMember.setBounds(40, 15, 140, 35); //회원 전체 조회
+        btnSelectMember.setBounds(210, 15, 140, 35); //회원 조회
+        btnDeleteMember.setBounds(380, 15, 140, 35); //회원 삭제
+        sp.setBounds(40, 60, 480, 380); //회원 테이블
+        labelMember.setBounds(230, 90, 100, 750); //<회원정보>
         
-        btnSelectAllBook.setBounds(550, 10, 120, 30); //도서 전체 조회
-        btnSelectBook.setBounds(690, 10, 110, 30); //도서 조회  
-        btnDeleteBook.setBounds(820, 10, 110, 30); //도서 삭제
-        sp2.setBounds(550, 50, 380, 300); //도서 테이블
-        labelBook.setBounds(710, 20, 100, 750); //<도서정보>
+        btnSelectAllBook.setBounds(560, 15, 140, 35); //도서 전체 조회
+        btnSelectBook.setBounds(730, 15, 140, 35); //도서 조회  
+        btnDeleteBook.setBounds(900, 15, 140, 35); //도서 삭제
+        sp2.setBounds(560, 60, 480, 380); //도서 테이블
+        labelBook.setBounds(770, 90, 100, 750); //<도서정보>
         
-        btnAddQuiz.setBounds(430, 380, 100, 30); //퀴즈 추가
-//      btnAddBook.setBounds(830, 380, 100, 30); //도서 추가
+        btnAddQuiz.setBounds(750, 500, 130, 35); //퀴즈 추가
+        btnBack.setBounds(910, 500, 130, 35);  
         
-        btnBack.setBounds(20, 450, 100, 30);  
-        
-        
+        Font font=new Font("맑은고딕", Font.BOLD, 16);
+        btnSelectAllMember.setFont(font);
+        btnSelectMember.setFont(font);
+        btnDeleteMember.setFont(font);
+        labelMember.setFont(font);
+        btnSelectAllBook.setFont(font);
+        btnSelectBook.setFont(font);
+        btnDeleteBook.setFont(font);
+        labelBook.setFont(font);
+        btnAddQuiz.setFont(font);
+        btnBack.setFont(font);
         
         //add
         add(btnSelectAllMember);
@@ -101,37 +108,11 @@ public class AdminView extends JFrame {
         
         add(btnBack);
         
-        setVisible(false);
-        setSize(1000, 530);
-        
-        
-        
-        //이벤트 (버튼 클릭시 화면전환)
-        btnAddQuiz.addActionListener(new ActionListener() {
-
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                new view.quiz.AddQuizView();
-            }
-            
-        });
-        
-//      btnAddBook.addActionListener(new ActionListener() {
-//
-//          @Override
-//          public void actionPerformed(ActionEvent e) {
-//              new AddBookView();
-//          }
-//          
-//      });
+        setBounds(500,250,1100,600); 
         
         
     } //end AdminView()
     
-    public static void main(String[] args) {
-        new AdminView().setVisible(true);
-    }
-
     
     //displayTable
     public void displayTable(ArrayList<Member> list) {
