@@ -38,6 +38,11 @@ public class FindIdPwdController extends Controller{
         Object s = e.getSource();
         if(s == viewFindIdPwd.btnSubmit) {
             String email = viewFindIdPwd.tfEmail.getText();
+            if(email.length()<1) {
+                JOptionPane.showMessageDialog(viewFindIdPwd, "이메일이 비어있습니다.");
+                viewFindIdPwd.tfEmail.requestFocus();
+                return;
+            }
             if(!Pattern.matches(Regex.EMAIL, email)) {
                 JOptionPane.showMessageDialog(viewFindIdPwd, Regex.EMAIL_WARN);
                 viewFindIdPwd.tfEmail.setText("");
