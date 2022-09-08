@@ -227,6 +227,25 @@ public class MemberDAO {
         }
         return false;
     }
+    
+    public boolean checkEmail(String email) {
+        PreparedStatement pstmt = DBConnManager.getInstance().getPreparedStatement(
+                "select email from member where email = ?");
+        ResultSet rs = null;
+        try {
+            pstmt.setString(1,email);
+            rs = pstmt.executeQuery();;
+            if (rs.next()) {
+                return true;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBConnManager.close(rs);
+            DBConnManager.close(pstmt);
+        }
+        return false;
+    }
 
     public boolean dupliCheck(String checkStr) {
         String sql;

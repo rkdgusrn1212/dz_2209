@@ -50,8 +50,8 @@ public class JoinController extends Controller{
                 showMsgWithResetText(viewJoin.tfId, "ID가 비어있습니다.");
                 return;
             }
-            if(!Pattern.matches("^[a-zA-Z0-9_]{6,20}$", id)) {
-                showMsgWithResetText(viewJoin.tfId, "ID는 6글자 이상 20글자 이하의 영문자, 숫자, 언더바만 입력 가능합니다.\n다시 입력해 주십시오.");
+            if(!Pattern.matches(Regex.ID, id)) {
+                showMsgWithResetText(viewJoin.tfId, Regex.ID_WARN);
                 return;
             }
             String pwd = new String(viewJoin.tfPwd.getPassword());
@@ -60,9 +60,9 @@ public class JoinController extends Controller{
                 showMsgWithResetText(viewJoin.tfPwd, "비밀번호가 비어있습니다.");
                 return;
             }
-            if(!Pattern.matches("^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@$!%*#?&])[A-Za-z\\d@$!%*#?&]{8,16}$",pwd)) {
+            if(!Pattern.matches(Regex.PASSWORD,pwd)) {
                 viewJoin.tfPwdConfirm.setText("");
-                showMsgWithResetText(viewJoin.tfPwd,"비밀번호는 숫자, 영문자, 특수문자를 각각 하나이상 포함하고 8자이상 16자 이하여야 합니다.\n다시 입력해 주십시오.");
+                showMsgWithResetText(viewJoin.tfPwd, Regex.PASSWORD_WARN);
                 return;
             }
             //패스워드 재확인 검사.
@@ -92,8 +92,8 @@ public class JoinController extends Controller{
                 showMsgWithResetText(viewJoin.tfEmail, "이메일이 비어있습니다.");
                 return;
             }
-            if(!Pattern.matches("^[a-zA-Z0-9+-\\_.]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+$", email)) {
-                showMsgWithResetText(viewJoin.tfEmail,"알맞는 이메일 형식이 아닙니다.\n다시 입력해 주십시오.");
+            if(!Pattern.matches(Regex.EMAIL, email)) {
+                showMsgWithResetText(viewJoin.tfEmail,Regex.EMAIL_WARN);
                 return;
             }
             if(email.length()>30) {
@@ -121,9 +121,5 @@ public class JoinController extends Controller{
         viewJoin.showMsg(msg);
         tf.setText("");
         tf.requestFocus();
-    }
-    
-    private boolean checkPwdRegEx(String pwd) {
-        return Pattern.matches("^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@$!%*#?&])[A-Za-z\\d@$!%*#?&]{8,13}$",  pwd);
     }
 }

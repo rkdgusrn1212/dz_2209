@@ -98,19 +98,9 @@ public class JoinView extends View
         add(labelInterestCategory);
 
         setBounds(700,250,480,510); 
-        setVisible(false);
-        
         
     }// 팝업 생성자  
     public void showMsg(String msg) {
         JOptionPane.showMessageDialog(this, msg);
-    }
-
-    public void setEmpty() {
-        tfId.setText("");
-        tfEmail.setText("");
-        tfName.setText("");
-        tfPwd.setText("");
-        tfPwdConfirm.setText("");
     }
 }//JoinForm
