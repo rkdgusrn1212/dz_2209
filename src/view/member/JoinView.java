@@ -14,70 +14,70 @@ import view.View;
 public class JoinView extends View 
 {
     public JTextField tfId,tfName,tfEmail;
-    public JPasswordField tfPwd,tfPwd2;
+    public JPasswordField tfPwd,tfPwdConfirm;
     public JButton btnSubmit,btnReset,btnCheckId;
-    JLabel la_id,la_pass1,la_pass2,la_n,la_email, la_genre;
-    public JComboBox<String> cbGenre;
-    String items[] = {"수필", "소설", "스릴러"};
+    JLabel labelId,labelPwd,labelPwd2,labelName,labelEmail, labelInterestCategory;
+    public JComboBox<String> cbInterestCategory;
+    String items[] = {"총류", "철학, 심리학, 윤리학", "종교", "사회과학", "순수과학", "기술과학", "예술", "어학", "문학", "역사, 지리, 관광"};
     public JoinView(){
         setTitle("joinView");
 
         tfId = new JTextField();
         tfPwd = new JPasswordField();
-        tfPwd2 = new JPasswordField();
+        tfPwdConfirm = new JPasswordField();
         tfName= new JTextField();
         tfEmail = new JTextField();
 
-        cbGenre = new JComboBox<>(items);
+        cbInterestCategory = new JComboBox<>(items);
 
         btnSubmit = new JButton("등록");
         btnReset = new JButton("취소");
         btnCheckId = new JButton("중복확인");
 
-        la_id = new JLabel("I  D:");
-        la_pass1 = new JLabel("비  번:");
-        la_pass2 = new JLabel("비번확인:");
-        la_n = new JLabel("이  름:");
-        la_email = new JLabel("이메일:"); 
-        la_genre = new JLabel("장  르:");
+        labelId = new JLabel("I  D:");
+        labelPwd = new JLabel("비  번:");
+        labelPwd2 = new JLabel("비번확인:");
+        labelName = new JLabel("이  름:");
+        labelEmail = new JLabel("이메일:"); 
+        labelInterestCategory = new JLabel("관심 분야:");
 
         //setBounds 
         tfId.setBounds(80,30,100,25);
         tfPwd.setBounds(80,70,100,25);
-        tfPwd2.setBounds(80,110,100,25);
+        tfPwdConfirm.setBounds(80,110,100,25);
         tfName.setBounds(80,150,100,25);
         tfEmail.setBounds(80,190,180,25);
-        cbGenre.setBounds(80,230,100,25);
+        cbInterestCategory.setBounds(80,230,100,25);
 
         btnSubmit.setBounds(50,290,90,25);
         btnReset.setBounds(150,290,90,25);
         btnCheckId.setBounds(190,30,90,25);
 
-        la_id.setBounds(10,30,100,25);
-        la_pass1.setBounds(10,70,100,25);
-        la_pass2.setBounds(10,110,100,25);
-        la_n.setBounds(10,150,100,25);
-        la_email.setBounds(10, 190, 100, 25);
-        la_genre.setBounds(10, 230, 100, 25);
+        labelId.setBounds(10,30,100,25);
+        labelPwd.setBounds(10,70,100,25);
+        labelPwd2.setBounds(10,110,100,25);
+        labelName.setBounds(10,150,100,25);
+        labelEmail.setBounds(10, 190, 100, 25);
+        labelInterestCategory.setBounds(10, 230, 100, 25);
         //add
         setLayout(null);
         add(tfId);
         add(tfPwd);
-        add(tfPwd2);
+        add(tfPwdConfirm);
         add(tfName);
         add(tfEmail);
-        add(cbGenre);
+        add(cbInterestCategory);
 
         add(btnSubmit);
         add(btnReset);
         add(btnCheckId);
 
-        add(la_id); 
-        add(la_pass1); 
-        add(la_pass2); 
-        add(la_n);
-        add(la_email);
-        add(la_genre);
+        add(labelId); 
+        add(labelPwd); 
+        add(labelPwd2); 
+        add(labelName);
+        add(labelEmail);
+        add(labelInterestCategory);
 
         setBounds(350,200,300,400); 
         setVisible(false);
@@ -91,6 +91,6 @@ public class JoinView extends View
         tfEmail.setText("");
         tfName.setText("");
         tfPwd.setText("");
-        tfPwd2.setText("");
+        tfPwdConfirm.setText("");
     }
 }//JoinForm

@@ -2,37 +2,34 @@ package model.vo;
 
 public class Member {
 	private String id;
-	private String pass;
-	private String ename;
+	private String pwd;
+	private String name;
 	private String email;
-	private int grade; // high <- 1,2,3 <- low
 	private int point;
 	private int cash;
-	private String genre;
+	private int interestCategery;
 	
 	public Member() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Member(String ename, int grade, int point, int cash) {
-		this.ename = ename;
-		this.grade = grade;
+	public Member(String ename, int point, int cash) {
+		this.name = ename;
 		this.point = point;
 		this.cash = cash;
 	}
 
 
-	public Member(String id, String pass, String ename, String email, int grade, int point, int cash, String genre,
+	public Member(String id, String pass, String ename, String email, int point, int cash, int interestCategory,
 			String passQ, String passA) {
 		super();
 		this.id = id;
-		this.pass = pass;
-		this.ename = ename;
+		this.pwd = pass;
+		this.name = ename;
 		this.email = email;
-		this.grade = grade;
 		this.point = point;
 		this.cash = cash;
-		this.genre = genre;
+		this.interestCategery = interestCategory;
 	}
 
 	
@@ -45,20 +42,20 @@ public class Member {
 		this.id = id;
 	}
 
-	public String getPass() {
-		return pass;
+	public String getPwd() {
+		return pwd;
 	}
 
-	public void setPass(String pass) {
-		this.pass = pass;
+	public void setPwd(String pwd) {
+		this.pwd = pwd;
 	}
 
-	public String getEname() {
-		return ename;
+	public String getName() {
+		return name;
 	}
 
-	public void setEname(String ename) {
-		this.ename = ename;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public String getEmail() {
@@ -67,14 +64,6 @@ public class Member {
 
 	public void setEmail(String email) {
 		this.email = email;
-	}
-
-	public int getGrade() {
-		return grade;
-	}
-
-	public void setGrade(int grade) {
-		this.grade = grade;
 	}
 
 	public int getPoint() {
@@ -93,18 +82,18 @@ public class Member {
 		this.cash = cash;
 	}
 
-	public String getGenre() {
-		return genre;
+	public int getInterestCategory() {
+		return interestCategery;
 	}
 
-	public void setGenre(String genre) {
-		this.genre = genre;
+	public void setInterestCategory(int interestCategory) {
+		this.interestCategery = interestCategory;
 	}
 
 	@Override
 	public String toString() {
-		return "Member [id=" + id + ", pass=" + pass + ", ename=" + ename + ", email=" + email + ", grade=" + grade
-				+ ", point=" + point + ", cash=" + cash + ", genre=" + genre + "]";
+		return "Member [id=" + id + ", pwd=" + pwd + ", name=" + name + ", email=" + email +", interest_category=" + interestCategery
+				+ ", point=" + point + ", cash=" + cash  + "]";
 	}
 
 

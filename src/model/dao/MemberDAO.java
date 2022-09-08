@@ -33,16 +33,15 @@ public class MemberDAO {
 
     public boolean insertJoin(Member m) {
         PreparedStatement pstmt = DBConnManager.getInstance().getPreparedStatement(
-                "insert into member values (?,?,?,?,?,?,?,?)");
+                "insert into member values (?,?,?,?,?,?,?)");
         try {
             pstmt.setString(1, m.getId());
-            pstmt.setString(2, m.getPass());
-            pstmt.setString(3, m.getEname());
+            pstmt.setString(2, m.getPwd());
+            pstmt.setString(3, m.getName());
             pstmt.setString(4, m.getEmail());
-            pstmt.setString(5, m.getGenre());
-            pstmt.setInt(6, 3);
+            pstmt.setInt(5, m.getInterestCategory());
+            pstmt.setInt(6, 0);
             pstmt.setInt(7, 0);
-            pstmt.setInt(8, 0);
             int t = pstmt.executeUpdate();
             if (t > 0)
                 return true;
@@ -64,7 +63,7 @@ public class MemberDAO {
             if(rs.next()) {
                 Member m = new Member();
                 m.setId(rs.getString("id"));
-                m.setPass(rs.getString("pwd"));
+                m.setPwd(rs.getString("pwd"));
                 return m;
             }
         } catch (SQLException e) {
@@ -76,16 +75,15 @@ public class MemberDAO {
         return null;
     }
 
-    public Member selectMypage(String id) {
+    public Member selectMyPage(String id) {
         PreparedStatement pstmt = DBConnManager.getInstance().getPreparedStatement(
-                "select name, grade, point,cash from member where id=?");
+                "select name, point ,cash from member where id=?");
         ResultSet rs = null;
         try {
             pstmt.setString(1, id);
             rs = pstmt.executeQuery();
             if (rs.next()) {
                 return new Member(rs.getString("name"),
-                        rs.getInt("grade"),
                         rs.getInt("point"), 
                         rs.getInt("cash"));
             }
@@ -98,15 +96,15 @@ public class MemberDAO {
         return null;
     }
 
-    public String selectGenre(String id) {
+    public String selectInterestCategory(String id) {
         PreparedStatement pstmt = DBConnManager.getInstance().getPreparedStatement(
-                "select genre from member where id=?");
+                "select interest_category from member where id=?");
         ResultSet rs = null;
         try {
             pstmt.setString(1, id);
             rs = pstmt.executeQuery();
             rs.next();
-            return rs.getString("genre");
+            return rs.getString("interest_category");
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -118,7 +116,7 @@ public class MemberDAO {
 
     public Member selectMemberInfo(String id) {
         PreparedStatement pstmt = DBConnManager.getInstance().getPreparedStatement(
-                "select name, email,genre from member");
+                "select name, email, interest_category from member");
         ResultSet rs = null;
         try {
             pstmt.setString(1, id);
@@ -126,9 +124,9 @@ public class MemberDAO {
             if (rs.next()) {
                 Member m  = new Member();
                 m.setId(id);
-                m.setEname(rs.getString("name"));
+                m.setName(rs.getString("name"));
                 m.setEmail(rs.getString("email"));
-                m.setGenre(rs.getString("genre"));
+                m.setInterestCategory(rs.getInt("interest_category"));
                 return m;
             }
         } catch (SQLException e) {
@@ -142,7 +140,7 @@ public class MemberDAO {
 
     public ArrayList<Member> selectMember(String id){
         PreparedStatement pstmt = DBConnManager.getInstance().getPreparedStatement(
-                "select name, email,genre from member");
+                "select name, email,interest_category from member");
         ResultSet rs = null;
         ArrayList<Member> list = new ArrayList<>();
         try {
@@ -151,9 +149,9 @@ public class MemberDAO {
             if (rs.next()) {
                 Member m  = new Member();
                 m.setId(id);
-                m.setEname(rs.getString("name"));
+                m.setName(rs.getString("name"));
                 m.setEmail(rs.getString("email"));
-                m.setGenre(rs.getString("genre"));
+                m.setInterestCategory(rs.getInt("interest_category"));
                 list.add(m);
             }
         } catch (SQLException e) {
@@ -167,7 +165,7 @@ public class MemberDAO {
 
     public ArrayList<Member> selectAllMember(){
         PreparedStatement pstmt = DBConnManager.getInstance().getPreparedStatement(
-                "select id, name, email,genre from member");
+                "select id, name, email,interest_category from member");
         ResultSet rs = null;
         ArrayList<Member> list = new ArrayList<>();
         try {
@@ -175,9 +173,9 @@ public class MemberDAO {
             while (rs.next()) {
                 Member m  = new Member();
                 m.setId(rs.getString("id"));
-                m.setEname(rs.getString("name"));
+                m.setName(rs.getString("name"));
                 m.setEmail(rs.getString("email"));
-                m.setGenre(rs.getString("genre"));
+                m.setInterestCategory(rs.getInt("interest_category"));
                 list.add(m);
             }
         } catch (SQLException e) {
@@ -230,11 +228,11 @@ public class MemberDAO {
         return false;
     }
 
-    public boolean updateGenre(String id,String genre) {
+    public boolean updateinterest_category(String id,String interest_category) {
 
-        PreparedStatement pstmt = DBConnManager.getInstance().getPreparedStatement("update member set genre=? where id=?");
+        PreparedStatement pstmt = DBConnManager.getInstance().getPreparedStatement("update member set interest_category=? where id=?");
         try {
-            pstmt.setString(1, genre);
+            pstmt.setString(1, interest_category);
             pstmt.setString(2, id);
             int t = pstmt.executeUpdate();
             if(t>0) return true;
@@ -278,39 +276,5 @@ public class MemberDAO {
         }	
         return false;
     }
-
-    public int selectGrade(String id) {
-        PreparedStatement pstmt = DBConnManager.getInstance().getPreparedStatement("select grade from member where id=?");
-        ResultSet rs = null;
-        try {
-            pstmt.setString(1, id);
-            rs = pstmt.executeQuery();
-            if(rs.next()) {
-                return rs.getInt("grade");
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            DBConnManager.close(rs);
-            DBConnManager.close(pstmt);
-        }
-        return 0;
-    }
-
-    public boolean updatgrade(String id, int grade) {
-        PreparedStatement pstmt = DBConnManager.getInstance().getPreparedStatement("update member set grade=? where id=?");
-        ResultSet rs = null;
-        try {
-            pstmt.setInt(1, grade);
-            pstmt.setString(2, id);
-            int t = pstmt.executeUpdate();
-            if(t>0) return true;
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            DBConnManager.close(rs);
-            DBConnManager.close(pstmt);
-        }
-        return false;
-    }
+    
 }
