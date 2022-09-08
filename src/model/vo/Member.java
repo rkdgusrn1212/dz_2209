@@ -13,11 +13,12 @@ public class Member {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Member(String ename, int point, int cash) {
-		this.name = ename;
-		this.point = point;
-		this.cash = cash;
-	}
+	//selectPayBook
+	public Member(String id, int point, int cash) {
+        this.name = id;
+        this.point = point;
+        this.cash = cash;
+  	}	//selectPayBook
 
 
 	public Member(String id, String pass, String ename, String email, int point, int cash, int interestCategory,

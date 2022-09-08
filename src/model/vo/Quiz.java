@@ -1,49 +1,59 @@
 package model.vo;
 
 public class Quiz {
-	int isbn;
-	String quiz;
-	String answer;
+    int quizId;
+    int isbn;
+    String question;
+    String answer;
 
-	public Quiz() {
-		// TODO Auto-generated constructor stub
-	}
+    public Quiz() {
+        // TODO Auto-generated constructor stub
+    }
 
-	public Quiz(int isbn, String quiz, String answer) {
-		super();
-		this.isbn = isbn;
-		this.quiz = quiz;
-		this.answer = answer;
-	}
+    public Quiz(int quizId, int isbn, String question, String answer) {
+        super();
+        this.quizId = quizId;
+        this.isbn = isbn;
+        this.question = question;
+        this.answer = answer;
+    }
 
-	@Override
-	public String toString() {
-		return "Quiz [isbn=" + isbn + ", quiz=" + quiz + ", answer=" + answer + "]";
-	}
+    @Override
+    public String toString() {
+        return "Quiz [quizId=" + quizId + ", isbn=" + isbn + ", question=" + question + ", answer=" + answer + "]";
+    }
 
-	public int getIsbn() {
-		return isbn;
-	}
+    public int getQuizId() {
+        return quizId;
+    }
 
-	public void setIsbn(int isbn) {
-		this.isbn = isbn;
-	}
+    public void setQuizId(int quizId) {
+        this.quizId = quizId;
+    }
 
-	public String getQuiz() {
-		return quiz;
-	}
+    public int getIsbn() {
+        return isbn;
+    }
 
-	public void setQuiz(String quiz) {
-		this.quiz = quiz;
-	}
+    public void setIsbn(int isbn) {
+        this.isbn = isbn;
+    }
 
-	public String getAnswer() {
-		return answer;
-	}
+    public String getQuestion() {
+        return question;
+    }
 
-	public void setAnswer(String answer) {
-		this.answer = answer;
-	}
-	
-	
+    public void setQuestion(String question) {
+        this.question = question;
+    }
+
+    public String getAnswer() {
+        return answer;
+    }
+
+    public void setAnswer(String answer) {
+        this.answer = answer;
+    }
+    
+    
 }
