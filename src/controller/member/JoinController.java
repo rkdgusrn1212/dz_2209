@@ -111,6 +111,7 @@ public class JoinController extends Controller{
                 viewJoin.showMsg("환영합니다^^");
                 finish();
             } else {
+                
                 viewJoin.showMsg("가입할 수 없습니다!");
             }
         }
