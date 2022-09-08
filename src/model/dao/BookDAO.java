@@ -112,7 +112,7 @@ public class BookDAO {
     }//SelectAllBook
 
     //도서상세내용 조회  => booksearchview
-    public Book selectBook(String bName) {
+    public Book selectBookWithName(String bName) {
 
         PreparedStatement pstmt = DBConnManager.getInstance().getPreparedStatement(
                 "select b_name,  origin_price, writer, summary from book where bname like '%' || ? || '%'");
@@ -138,9 +138,39 @@ public class BookDAO {
         return b;
     }//SelectSearchBook
 
+    public ArrayList<Book> selectBookWithMemberIdWithRowNum(String id, int rowNum) {
 
+        PreparedStatement pstmt = DBConnManager.getInstance().getPreparedStatement(
+                "select * from book where category = (select interest_category from member where id = ?) and rownum <= ?");
+        ResultSet rs = null;
+        Book b = null;
+        ArrayList<Book> list = new ArrayList<>();
 
-
+        try {
+            pstmt.setString(1, id);
+            pstmt.setInt(2, rowNum);
+            rs = pstmt.executeQuery();
+            while(rs.next()) {
+                b = new Book(
+                        rs.getInt(1),//book_id
+                        rs.getString(2),//isbn
+                        rs.getInt(3),//cat
+                        rs.getString(4),//b_name
+                        rs.getString(5),//wri
+                        rs.getInt(6),//prent
+                        rs.getInt(7),//price
+                        rs.getString(8),
+                        rs.getURL(9));
+                list.add(b);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBConnManager.close(rs);
+            DBConnManager.close(pstmt);
+        }
+        return list;
+    }//SelectSearchBook
 
     //  public boolean updatePrent(Book b) {
     //

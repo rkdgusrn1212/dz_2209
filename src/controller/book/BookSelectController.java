@@ -3,10 +3,13 @@ package controller.book;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 
 import controller.Controller;
 import controller.member.LoginController;
 import controller.member.MyPageController;
+import model.dao.BookDAO;
+import model.vo.Book;
 import view.View;
 import view.book.BookClickView;
 import view.book.BookSelectView;
@@ -91,5 +94,17 @@ public class BookSelectController extends Controller {
         viewBookSelect.viewBookClick[i].labelName.setVisible(flag);
         viewBookSelect.viewBookClick[i].labelWriter.setVisible(flag);
         viewBookSelect.viewBookClick[i].labelPrice.setVisible(flag);
+    }
+    
+    @Override
+    protected void resume() {
+        super.resume();
+        ArrayList<Book> list = new BookDAO().selectBookWithMemberIdWithRowNum(getArgs(0), 3);
+        for(int i=0 ;i<list.size(); i++) {
+            Book book = list.get(i);
+            viewBookSelect.viewBookClick[i].labelName.setText(book.getBname());
+            viewBookSelect.viewBookClick[i].labelWriter.setText(book.getWriter());
+            viewBookSelect.viewBookClick[i].labelPrice.setText(book.getOriginPrice()+"₩");
+        }
     }
 }
