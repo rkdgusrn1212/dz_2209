@@ -3,45 +3,43 @@ package model.vo;
 public class Book {
 	
 	int isbn;
-	String genre;
+	int category;
 	String bname;
 	String writer;
 	int prent;
-	int clearNum;
 	int originPrice;
 	String summary;
-	String imange;
+//	String imange;
 	
 	
-	public Book(String bname, String writer, int originPrice, String summary) {
-		this.bname = bname;
+	public Book(int i, String j, String writer, int k) {
+	    this.isbn = i;
+		this.bname = j;
 		this.writer = writer;
-		this.originPrice = originPrice;
-		this.summary = summary;
+		this.prent = k;
 	}
 
-    public Book(int isbn, String genre, String bname, String writer, int prent, int clearNum, int originPrice,
-			String summary, String imange) {
+    public Book(int isbn, int category, String bname, String writer, int prent, int originPrice,
+			String summary ) {
 		super();
 		this.isbn = isbn;
-		this.genre = genre;
+		this.category = category;
 		this.bname = bname;
 		this.writer = writer;
 		this.prent = prent;
-		this.clearNum = clearNum;
 		this.originPrice = originPrice;
 		this.summary = summary;
-		this.imange = imange;
+//		this.imange = imange;
 	}
     
-	public String getImange() {
-		return imange;
-	}
-
-
-	public void setImange(String imange) {
-		this.imange = imange;
-	}
+//	public String getImange() {
+//		return imange;
+//	}
+//
+//
+//	public void setImange(String imange) {
+//		this.imange = imange;
+//	}
 
 	public String getSummary() {
 		return summary;
@@ -59,12 +57,12 @@ public class Book {
 		this.isbn = isbn;
 	}
 
-	public String getGenre() {
-		return genre;
+	public int getCategory() {
+		return category;
 	}
 
-	public void setGenre(String genre) {
-		this.genre = genre;
+	public void setCategory(int category) {
+		this.category = category;
 	}
 
 	public String getBname() {
@@ -91,13 +89,6 @@ public class Book {
 		this.prent = prent;
 	}
 
-	public int getClearNum() {
-		return clearNum;
-	}
-
-	public void setClearNum(int clearNum) {
-		this.clearNum = clearNum;
-	}
 
 	public int getOriginPrice() {
 		return originPrice;
@@ -109,9 +100,10 @@ public class Book {
 
 	@Override
 	public String toString() {
-		return "Book [isbn=" + isbn + ", genre=" + genre + ", bname=" + bname + ", writer=" + writer + ", prent="
-				+ prent + ", clearNum=" + clearNum + ", originPrice=" + originPrice + ", summary=" + summary
-				+ ", imange=" + imange + "]";
+		return "Book [isbn=" + isbn + ", category=" + category + ", bname=" + bname + ", writer=" + writer + ", prent="
+				+ prent + ", originPrice=" + originPrice + ", summary=" + summary
+				//+ ", imange=" + imange 
+				+ "]";
 	}
 
 }
