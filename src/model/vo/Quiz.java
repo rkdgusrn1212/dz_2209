@@ -17,6 +17,12 @@ public class Quiz {
         this.question = question;
         this.answer = answer;
     }
+    
+
+    public Quiz(String answer) {
+        super();
+        this.answer = answer;
+    }
 
     @Override
     public String toString() {
