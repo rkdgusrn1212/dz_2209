@@ -9,7 +9,7 @@ import view.View;
 
 public class BookSelectView extends View {
     public JLabel labelMsg, labelId;
-    public JButton btnAllList, btnQuiz, btnSearch, btnMyPage, btnLogout;
+    public JButton btnAllList, btnQuiz, btnSearch, btnMyPage, btnLogout, btnPick1, btnPick2, btnPick3;
     public BookClickView[] viewBookClick;
     public JTextField tfSearch;
     
@@ -26,6 +26,11 @@ public class BookSelectView extends View {
         viewBookClick = new BookClickView[3];
         btnMyPage = new JButton("마이페이지");
         btnLogout = new JButton("로그아웃");
+        btnPick1 = new JButton("선 택");
+        btnPick2 = new JButton("선 택");
+        btnPick3 = new JButton("선 택");
+        
+        
         //setBounds
         labelId.setBounds(100, 20, 80, 30);
         labelMsg.setBounds(440, 20, 120, 30);
@@ -35,6 +40,10 @@ public class BookSelectView extends View {
         btnQuiz.setBounds(340, 700, 100, 30);
         btnMyPage.setBounds(680, 20, 100, 30);
         btnLogout.setBounds(820, 20, 100, 30);
+        btnPick1.setBounds(150, 560, 80,30);
+        btnPick2.setBounds(460, 560, 80,30);
+        btnPick3.setBounds(770, 560, 80,30);
+        
         //add
         add(labelId);
         add(labelMsg);
@@ -44,6 +53,10 @@ public class BookSelectView extends View {
         add(btnQuiz);
         add(btnMyPage);
         add(btnLogout);
+        add(btnPick1);
+        add(btnPick2);
+        add(btnPick3);
+        
         //add BookClickView
         for(int i=0; i<viewBookClick.length; i++) {
             viewBookClick[i] = new BookClickView();
@@ -52,6 +65,5 @@ public class BookSelectView extends View {
         }
 
         setSize(1000,800);
-        setVisible(true);
     }
 }
