@@ -1,8 +1,7 @@
-
-
 package view.quiz;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -43,7 +42,6 @@ public class QuizView extends JFrame{
         panelQuiz.setLayout(null);
         getContentPane().setLayout(null);
         panelQuiz.setBounds(14, 12, 714, 40);
-        
         labelQuiz.setBounds(340, 2, 111, 40);
         labelContent.setBounds(51,75, 654, 130);
         
@@ -75,16 +73,31 @@ public class QuizView extends JFrame{
         rBtnAs3.setBounds(360, 319, 80, 30);
         rBtnAs4.setBounds(460, 319, 80, 30);
         rBtnAs5.setBounds(560, 319, 80, 30);
+        // 확인 취소 창 위치 및 크기 조정
+        btnConfirm.setBounds(185, 393, 160, 45);
+        btnCancel.setBounds(377, 393, 160, 45);
+
+
+        
+        Font font=new Font("맑은고딕", Font.BOLD, 16);
+        panelQuiz.setFont(font);
+        labelQuiz.setFont(font);
+        labelContent.setFont(font);
+        rBtnAs1.setFont(font);
+        rBtnAs2.setFont(font);
+        rBtnAs3.setFont(font);
+        rBtnAs4.setFont(font);
+        rBtnAs5.setFont(font);
+        btnConfirm.setFont(font);
+        btnCancel.setFont(font);
+        labelAnswer.setFont(font);
+        
         // frame
         add(rBtnAs1);
         add(rBtnAs2);
         add(rBtnAs3);
         add(rBtnAs4);
         add(rBtnAs5);
-        // 확인 취소 창 위치 및 크기 조정
-        btnConfirm.setBounds(185, 393, 160, 45);
-        btnCancel.setBounds(377, 393, 160, 45);
-
 
         panelQuiz.add(labelQuiz);
         getContentPane().add(panelQuiz);
@@ -93,31 +106,9 @@ public class QuizView extends JFrame{
         getContentPane().add(btnConfirm);
         getContentPane().add(btnCancel);
         
-        // 확인 버튼 누르면 팝업 버튼 출력
-        btnConfirm.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-            	JOptionPane.showMessageDialog(null, "정답");
-            }
-            
-        });
-        
-        // 취소 버튼 누르면 HistoryView로 되돌아감
-        btnCancel.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-            	new HistoryView();
-            	 setVisible(false);
-            }
-            
-        });
 
-        setSize(757, 500);
-        setVisible(true);
+        setBounds(700,200,760,510); 
         
     }
-    public static void main(String[] args) {
-		new QuizView();
-	}
 }
 
