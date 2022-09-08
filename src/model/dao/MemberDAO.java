@@ -330,7 +330,7 @@ public class MemberDAO {
             e.printStackTrace();
         } finally {
             DBConnManager.close(pstmt);
-        }	
+        }   
         return false;
     }
     

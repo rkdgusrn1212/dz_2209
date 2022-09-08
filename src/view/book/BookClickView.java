@@ -1,4 +1,6 @@
 package view.book;
+import java.awt.Font;
+
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -20,12 +22,19 @@ public class BookClickView extends JPanel {
         labelPrice = new JLabel("가격");
         
         //setBounds
-        tglBtnImage.setBounds(25, 25, 200, 200);
-        labelName.setBounds(20, 270, 80, 30);
-        labelWriter.setBounds(20, 340, 80, 30);
-        labelPrice.setBounds(20, 410, 80, 30);
+        tglBtnImage.setBounds(25, 100, 200, 200);
+        labelName.setBounds(25, 320, 80, 30);
+        labelWriter.setBounds(25, 370, 80, 30);
+        labelPrice.setBounds(25, 420, 80, 30);
 //        taContent.setBounds(25, 350, 200, 150);
         taContent.setBounds(25, 250, 200, 300);
+        
+        //폰트 추가
+        Font font=new Font("맑은고딕", Font.BOLD, 13);
+        tglBtnImage.setFont(font);
+        labelName.setFont(font);
+        labelWriter.setFont(font);
+        labelPrice.setFont(font);
         
         //add
         add(tglBtnImage);

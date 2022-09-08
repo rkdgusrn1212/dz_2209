@@ -1,4 +1,6 @@
 package view.book;
+import java.awt.Font;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -10,7 +12,7 @@ public class BookPayView extends JFrame {
     public JTextField tfPoint;
     public JButton btnPay, btnBack;
     public BookPayView() {
-        setTitle("BookPayView");
+        setTitle("도서대여 결제");
         setLayout(null);
      
         //p_book
@@ -23,14 +25,24 @@ public class BookPayView extends JFrame {
         btnPay = new JButton("결제");
       	btnBack = new JButton("이전으로");
         
-        labelId.setBounds(50, 30, 50, 50);
-        labelCash.setBounds(50, 100, 80, 50);
-        labelPoint.setBounds(50, 170, 90, 50);
-        labelLend.setBounds(350, 30, 70, 50);
-        labelUsePoint.setBounds(350, 100, 90, 50);
-        tfPoint.setBounds(430, 110, 120, 30);
-        btnPay.setBounds(350, 190, 100, 30);
-        btnBack.setBounds(510, 190, 100, 30);
+        labelId.setBounds(50, 30, 180, 50);
+        labelCash.setBounds(50, 100, 180, 50);
+        labelPoint.setBounds(50, 170, 180, 50);
+        labelLend.setBounds(390, 30, 70, 50);
+        labelUsePoint.setBounds(390, 100, 90, 50);
+        tfPoint.setBounds(490, 110, 180, 35);
+        btnPay.setBounds(390, 180, 135, 35);
+        btnBack.setBounds(570, 180, 135, 35);
+        
+        Font font=new Font("맑은고딕", Font.BOLD, 16);
+        labelId.setFont(font);
+        labelCash.setFont(font);
+        labelPoint.setFont(font);
+        labelLend.setFont(font);
+        labelUsePoint.setFont(font);
+        tfPoint.setFont(font);
+        btnPay.setFont(font);
+        btnBack.setFont(font);
         
         add(labelId);
         add(labelCash);
@@ -42,7 +54,7 @@ public class BookPayView extends JFrame {
         add(btnBack);
 
         
-        setBounds(500,200,700,300);
+        setBounds(500,300,770,300);
         
     }
 }

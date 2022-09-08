@@ -1,5 +1,6 @@
 package view.book;
 
+import java.awt.Font;
 import java.util.ArrayList;
 
 import javax.swing.ButtonGroup;
@@ -26,7 +27,7 @@ public class BookListView extends View{
     Object columnnames[] = {"제목", "저자", "카테고리", "대여여부"};
     
     public BookListView() {
-        setTitle("BookListView");
+        setTitle("도서 목록 조회");
         setLayout(null);
         
         
@@ -41,10 +42,13 @@ public class BookListView extends View{
         labelMsg = new JLabel("도서 목록 조회");
         
         //setBounds
-        sp.setBounds(20, 50, 645, 540); // 도서 리스트 테이블
-        btnBack.setBounds(20, 600, 110, 30);
+        sp.setBounds(20, 50, 640, 540); // 도서 리스트 테이블
+        btnBack.setBounds(20, 600, 130, 35);
         labelMsg.setBounds(300, 10, 120, 30);
         
+        Font font=new Font("맑은고딕", Font.BOLD, 16);
+        btnBack.setFont(font);
+        labelMsg.setFont(font);
         
         //add
         add(sp);
@@ -53,7 +57,7 @@ public class BookListView extends View{
 
         
         //메인 창 출력 위치
-        setBounds(600,200,700,700);
+        setBounds(550,200,700,700);
         
     }
     //displayTable
@@ -65,8 +69,5 @@ public class BookListView extends View{
            Object rowData[]= {b.getBname(),b.getWriter(),b.getCategory(),b.getPrent()};
            dtm.addRow(rowData);
            }//for
-        }
-    
-  
-    
+        }  
 }

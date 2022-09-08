@@ -1,6 +1,7 @@
 package view.book;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 
 import javax.swing.JButton;
@@ -17,10 +18,10 @@ public class BookSelectView extends View {
     public JTextField tfSearch;
     
     public BookSelectView() {
-        setTitle("BookSelectView");
+        setTitle("메인페이지");
         setLayout(null);
         //new   
-        labelMsg = new JLabel("도서를 선택하세요");
+        labelMsg = new JLabel("추천 도서");
         labelId = new JLabel("id");
         tfSearch = new JTextField("제목입력");
         btnAdd = new JButton("도서 등록");
@@ -37,21 +38,37 @@ public class BookSelectView extends View {
         
         //setBounds
 
-        btnPick1.setBounds(150, 560, 80,30);
-        btnPick2.setBounds(460, 560, 80,30);
-        btnPick3.setBounds(770, 560, 80,30);
-        labelId.setBounds(100, 20, 80, 30);
-        labelMsg.setBounds(440, 20, 120, 30);
-        tfSearch.setBounds(550, 700, 180, 30);
-        btnAdd.setBounds(100, 700, 100, 30);
-        btnQuiz.setBounds(250, 700, 100, 30);
-        btnAllList.setBounds(400, 700, 100, 30);
-        btnSearch.setBounds(730, 700, 100, 30);
-        btnMyPage.setBounds(680, 20, 100, 30);
-        btnLogout.setBounds(820, 20, 100, 30);
+        btnPick1.setBounds(140, 140, 100, 35);
+        btnPick2.setBounds(450, 140, 100, 35);
+        btnPick3.setBounds(760, 140, 100, 35);
+        labelId.setBounds(40, 20, 120, 35);
+        labelMsg.setBounds(460, 50, 180, 35);
+        tfSearch.setBounds(609, 700, 210, 35);
+        btnAdd.setBounds(50, 700, 130, 35);
+        btnQuiz.setBounds(235, 700, 130, 35);
+        btnAllList.setBounds(420, 700, 130, 35);
+        btnSearch.setBounds(820, 700, 130, 35);
+        btnMyPage.setBounds(670, 20, 130, 35);
+        btnLogout.setBounds(820, 20, 130, 35);
+        
+        
+        Font font=new Font("맑은고딕", Font.BOLD, 16);
+        Font font2=new Font("맑은고딕", Font.ITALIC, 16);
+        labelMsg.setFont(font);
+        btnPick1.setFont(font);
+        btnPick2.setFont(font);
+        btnPick3.setFont(font);
+        labelId.setFont(font);
+        labelMsg.setFont(font);
+        tfSearch.setFont(font2);
+        btnAdd.setFont(font);
+        btnQuiz.setFont(font);
+        btnAllList.setFont(font);
+        btnSearch.setFont(font);
+        btnMyPage.setFont(font);
+        btnLogout.setFont(font);
         
         //add
-
         add(btnPick1);
         add(btnPick2);
         add(btnPick3);
@@ -71,6 +88,6 @@ public class BookSelectView extends View {
             viewBookClick[i].setBounds(310*i+60, 100, 250, 500);
             add(viewBookClick[i]);
         }
-        setSize(1000,800);
+        setBounds(400,100,1000,800); 
     }
 }
