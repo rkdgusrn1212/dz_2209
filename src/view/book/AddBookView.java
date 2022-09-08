@@ -1,5 +1,8 @@
 package view.book;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -10,7 +13,9 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-public class AddBookView extends JFrame 
+import view.View;
+
+public class AddBookView extends View
 {
      public JTextField tfIsbn, tfBook, tfWriter, tfCategory, tfPrice; 
      public JTextArea taContent;
@@ -100,10 +105,6 @@ public class AddBookView extends JFrame
               tfPrice.setText("");
           }
           
-          
-          //main
-      public static void main(String[] args) {
-        new AddBookView();
-    }
+
       
 }//AddBookView
