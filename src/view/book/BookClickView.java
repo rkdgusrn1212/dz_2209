@@ -22,10 +22,10 @@ public class BookClickView extends JPanel {
         labelPrice = new JLabel("가격");
         
         //setBounds
-        tglBtnImage.setBounds(25, 25, 200, 200);
-        labelName.setBounds(25, 270, 80, 30);
-        labelWriter.setBounds(25, 320, 80, 30);
-        labelPrice.setBounds(25, 370, 80, 30);
+        tglBtnImage.setBounds(25, 100, 200, 200);
+        labelName.setBounds(25, 320, 80, 30);
+        labelWriter.setBounds(25, 370, 80, 30);
+        labelPrice.setBounds(25, 420, 80, 30);
 //        taContent.setBounds(25, 350, 200, 150);
         taContent.setBounds(25, 250, 200, 300);
         
