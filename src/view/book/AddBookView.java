@@ -102,10 +102,6 @@ public class AddBookView extends View
               tfPrice.setText("");
           }
           
-          
-          //main
-      public static void main(String[] args) {
-        new AddBookView();
-    }
+
       
 }//AddBookView
