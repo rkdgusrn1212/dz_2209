@@ -1,4 +1,5 @@
 package view.member;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
@@ -17,64 +18,44 @@ public class CashView extends JFrame{
     public JTextField tfCash;
    
     public CashView() {
-    
-        setTitle("CashView");
+        setTitle("캐시충전");
         setLayout(null);
-        labelMsg = new JLabel("충전할 금액을 입력하세요");
-        labelNowcash = new JLabel("현재 캐시: 10000");
-        labelAftercash = new JLabel("충전 후 캐시: ");
+        labelMsg = new JLabel("충전 금액");
+        labelNowcash = new JLabel("보유 캐시: ");
+        //labelAftercash = new JLabel("충전 후 캐시: "); //충전 후 캐시는 팝업으로 띄워주는게 나을듯?
         tfCash = new JTextField("");
         btnSubmit = new JButton("충전");
         btnBack = new JButton("취소");
         
-        //각각의 사이즈 위치설정 및 내용 띄우기
-        labelMsg.setBounds(65, 40, 150, 30);
-        labelNowcash.setBounds(80, 70, 150, 30);
-        tfCash.setBounds(60, 100, 150, 30);
-        labelAftercash.setBounds(75,130,150,30);
-        btnSubmit.setBounds(20, 190, 100, 30);
-        btnBack.setBounds(160, 190, 100, 30);
+        labelMsg.setBounds(30, 98, 300, 35);
+        labelNowcash.setBounds(30, 40, 200, 35);
+        tfCash.setBounds(120, 100, 180, 30);
+        //labelAftercash.setBounds(30, 160,200,35);
+        btnSubmit.setBounds(30, 220, 130, 35);
+        btnBack.setBounds(250, 220, 130, 35);
         add(labelMsg);
         add(labelNowcash);
-        add(labelAftercash);
+        //add(labelAftercash);
         add(tfCash);
         add(btnSubmit);
         add(btnBack);
         
+        Font font=new Font("맑은고딕", Font.BOLD, 16);
+        labelMsg.setFont(font);
+        labelNowcash.setFont(font);
+        //labelAftercash.setFont(font);
+        tfCash.setFont(font);
+        btnSubmit.setFont(font);
+        btnBack.setFont(font);
         
         //메인 창 출력 위치
-        setBounds(800,300,300,300);
-        setVisible(true);
+        setBounds(800,300,430,350);
         
         
-        
-        //버튼클릭시 화면 전환       
-        btnSubmit.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(null, "충전되었습니다.");
-            }
-            
-        });
-        
-        
-        btnBack.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                new MyPageView();
-                setVisible(false);
-                
-            }
-            
-        });
         
               
     }
     public void showMsg(String msg) {
         JOptionPane.showMessageDialog(this, msg);
-    }
-    
-    public static void main(String[] args) {
-        new CashView().setVisible(true);
     }
 }

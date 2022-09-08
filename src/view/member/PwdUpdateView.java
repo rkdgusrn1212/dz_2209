@@ -1,5 +1,7 @@
 package view.member;
 
+import java.awt.Font;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -16,7 +18,7 @@ public class PwdUpdateView extends JFrame {
 
     public PwdUpdateView()
     {   
-        setTitle("PassUpdateView");
+        setTitle("비밀번호 변경");
 
         tfId = new JTextField();
         tfPwd = new JPasswordField();
@@ -27,27 +29,42 @@ public class PwdUpdateView extends JFrame {
         btnSubmit = new JButton("등록");
         btnReset = new JButton("취소");
 
-        la_id = new JLabel("I  D:");
-        la_pass1 = new JLabel("비  번:");
-        la_pass2 = new JLabel("비번확인:");
-        la_n = new JLabel("이  름:");
-        la_email = new JLabel("이메일:"); 
+        la_id = new JLabel("I  D");
+        la_pass1 = new JLabel("비밀번호");
+        la_pass2 = new JLabel("비밀번호확인");
+        la_n = new JLabel("이  름");
+        la_email = new JLabel("이메일"); 
 
 
-        tfId.setBounds(80,30,100,25);
-        tfPwd.setBounds(80,70,100,25);
-        tfPwd2.setBounds(80,110,100,25);
-        tfName.setBounds(80,150,100,25);
-        tfEmail.setBounds(80,190,180,25);
+        tfId.setBounds(140,30,200,35);
+        tfPwd.setBounds(140,80,200,35);
+        tfPwd2.setBounds(140,130,200,35);
+        tfName.setBounds(140,180,200,35);
+        tfEmail.setBounds(140,230,200,35);
 
-        btnSubmit.setBounds(50,240,90,25);
-        btnReset.setBounds(150,240,90,25);
+        btnSubmit.setBounds(30,300,150,35);
+        btnReset.setBounds(200,300,150,35);
 
-        la_id.setBounds(10,30,100,25);
-        la_pass1.setBounds(10,70,100,25);
-        la_pass2.setBounds(10,110,100,25);
-        la_n.setBounds(10,150,100,25);
-        la_email.setBounds(10, 190, 100, 25);
+        la_id.setBounds(30,30,100,35);
+        la_pass1.setBounds(30,85,100,35);
+        la_pass2.setBounds(30,135,100,35);
+        la_n.setBounds(30,185,100,35);
+        la_email.setBounds(30, 235, 100, 35);
+        
+        //폰트 추가
+        Font font=new Font("맑은고딕", Font.BOLD, 16);
+        tfId.setFont(font);
+        tfPwd.setFont(font);
+        tfPwd2.setFont(font);
+        tfName.setFont(font);
+        tfEmail.setFont(font);
+        btnSubmit.setFont(font);
+        btnReset.setFont(font);
+        la_id.setFont(font);
+        la_pass1.setFont(font);
+        la_pass2.setFont(font);
+        la_n.setFont(font);
+        la_email.setFont(font);
 
         setLayout(null);
         add(tfId);
@@ -68,7 +85,7 @@ public class PwdUpdateView extends JFrame {
         tfName.setEnabled(false);
         tfId.setEnabled(false);
 
-        setBounds(800,300,300,300);
+        setBounds(800,300,400,400);
         setVisible(true);
     }//생성자  
     public void showMsg(String msg) {
