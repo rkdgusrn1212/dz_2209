@@ -78,28 +78,6 @@ public class MemberDAO {
         return false;
     }
 
-    public Member findIdpwd(String email) {
-        PreparedStatement pstmt = DBConnManager.getInstance().getPreparedStatement(
-                "select id,pwd from member where email = ?");
-        ResultSet rs = null;
-        try {
-            pstmt.setString(1, email);
-            rs = pstmt.executeQuery();
-            if(rs.next()) {
-                Member m = new Member();
-                m.setId(rs.getString("id"));
-                m.setPwd(rs.getString("pwd"));
-                return m;
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            DBConnManager.close(rs);
-            DBConnManager.close(pstmt);
-        }
-        return null;
-    }
-
     public Member selectMyPage(String id) {
         PreparedStatement pstmt = DBConnManager.getInstance().getPreparedStatement(
                 "select name, point ,cash from member where id=?");
@@ -187,6 +165,25 @@ public class MemberDAO {
         }
         return list;
     }
+    
+    public String selectIdWithEmail(String email){
+        PreparedStatement pstmt = DBConnManager.getInstance().getPreparedStatement(
+                "select id from member where email = ?");
+        ResultSet rs = null;
+        try {
+            pstmt.setString(1, email);
+            rs = pstmt.executeQuery();
+            if (rs.next()) {
+                return rs.getString(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBConnManager.close(rs);
+            DBConnManager.close(pstmt);
+        }
+        return null;
+    }
 
     public ArrayList<Member> selectAllMember(){
         PreparedStatement pstmt = DBConnManager.getInstance().getPreparedStatement(
@@ -212,12 +209,28 @@ public class MemberDAO {
         return list;
     }
 
-    public boolean updateMemberInfo(String id,String pwd) {
+    public boolean updatePwd(String id,String pwd) {
         PreparedStatement pstmt = DBConnManager.getInstance().getPreparedStatement(
                 "update member set pwd=? where id=?");
         try {
             pstmt.setString(1, pwd);
             pstmt.setString(2, id);
+            int t = pstmt.executeUpdate();
+            if(t>0) return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBConnManager.close(pstmt);
+        }
+        return false;
+    }
+    
+    public boolean updatePwdWithEmail(String email,String pwd) {
+        PreparedStatement pstmt = DBConnManager.getInstance().getPreparedStatement(
+                "update member set pwd=? where email=?");
+        try {
+            pstmt.setString(1, pwd);
+            pstmt.setString(2, email);
             int t = pstmt.executeUpdate();
             if(t>0) return true;
         } catch (SQLException e) {
@@ -272,7 +285,7 @@ public class MemberDAO {
         return false;
     }
 
-    public boolean updateinterest_category(String id,String interest_category) {
+    public boolean updateInterestCategory(String id,String interest_category) {
 
         PreparedStatement pstmt = DBConnManager.getInstance().getPreparedStatement("update member set interest_category=? where id=?");
         try {
