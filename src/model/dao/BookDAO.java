@@ -5,26 +5,27 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+
+
 import db.util.DBConnManager;
 import model.vo.Book;
 
 public class BookDAO {
 
 
-
+//addbookview와 mypage에 활용
     public boolean insertBook(Book b) {
 
         PreparedStatement pstmt = DBConnManager.getInstance().getPreparedStatement(
-                "insert into book (isbn,genre,b_name,writer,p_rent,clear_num,origin_price,summary) values(?,?,?,?,?,?,?,?)");
+                "insert into book (isbn,category,bname,writer,pRent,originPrice,summary) values(?,?,?,?,?,?,?)");
         try {
             pstmt.setInt(1, b.getIsbn());
-            pstmt.setString(2, b.getGenre());
+            pstmt.setInt(2, b.getCategory());
             pstmt.setString(3, b.getBname());
             pstmt.setString(4, b.getWriter());			  
             pstmt.setInt(5, 0);
-            pstmt.setInt(6, 0);
-            pstmt.setInt(7, b.getOriginPrice());
-            pstmt.setString(8, b.getSummary());
+            pstmt.setInt(6, b.getOriginPrice());
+            pstmt.setString(7, b.getSummary());
             pstmt.executeUpdate();
             return true;
         } catch (SQLException e) {
@@ -33,49 +34,15 @@ public class BookDAO {
             DBConnManager.close(pstmt);
         }
         return false;
-    }
-    
-     public boolean updatePrent(Book b) {
+    }//InsertBook
 
-        PreparedStatement pstmt = DBConnManager.getInstance().getPreparedStatement("update book set p_rent=?"
-                    +"where isbn=?");
-        try {
-            pstmt.setInt(1, b.getPrent() + 1);
-            pstmt.setInt(2, b.getIsbn());
-            pstmt.executeUpdate();
-            return true;
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            DBConnManager.close(pstmt);
-        }
-        return false;
-    }
-    
-    public boolean updateClearNum(Book b) {
 
-        PreparedStatement pstmt = DBConnManager.getInstance().getPreparedStatement("update book set clear_num=?"
-                +"where isbn=?");
-        try {
-
-            pstmt.setInt(1, b.getClearNum() + 1);
-            pstmt.setInt(2, b.getIsbn());
-            pstmt.executeUpdate();
-
-            return true;
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            DBConnManager.close(pstmt);
-        }
-        return false;
-    }
-
-    public boolean deleteBook(String isbn) {
+//mypage에서 사용
+    public boolean deleteBook(int isbn) {
 
         PreparedStatement pstmt = DBConnManager.getInstance().getPreparedStatement("delete from book where isbn=?");
         try {
-            pstmt.setString(1, isbn);
+            pstmt.setInt(1, isbn);
             int t = pstmt.executeUpdate();
             if(t == 1) {
                 return true;
@@ -86,28 +53,25 @@ public class BookDAO {
             DBConnManager.close(pstmt);
         }
         return false;
-    }
+    }//DeleteBook
 
-    public Book selectBook(int isbn) {
+//도서검색 조회  => booksearchview
+    public Book selectSearchBook(String bname) {
 
         PreparedStatement pstmt = DBConnManager.getInstance().getPreparedStatement(
-                "select genre, b_name, writer, p_rent, clear_num, origin_price, summary, image where isbn=?");
+                "select isbn, bname, writer, pRent from book where bname  like '%' || ? || '%'");
         ResultSet rs = null;
         Book b = null;
 
         try {
-            pstmt.setInt(1, isbn);
+            pstmt.setString(1, bname);
             rs = pstmt.executeQuery();
             if(rs.next()) {
-                b = new Book(isbn, 
-                        rs.getString("genre"),
-                        rs.getString("b_name"),
+              b = new Book(
+                        rs.getInt("isbn"),
+                        rs.getString("bname"),
                         rs.getString("writer"),
-                        rs.getInt("p_rent"),
-                        rs.getInt("clear_num"),
-                        rs.getInt("origin_price"),
-                        rs.getString("summary"),
-                        rs.getString("image "));
+                        rs.getInt("prent"));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -116,54 +80,26 @@ public class BookDAO {
             DBConnManager.close(pstmt);
         }
         return b;
-    }//selectBook
+    }//SelectSearchBook
 
-    public ArrayList<Book> recommendBook(String genre) {
-
-        PreparedStatement pstmt = DBConnManager.getInstance().getPreparedStatement(
-                "select b_name, writer, origin_price, summary from book where genre=?");
-        ArrayList<Book> bookList = new ArrayList<>();
-        ResultSet rs = null;
-
-        try {
-            pstmt.setString(1, genre);
-            rs = pstmt.executeQuery();
-            if(rs.next()) {
-                Book b = new Book(
-                        rs.getString("b_name"),
-                        rs.getString("writer"),
-                        rs.getInt("origin_price"),
-                        rs.getString("summary"));
-                bookList.add(b);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            DBConnManager.close(rs);
-            DBConnManager.close(pstmt);
-        }
-        return bookList;
-    }//recommendBook
-
+    
+  // 도서 전체 리스트 검색 booklistview  
     public ArrayList<Book> selectAllBook() {
 
         PreparedStatement pstmt = DBConnManager.getInstance().getPreparedStatement(
-                "select isbn, genre, b_name, writer, p_rent, clear_num, origin_price, summary, image from book");
+                "select isbn, bname, writer, pRent from book ");
         ArrayList<Book> bookList = new ArrayList<>();
         ResultSet rs = null;
+        Book b = null;
+
         try {
             rs = pstmt.executeQuery();
             while(rs.next()) {
-                Book b = new Book(
+                b = new Book(
                         rs.getInt("isbn"),
-                        rs.getString("genre"),
-                        rs.getString("b_name"),
+                        rs.getString("bname"),
                         rs.getString("writer"),
-                        rs.getInt("p_rent"),
-                        rs.getInt("clear_num"),
-                        rs.getInt("origin_price"),
-                        rs.getString("summary"),
-                        rs.getString("image"));
+                        rs.getInt("prent"));
                 bookList.add(b);
             }
         } catch (SQLException e) {
@@ -173,27 +109,104 @@ public class BookDAO {
             DBConnManager.close(pstmt);
         }
         return bookList;
-    }//selectAllBook
+    }//SelectAllBook
 
+  //도서상세내용 조회  => booksearchview
+    public Book selectBook(String bname) {
 
-    public boolean selectDuplicatedIsbn(String isbn) {
         PreparedStatement pstmt = DBConnManager.getInstance().getPreparedStatement(
-                "select count(*) count from book where isbn=?");
+                "select  isbn, category, bname, writer, pRent,  originPrice, summary from book where bname like '%' || ? || '%'");
         ResultSet rs = null;
+        Book b = null;
+
         try {
-            pstmt.setString(1,isbn);
+            pstmt.setString(1, bname);
             rs = pstmt.executeQuery();
-            rs.next();
-            int count = rs.getInt("count");
-            if(count==1) return true;
+            if(rs.next()) {
+              b = new Book(
+                        rs.getInt("isbn"),
+                        rs.getInt("category"),
+                        rs.getString("bname"),
+                        rs.getString("writer"),
+                        rs.getInt("prent"),
+                        rs.getInt("originPrice"),
+                        rs.getString("summary"));
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
             DBConnManager.close(rs);
             DBConnManager.close(pstmt);
         }
-        return false;
-    }//selectDuplicatedIsbn
+        return b;
+    }//SelectSearchBook
+
+
+    
+    
+    
+//  public boolean updatePrent(Book b) {
+//
+//     PreparedStatement pstmt = DBConnManager.getInstance().getPreparedStatement("update book set p_rent=?"
+//                 +"where isbn=?");
+//     try {
+//         pstmt.setInt(1, b.getPrent() + 1);
+//         pstmt.setInt(2, b.getIsbn());
+//         pstmt.executeUpdate();
+//         return true;
+//     } catch (SQLException e) {
+//         e.printStackTrace();
+//     } finally {
+//         DBConnManager.close(pstmt);
+//     }
+//     return false;
+// }
+
+//  public ArrayList<Book> recommendBook(String genre) {
+//
+//      PreparedStatement pstmt = DBConnManager.getInstance().getPreparedStatement(
+//              "select b_name, writer, origin_price, summary from book where genre=?");
+//      ArrayList<Book> bookList = new ArrayList<>();
+//      ResultSet rs = null;
+//
+//      try {
+//          pstmt.setString(1, genre);
+//          rs = pstmt.executeQuery();
+//          if(rs.next()) {
+//              Book b = new Book(
+//                      rs.getString("b_name"),
+//                      rs.getString("writer"),
+//                      rs.getInt("origin_price"),
+//                      rs.getString("summary"));
+//              bookList.add(b);
+//          }
+//      } catch (SQLException e) {
+//          e.printStackTrace();
+//      } finally {
+//          DBConnManager.close(rs);
+//          DBConnManager.close(pstmt);
+//      }
+//      return bookList;
+//  }//recommendBook
+    
+//    public boolean selectDuplicatedIsbn(String isbn) {
+//        PreparedStatement pstmt = DBConnManager.getInstance().getPreparedStatement(
+//                "select count(*) count from book where isbn=?");
+//        ResultSet rs = null;
+//        try {
+//            pstmt.setString(1,isbn);
+//            rs = pstmt.executeQuery();
+//            rs.next();
+//            int count = rs.getInt("count");
+//            if(count==1) return true;
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        } finally {
+//            DBConnManager.close(rs);
+//            DBConnManager.close(pstmt);
+//        }
+//        return false;
+//    }//selectDuplicatedIsbn
 
 
 }
