@@ -9,6 +9,31 @@ import db.util.DBConnManager;
 import model.vo.Member;
 
 public class MemberDAO {
+    
+    //도서 결제시 포인트 및 캐쉬 확인
+    public Member selectPayBook(String id) {
+
+        PreparedStatement pstmt = DBConnManager.getInstance().getPreparedStatement(
+                "select point, cash from member  where id = ? ");
+        ResultSet rs = null;
+        Member m = null;
+
+        try {
+            pstmt.setString(1, id);
+            rs = pstmt.executeQuery();
+            if(rs.next()) {
+              m = new Member(
+                        id, rs.getInt("point"),
+                        rs.getInt("cash"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBConnManager.close(rs);
+            DBConnManager.close(pstmt);
+        }
+        return m;
+    }//selectPayBook
 
     public boolean loginCheck(String id, String pwd) {
         PreparedStatement pstmt = DBConnManager.getInstance().getPreparedStatement(
