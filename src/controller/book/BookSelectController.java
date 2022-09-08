@@ -12,6 +12,7 @@ import javax.swing.JTextArea;
 import controller.Controller;
 import controller.member.LoginController;
 import controller.member.MyPageController;
+import controller.quiz.QuizController;
 import model.dao.BookDAO;
 import model.vo.Book;
 import view.View;
@@ -44,6 +45,8 @@ public class BookSelectController extends Controller {
             new BookController(this);
         }else if(s==viewBookSelect.btnPick3) {
             new BookController(this);
+        }else if(s==viewBookSelect.btnQuiz) {
+            new QuizController(this, getArgs(0));
         }
     }
     
@@ -58,6 +61,7 @@ public class BookSelectController extends Controller {
         viewBookSelect.btnPick1.addActionListener(this);
         viewBookSelect.btnPick2.addActionListener(this);
         viewBookSelect.btnPick3.addActionListener(this);
+        viewBookSelect.btnQuiz.addActionListener(this);
         for (int i = 0; i < viewBookSelect.viewBookClick.length; i++) {
             viewBookSelect.viewBookClick[i].tglBtnImage.addItemListener(new BSCItemListener(
                     viewBookSelect.viewBookClick[i].taContent));

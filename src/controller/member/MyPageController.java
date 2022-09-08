@@ -22,14 +22,7 @@ public class MyPageController extends Controller {
             viewMyPage.setVisible(false);
            // viewLogin.setVisible(true);
         } else if (s == viewMyPage.btnUpdate) {
-            //Member m = new MemberDAO().selectMemberInfo(userId);
-           // viewPwdUpdate.tfId.setText(m.getId());
-           // viewPwdUpdate.tfName.setText(m.getEname());
-           // viewPwdUpdate.tfEmail.setText(m.getEmail());
-           // viewPwdUpdate.tfPwd.setText("");
-           // viewPwdUpdate.tfPwd2.setText("");
-           // viewPwdUpdate.tfPwd.requestFocus()
-           // viewPwdUpdate.setVisible(true);
+            new PwdUpdateController(this, getArgs(0));
         }else if (s == viewMyPage.btnHistory) {
 
            // viewHistory.setVisible(true);

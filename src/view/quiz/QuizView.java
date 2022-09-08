@@ -8,7 +8,6 @@ import java.awt.event.ActionListener;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -17,9 +16,10 @@ import javax.swing.JTextField;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.SoftBevelBorder;
 
+import view.View;
 import view.history.HistoryView;
 
-public class QuizView extends JFrame{
+public class QuizView extends View{
     JPanel panelQuiz;
     JLabel labelQuiz, labelContent, labelAnswer;
     JRadioButton rBtnAs1, rBtnAs2, rBtnAs3, rBtnAs4, rBtnAs5;
@@ -92,28 +92,8 @@ public class QuizView extends JFrame{
         getContentPane().add(tfAnswer);
         getContentPane().add(btnConfirm);
         getContentPane().add(btnCancel);
-        
-        // 확인 버튼 누르면 팝업 버튼 출력
-        btnConfirm.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-            	JOptionPane.showMessageDialog(null, "정답");
-            }
-            
-        });
-        
-        // 취소 버튼 누르면 HistoryView로 되돌아감
-        btnCancel.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-            	new HistoryView();
-            	 setVisible(false);
-            }
-            
-        });
 
         setSize(757, 500);
-        setVisible(true);
         
     }
     public static void main(String[] args) {
