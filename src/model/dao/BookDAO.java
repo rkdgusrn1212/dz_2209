@@ -59,7 +59,7 @@ public class BookDAO {
     public Book selectSearchBook(String bname) {
 
         PreparedStatement pstmt = DBConnManager.getInstance().getPreparedStatement(
-                "select isbn, bname, writer, pRent from book where bname  like '%' || ? || '%'");
+                "select bname, writer,category, pRent from book where bname  like '%' || ? || '%'");
         ResultSet rs = null;
         Book b = null;
 
@@ -68,10 +68,10 @@ public class BookDAO {
             rs = pstmt.executeQuery();
             if(rs.next()) {
               b = new Book(
-                        rs.getInt("isbn"),
-                        rs.getString("bname"),
-                        rs.getString("writer"),
-                        rs.getInt("prent"));
+                      rs.getString("bname"),
+                      rs.getString("writer"),
+                      rs.getInt("category"),
+                      rs.getInt("prent"));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -83,11 +83,11 @@ public class BookDAO {
     }//SelectSearchBook
 
     
-  // 도서 전체 리스트 검색 booklistview  
-    public ArrayList<Book> selectAllBook() {
+  // 도서 전체 리스트 검색 booklistView  
+    public Book selectAllBook() {
 
         PreparedStatement pstmt = DBConnManager.getInstance().getPreparedStatement(
-                "select isbn, bname, writer, pRent from book ");
+                "select bname, writer,category, pRent from book ");
         ArrayList<Book> bookList = new ArrayList<>();
         ResultSet rs = null;
         Book b = null;
@@ -96,9 +96,9 @@ public class BookDAO {
             rs = pstmt.executeQuery();
             while(rs.next()) {
                 b = new Book(
-                        rs.getInt("isbn"),
                         rs.getString("bname"),
                         rs.getString("writer"),
+                        rs.getInt("category"),
                         rs.getInt("prent"));
                 bookList.add(b);
             }
@@ -108,14 +108,14 @@ public class BookDAO {
             DBConnManager.close(rs);
             DBConnManager.close(pstmt);
         }
-        return bookList;
+        return b;
     }//SelectAllBook
 
   //도서상세내용 조회  => booksearchview
     public Book selectBook(String bname) {
 
         PreparedStatement pstmt = DBConnManager.getInstance().getPreparedStatement(
-                "select  isbn, category, bname, writer, pRent,  originPrice, summary from book where bname like '%' || ? || '%'");
+                "select bname,  originPrice, writer, summary from book where bname like '%' || ? || '%'");
         ResultSet rs = null;
         Book b = null;
 
@@ -124,12 +124,9 @@ public class BookDAO {
             rs = pstmt.executeQuery();
             if(rs.next()) {
               b = new Book(
-                        rs.getInt("isbn"),
-                        rs.getInt("category"),
                         rs.getString("bname"),
-                        rs.getString("writer"),
-                        rs.getInt("prent"),
                         rs.getInt("originPrice"),
+                        rs.getString("writer"),
                         rs.getString("summary"));
             }
         } catch (SQLException e) {
