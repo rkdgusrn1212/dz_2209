@@ -1,5 +1,6 @@
 package view.quiz;
 
+import java.awt.Font;
 import java.awt.event.WindowAdapter;
 
 import javax.swing.JButton;
@@ -21,29 +22,36 @@ public class AddQuizView extends JFrame {
     JScrollPane sp;
 
     public AddQuizView() {
-        setTitle("AddQuizView");
+        setTitle("퀴즈추가");
+        
 
-        labelQuestion = new JLabel("퀴즈 문제 : ");
+        labelQuestion = new JLabel("문제");
 //        tfQuestion = new JTextField();
         tfQuestion = new JTextArea();
-
-        labelAnswer = new JLabel("퀴즈 정답 : ");
+        labelAnswer = new JLabel("정답");
         tfAnswer = new JTextField();
-
         btnSubmit = new JButton("등록");
         btnReset = new JButton("취소");
 
         // setBounds
-        labelQuestion.setBounds(10, 30, 80, 50);
-        tfQuestion.setBounds(75, 45, 165, 180);
+        labelQuestion.setBounds(50, 30, 100, 50);
+        tfQuestion.setBounds(140, 50, 290, 250);
         tfQuestion.setLineWrap(true);
 
-        labelAnswer.setBounds(10, 250, 100, 25);
-        tfAnswer.setBounds(75, 250, 165, 25);
+        labelAnswer.setBounds(50, 330, 100, 35);
+        tfAnswer.setBounds(140, 330, 290, 35);
 
-        btnSubmit.setBounds(50, 310, 90, 25);
-        btnReset.setBounds(150, 310, 90, 25);
-
+        btnSubmit.setBounds(50, 400, 130, 35);
+        btnReset.setBounds(300, 400, 130, 35);
+        
+        Font font=new Font("맑은고딕", Font.BOLD, 16);
+        labelQuestion.setFont(font);
+        tfQuestion.setFont(font);
+        labelAnswer.setFont(font);
+        tfAnswer.setFont(font);
+        btnSubmit.setFont(font);
+        btnReset.setFont(font);
+        
         // add
         setLayout(null);
         add(labelQuestion);
@@ -54,10 +62,9 @@ public class AddQuizView extends JFrame {
         add(btnSubmit);
         add(btnReset);
 
-        setBounds(350, 200, 300, 400);
+        setBounds(350, 200, 500, 500);
   
 
-        setVisible(true);
     }
 
     // 생성자
@@ -73,9 +80,5 @@ public class AddQuizView extends JFrame {
 //              tfPrice.setText("");
 //          }
 
-    // main
-    public static void main(String[] args) {
-        new AddQuizView();
-    }
 
 }// AddBookView
