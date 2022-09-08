@@ -12,20 +12,20 @@ import model.vo.Book;
 
 public class BookDAO {
 
-
-//addbookview와 mypage에 활용
+    //addbookview와 mypage에 활용
     public boolean insertBook(Book b) {
 
         PreparedStatement pstmt = DBConnManager.getInstance().getPreparedStatement(
-                "insert into book (isbn,category,bname,writer,pRent,originPrice,summary) values(?,?,?,?,?,?,?)");
+                "insert into book (book_id, isbn, category,b_name,writer,p_rent,origin_price,summary) values(?,?,?,?,?,?,?)");
         try {
-            pstmt.setInt(1, b.getIsbn());
-            pstmt.setInt(2, b.getCategory());
-            pstmt.setString(3, b.getBname());
-            pstmt.setString(4, b.getWriter());			  
-            pstmt.setInt(5, 0);
-            pstmt.setInt(6, b.getOriginPrice());
-            pstmt.setString(7, b.getSummary());
+            pstmt.setString(1, b.getIsbn());
+            pstmt.setString(2, b.getIsbn());
+            pstmt.setInt(3, b.getCategory());
+            pstmt.setString(4, b.getBname());
+            pstmt.setString(5, b.getWriter());			  
+            pstmt.setInt(6, 0);
+            pstmt.setInt(7, b.getOriginPrice());
+            pstmt.setString(8, b.getSummary());
             pstmt.executeUpdate();
             return true;
         } catch (SQLException e) {
@@ -37,12 +37,12 @@ public class BookDAO {
     }//InsertBook
 
 
-//mypage에서 사용
-    public boolean deleteBook(int isbn) {
+    //mypage에서 사용
+    public boolean deleteBook(int bookId) {
 
-        PreparedStatement pstmt = DBConnManager.getInstance().getPreparedStatement("delete from book where isbn=?");
+        PreparedStatement pstmt = DBConnManager.getInstance().getPreparedStatement("delete from book where book_id =?");
         try {
-            pstmt.setInt(1, isbn);
+            pstmt.setInt(1, bookId);
             int t = pstmt.executeUpdate();
             if(t == 1) {
                 return true;
@@ -55,23 +55,23 @@ public class BookDAO {
         return false;
     }//DeleteBook
 
-//도서검색 조회  => booksearchview
-    public Book selectSearchBook(String bname) {
+    //도서검색 조회  => booksearchview
+    public Book selectSearchBook(String bName) {
 
         PreparedStatement pstmt = DBConnManager.getInstance().getPreparedStatement(
-                "select bname, writer,category, pRent from book where bname  like '%' || ? || '%'");
+                "select b_name, writer,category, p_rent from book where bname  like '%' || ? || '%'");
         ResultSet rs = null;
         Book b = null;
 
         try {
-            pstmt.setString(1, bname);
+            pstmt.setString(1, bName);
             rs = pstmt.executeQuery();
             if(rs.next()) {
-              b = new Book(
-                      rs.getString("bname"),
-                      rs.getString("writer"),
-                      rs.getInt("category"),
-                      rs.getInt("prent"));
+                b = new Book(
+                        rs.getString("b_name"),
+                        rs.getString("writer"),
+                        rs.getInt("category"),
+                        rs.getInt("p_rent"));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -82,12 +82,12 @@ public class BookDAO {
         return b;
     }//SelectSearchBook
 
-    
-  // 도서 전체 리스트 검색 booklistView  
+
+    // 도서 전체 리스트 검색 booklistView  
     public Book selectAllBook() {
 
         PreparedStatement pstmt = DBConnManager.getInstance().getPreparedStatement(
-                "select bname, writer,category, pRent from book ");
+                "select b_name, writer,category, p_rent from book ");
         ArrayList<Book> bookList = new ArrayList<>();
         ResultSet rs = null;
         Book b = null;
@@ -96,10 +96,10 @@ public class BookDAO {
             rs = pstmt.executeQuery();
             while(rs.next()) {
                 b = new Book(
-                        rs.getString("bname"),
+                        rs.getString("b_name"),
                         rs.getString("writer"),
                         rs.getInt("category"),
-                        rs.getInt("prent"));
+                        rs.getInt("p_rent"));
                 bookList.add(b);
             }
         } catch (SQLException e) {
@@ -111,21 +111,21 @@ public class BookDAO {
         return b;
     }//SelectAllBook
 
-  //도서상세내용 조회  => booksearchview
-    public Book selectBook(String bname) {
+    //도서상세내용 조회  => booksearchview
+    public Book selectBook(String bName) {
 
         PreparedStatement pstmt = DBConnManager.getInstance().getPreparedStatement(
-                "select bname,  originPrice, writer, summary from book where bname like '%' || ? || '%'");
+                "select b_name,  origin_price, writer, summary from book where bname like '%' || ? || '%'");
         ResultSet rs = null;
         Book b = null;
 
         try {
-            pstmt.setString(1, bname);
+            pstmt.setString(1, bName);
             rs = pstmt.executeQuery();
             if(rs.next()) {
-              b = new Book(
-                        rs.getString("bname"),
-                        rs.getInt("originPrice"),
+                b = new Book(
+                        rs.getString("b_name"),
+                        rs.getInt("origin_price"),
                         rs.getString("writer"),
                         rs.getString("summary"));
             }
@@ -139,71 +139,71 @@ public class BookDAO {
     }//SelectSearchBook
 
 
-    
-    
-    
-//  public boolean updatePrent(Book b) {
-//
-//     PreparedStatement pstmt = DBConnManager.getInstance().getPreparedStatement("update book set p_rent=?"
-//                 +"where isbn=?");
-//     try {
-//         pstmt.setInt(1, b.getPrent() + 1);
-//         pstmt.setInt(2, b.getIsbn());
-//         pstmt.executeUpdate();
-//         return true;
-//     } catch (SQLException e) {
-//         e.printStackTrace();
-//     } finally {
-//         DBConnManager.close(pstmt);
-//     }
-//     return false;
-// }
 
-//  public ArrayList<Book> recommendBook(String genre) {
-//
-//      PreparedStatement pstmt = DBConnManager.getInstance().getPreparedStatement(
-//              "select b_name, writer, origin_price, summary from book where genre=?");
-//      ArrayList<Book> bookList = new ArrayList<>();
-//      ResultSet rs = null;
-//
-//      try {
-//          pstmt.setString(1, genre);
-//          rs = pstmt.executeQuery();
-//          if(rs.next()) {
-//              Book b = new Book(
-//                      rs.getString("b_name"),
-//                      rs.getString("writer"),
-//                      rs.getInt("origin_price"),
-//                      rs.getString("summary"));
-//              bookList.add(b);
-//          }
-//      } catch (SQLException e) {
-//          e.printStackTrace();
-//      } finally {
-//          DBConnManager.close(rs);
-//          DBConnManager.close(pstmt);
-//      }
-//      return bookList;
-//  }//recommendBook
-    
-//    public boolean selectDuplicatedIsbn(String isbn) {
-//        PreparedStatement pstmt = DBConnManager.getInstance().getPreparedStatement(
-//                "select count(*) count from book where isbn=?");
-//        ResultSet rs = null;
-//        try {
-//            pstmt.setString(1,isbn);
-//            rs = pstmt.executeQuery();
-//            rs.next();
-//            int count = rs.getInt("count");
-//            if(count==1) return true;
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        } finally {
-//            DBConnManager.close(rs);
-//            DBConnManager.close(pstmt);
-//        }
-//        return false;
-//    }//selectDuplicatedIsbn
+
+
+    //  public boolean updatePrent(Book b) {
+    //
+    //     PreparedStatement pstmt = DBConnManager.getInstance().getPreparedStatement("update book set p_rent=?"
+    //                 +"where isbn=?");
+    //     try {
+    //         pstmt.setInt(1, b.getPrent() + 1);
+    //         pstmt.setInt(2, b.getIsbn());
+    //         pstmt.executeUpdate();
+    //         return true;
+    //     } catch (SQLException e) {
+    //         e.printStackTrace();
+    //     } finally {
+    //         DBConnManager.close(pstmt);
+    //     }
+    //     return false;
+    // }
+
+    //  public ArrayList<Book> recommendBook(String genre) {
+    //
+    //      PreparedStatement pstmt = DBConnManager.getInstance().getPreparedStatement(
+    //              "select b_name, writer, origin_price, summary from book where genre=?");
+    //      ArrayList<Book> bookList = new ArrayList<>();
+    //      ResultSet rs = null;
+    //
+    //      try {
+    //          pstmt.setString(1, genre);
+    //          rs = pstmt.executeQuery();
+    //          if(rs.next()) {
+    //              Book b = new Book(
+    //                      rs.getString("b_name"),
+    //                      rs.getString("writer"),
+    //                      rs.getInt("origin_price"),
+    //                      rs.getString("summary"));
+    //              bookList.add(b);
+    //          }
+    //      } catch (SQLException e) {
+    //          e.printStackTrace();
+    //      } finally {
+    //          DBConnManager.close(rs);
+    //          DBConnManager.close(pstmt);
+    //      }
+    //      return bookList;
+    //  }//recommendBook
+
+    //    public boolean selectDuplicatedIsbn(String isbn) {
+    //        PreparedStatement pstmt = DBConnManager.getInstance().getPreparedStatement(
+    //                "select count(*) count from book where isbn=?");
+    //        ResultSet rs = null;
+    //        try {
+    //            pstmt.setString(1,isbn);
+    //            rs = pstmt.executeQuery();
+    //            rs.next();
+    //            int count = rs.getInt("count");
+    //            if(count==1) return true;
+    //        } catch (SQLException e) {
+    //            e.printStackTrace();
+    //        } finally {
+    //            DBConnManager.close(rs);
+    //            DBConnManager.close(pstmt);
+    //        }
+    //        return false;
+    //    }//selectDuplicatedIsbn
 
 
 }
