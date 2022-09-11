@@ -15,9 +15,10 @@ import javax.swing.table.DefaultTableModel;
 
 import model.vo.Member;
 import view.quiz.AddQuizView;
+import view.View;
 import view.book.AddBookView;
 
-public class AdminView extends JFrame {
+public class AdminView extends View {
     DefaultTableModel dtm, dtm2;
     public JTable table, table2;
     JLabel labelMember, labelBook;
@@ -102,8 +103,6 @@ public class AdminView extends JFrame {
         add(btnDeleteBook);
         add(sp2);
         add(labelBook);
-        
-//        add(btnAddBook);
         add(btnAddQuiz);
         
         add(btnBack);
