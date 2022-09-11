@@ -10,8 +10,8 @@ public class AdminController extends Controller {
     
     AdminView view;
 
-    protected AdminController(Controller controller, Class viewClass, String[] args) {
-        super(controller, viewClass, args);
+    public AdminController(Controller controller) {
+        super(controller, AdminView.class);
     }
 
     @Override

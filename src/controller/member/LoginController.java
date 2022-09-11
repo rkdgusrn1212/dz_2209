@@ -2,6 +2,7 @@ package controller.member;
 
 import java.awt.event.ActionEvent;
 import controller.Controller;
+import controller.admin.AdminController;
 import controller.book.BookSelectController;
 import model.dao.MemberDAO;
 import view.View;
@@ -27,25 +28,14 @@ public class LoginController extends Controller{
             String pass = new String(viewLogin.tfPwd.getPassword());
             if (id.equals("admin") && pass.equals("manager")) {// 1-1 관리자 로그인
                 viewLogin.showMsg("관리자 로그인 성공!!");
-                //viewLogin.setVisible(false);
-                //viewAdmin.setVisible(true);
+                new AdminController(null);
                 return;
             }
 
             if ((new MemberDAO().loginCheck(id, pass))) { // 1.로그인 성공!
                 viewLogin.showMsg(id + "님 환영합니다 ^_^");
-                //viewBookSelect.labelId.setText(id + "님");
-                /*
-                 * list = new BookDAO().recommendBook(new MemberDAO().selectGenre(id));
-                 *
-                 * Random random = new Random(); for(int i=0; i<3 ;i++) { // 랜덤한 함수 필요 !! int
-                 * ranNum = random.nextInt(list.size())+1; Book book = list.get(ranNum);
-                 *
-                 * v_bookselect.v_bc[i].la_name.setText(book.getBname()); }
-                 */
                 new BookSelectController(null, id);
-                viewLogin.dispose();
-                //viewLogin.dispatchEvent(new WindowEvent(viewLogin, WindowEvent.WINDOW_CLOSING));
+                finish();
             } else {
                 viewLogin.showMsg("아이디 또는 비밀번호를 확인해주세요!");
                 viewLogin.tfId.setText("");
