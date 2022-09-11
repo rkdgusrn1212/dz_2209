@@ -4,6 +4,7 @@ package view.member;
 import java.awt.Font;
 
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
@@ -17,6 +18,7 @@ public class LoginView extends View
     public JPasswordField tfPwd;
     public JButton btnLogin,btnJoin;
     public JButton btnFindIdPw;
+    public JCheckBox adminCheckBox;
     JLabel labelId, labelPass;
 
     public LoginView(){
@@ -31,7 +33,7 @@ public class LoginView extends View
 
         labelId = new JLabel("I  D");
         labelPass = new JLabel("Password");
-        
+        adminCheckBox = new JCheckBox("관리자로 로그인");
 
         tfId.setBounds(120,40,200,35);
         tfPwd.setBounds(120,100,200,35);
@@ -40,6 +42,7 @@ public class LoginView extends View
         btnFindIdPw.setBounds(270,170,180,35);
         labelId.setBounds(20,43,80,25);
         labelPass.setBounds(20,105,105,25);
+        adminCheckBox.setBounds(20,135,150,25);
         
         // 폰트 생성
         Font font=new Font("맑은고딕", Font.BOLD, 16);
@@ -59,6 +62,7 @@ public class LoginView extends View
         add(btnFindIdPw);
         add(labelId);
         add(labelPass);
+        add(adminCheckBox);
 
         setBounds(700,400,480,270);
         setResizable(false);
