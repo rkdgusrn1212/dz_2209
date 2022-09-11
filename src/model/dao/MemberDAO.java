@@ -260,14 +260,31 @@ public class MemberDAO {
         return false;
     }
 
-    public boolean dupliCheck(String checkStr) {
-        String sql;
-        if(checkStr.contains("@")) {
-            sql = "select count(*) as count from member where email=?";              
-        }else {
-            sql = "select count(*) as count from member where id=?";
+    public boolean isIdExist(String checkStr) {
+        
+        PreparedStatement pstmt = DBConnManager.getInstance().getPreparedStatement(
+                "select count(*) as count from member where id=?");
+        ResultSet rs = null;
+        try {
+            pstmt.setString(1, checkStr);
+            rs = pstmt.executeQuery();
+            rs.next();
+
+            int t = rs.getInt("count");
+            if(t>0) return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBConnManager.close(rs);
+            DBConnManager.close(pstmt);
         }
-        PreparedStatement pstmt = DBConnManager.getInstance().getPreparedStatement(sql);
+        return false;
+    }
+    
+public boolean isEmailExist(String checkStr) {
+        
+        PreparedStatement pstmt = DBConnManager.getInstance().getPreparedStatement(
+                "select count(*) as count from member where email=?");
         ResultSet rs = null;
         try {
             pstmt.setString(1, checkStr);

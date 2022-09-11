@@ -17,7 +17,7 @@ public class JoinView extends View
 {
     public JTextField tfId,tfName,tfEmail;
     public JPasswordField tfPwd,tfPwdConfirm;
-    public JButton btnSubmit,btnReset,btnCheckId;
+    public JButton btnSubmit,btnReset,btnCheckId, btnValidEmail;
     JLabel labelId,labelPwd,labelPwd2,labelName,labelEmail, labelInterestCategory;
     public JComboBox<String> cbInterestCategory;
     String items[] = {"종류", "철학, 심리학, 윤리학", "종교", "사회과학", "순수과학", "기술과학", "예술", "어학", "문학", "역사, 지리, 관광"};
@@ -41,6 +41,7 @@ public class JoinView extends View
         labelPwd2 = new JLabel("번호재확인");
         labelName = new JLabel("이  름");
         labelEmail = new JLabel("이메일"); 
+        btnValidEmail = new JButton("이메일 인증");
         labelInterestCategory = new JLabel("관심 분야");
 
         //setBounds 
@@ -49,16 +50,17 @@ public class JoinView extends View
         tfPwdConfirm.setBounds(160,170,230,35);
         tfName.setBounds(160,220,230,35);
         tfEmail.setBounds(160,270,230,35);
-        cbInterestCategory.setBounds(160,330,100,35);
+        btnValidEmail.setBounds(160,310 ,230, 35);
+        cbInterestCategory.setBounds(160,360,100,35);
         btnCheckId.setBounds(160,70,230,35); 
-        btnSubmit.setBounds(50,400,160,35);
-        btnReset.setBounds(260,400,160,35);
+        btnSubmit.setBounds(50,430,160,35);
+        btnReset.setBounds(260,430,160,35);
         labelId.setBounds(50,35,100,25);
         labelPwd.setBounds(50,125,100,25);
         labelPwd2.setBounds(50,175,100,25);
         labelName.setBounds(50,225,100,25);
         labelEmail.setBounds(50, 275, 100, 25);
-        labelInterestCategory.setBounds(50, 330, 100, 25);
+        labelInterestCategory.setBounds(50, 370, 100, 25);
         
         // 폰트 생성
         Font font=new Font("맑은고딕", Font.BOLD, 16);
@@ -90,6 +92,7 @@ public class JoinView extends View
         add(btnSubmit);
         add(btnReset);
         add(btnCheckId);
+        add(btnValidEmail);
         add(labelId); 
         add(labelPwd); 
         add(labelPwd2); 
@@ -97,7 +100,7 @@ public class JoinView extends View
         add(labelEmail);
         add(labelInterestCategory);
 
-        setBounds(700,250,480,510); 
+        setBounds(700,250,480,540); 
         
     }// 팝업 생성자  
     public void showMsg(String msg) {
