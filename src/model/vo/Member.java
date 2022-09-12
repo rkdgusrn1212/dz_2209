@@ -5,7 +5,6 @@ public class Member {
 	private String pwd;
 	private String name;
 	private String email;
-	private int point;
 	private int cash;
 	private int interestCategery;
 	
@@ -14,21 +13,19 @@ public class Member {
 	}
 
 	//selectPayBook
-	public Member(String id, int point, int cash) {
+	public Member(String id, int cash) {
         this.name = id;
-        this.point = point;
         this.cash = cash;
   	}	//selectPayBook
 
 
-	public Member(String id, String pass, String ename, String email, int point, int cash, int interestCategory,
+	public Member(String id, String pass, String ename, String email, int cash, int interestCategory,
 			String passQ, String passA) {
 		super();
 		this.id = id;
 		this.pwd = pass;
 		this.name = ename;
 		this.email = email;
-		this.point = point;
 		this.cash = cash;
 		this.interestCategery = interestCategory;
 	}
@@ -67,13 +64,6 @@ public class Member {
 		this.email = email;
 	}
 
-	public int getPoint() {
-		return point;
-	}
-
-	public void setPoint(int point) {
-		this.point = point;
-	}
 
 	public int getCash() {
 		return cash;
@@ -94,7 +84,7 @@ public class Member {
 	@Override
 	public String toString() {
 		return "Member [id=" + id + ", pwd=" + pwd + ", name=" + name + ", email=" + email +", interest_category=" + interestCategery
-				+ ", point=" + point + ", cash=" + cash  + "]";
+				+  ", cash=" + cash  + "]";
 	}
 
 
