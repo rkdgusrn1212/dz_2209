@@ -33,9 +33,9 @@ public class BookSelectController extends Controller {
         if (s == viewBookSelect.btnLogout) {
             finish();
             new LoginController(null);
-        }else if (s == viewBookSelect.btnMyPage) {// 마이페이지로 이동
+        }else if (s == viewBookSelect.btnMyPage) {
             new MyPageController(this, getArgs(0));
-        }else if(s==viewBookSelect.btnAllList) {
+        }else if(s==viewBookSelect.btnAllList) {  
             new BookListController(this);
         }else if(s==viewBookSelect.btnAdd) {
             new AddBookController(this);
@@ -45,8 +45,8 @@ public class BookSelectController extends Controller {
             new BookController(this);
         }else if(s==viewBookSelect.btnPick3) {
             new BookController(this);
-        }else if(s==viewBookSelect.btnQuiz) {
-            new QuizController(this, getArgs(0));
+        }else if(s==viewBookSelect.btnSearch) {
+        	new BookListController(this);
         }
     }
     
@@ -61,7 +61,7 @@ public class BookSelectController extends Controller {
         viewBookSelect.btnPick1.addActionListener(this);
         viewBookSelect.btnPick2.addActionListener(this);
         viewBookSelect.btnPick3.addActionListener(this);
-        viewBookSelect.btnQuiz.addActionListener(this);
+        viewBookSelect.btnSearch.addActionListener(this);
         for (int i = 0; i < viewBookSelect.viewBookClick.length; i++) {
             viewBookSelect.viewBookClick[i].tglBtnImage.addItemListener(new BSCItemListener(
                     viewBookSelect.viewBookClick[i].taContent));
