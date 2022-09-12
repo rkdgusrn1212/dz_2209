@@ -66,7 +66,7 @@ public class BookListView extends View{
              
            for(int i=0; i< list.size(); i++) {
            Book b = list.get(i);
-           Object rowData[]= {b.getBname(),b.getWriter(),b.getCategory(),b.getPrent()};
+           Object rowData[]= {b.getBname(),b.getWriter(),b.getCategory()};
            dtm.addRow(rowData);
            }//for
         }  

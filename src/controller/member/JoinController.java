@@ -74,7 +74,7 @@ public class JoinController extends Controller{
             }else {
                 viewJoin.tfEmail.setEditable(false);
                 String randomCode = new RandomCodeGenerator().getRandomCode(12);
-                MailSenderClient.getInstance().sendMessage(email, "[두부북쉐어] 이메일 인증 코드입니다.", "다음 12자리 인증코드를 회원가입창에 입력사에요. ["+randomCode+"]");
+                MailSenderClient.getInstance().sendMessage(email, "[두부북쉐어] 이메일 인증 코드입니다.", "다음 12자리 인증코드를 회원가입창에 입력하세요. ["+randomCode+"]");
                 String respondCode = JOptionPane.showInputDialog(viewJoin, 
                         "이메일 인증코드가 "+email+"로 전송되었습니다.\n전송받은 이메일 인증코드를 아래에 입력하세요.");
             

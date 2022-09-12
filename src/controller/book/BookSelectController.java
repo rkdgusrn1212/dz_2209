@@ -5,8 +5,12 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JTextArea;
 
 import controller.Controller;
@@ -15,6 +19,7 @@ import controller.member.MyPageController;
 import controller.quiz.QuizController;
 import model.dao.BookDAO;
 import model.vo.Book;
+import util.ImageHelper;
 import view.View;
 import view.book.BookClickView;
 import view.book.BookSelectView;
@@ -74,9 +79,20 @@ public class BookSelectController extends Controller {
         ArrayList<Book> list = new BookDAO().selectBookWithMemberIdWithRowNum(getArgs(0), 3);
         for(int i=0 ;i<list.size(); i++) {
             Book book = list.get(i);
-            viewBookSelect.viewBookClick[i].labelName.setText(book.getBname());
-            viewBookSelect.viewBookClick[i].labelWriter.setText(book.getWriter());
-            viewBookSelect.viewBookClick[i].labelPrice.setText(book.getOriginPrice()+"₩");
+            BookClickView view = viewBookSelect.viewBookClick[i];
+            if(book.getImg()!=null) {
+                view.tglBtnImage.setIcon(ImageHelper.getFitImageIcon(view.tglBtnImage, book.getImg()));
+            }else {
+                try {
+                    view.tglBtnImage.setIcon(ImageHelper.getFitImageIcon(view.tglBtnImage, ImageIO.read(new File("asset/no_image.jpg"))));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            
+            view.labelName.setText(book.getBname());
+            view.labelWriter.setText(book.getWriter());
+            view.labelPrice.setText(book.getOriginPrice()+"₩");
         }
     }
     

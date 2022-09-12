@@ -7,6 +7,8 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JToggleButton;
 
+import util.ImageHelper;
+
 public class BookClickView extends JPanel {
     public JToggleButton tglBtnImage;
     public JLabel labelName, labelWriter, labelPrice;
@@ -15,14 +17,16 @@ public class BookClickView extends JPanel {
         setLayout(null);
         
         //new
-        tglBtnImage = new JToggleButton(new ImageIcon("asset/dooboo.jpg"));
+        int btnWidth = 142;
+        int btnHeight = 200;
+        tglBtnImage = new JToggleButton();
         labelName = new JLabel("도서명");
         labelWriter = new JLabel("저자명");
         taContent = new JTextArea("간단줄거리");
         labelPrice = new JLabel("가격");
         
         //setBounds
-        tglBtnImage.setBounds(25, 100, 200, 200);
+        tglBtnImage.setBounds(25, 100, btnWidth, btnHeight);
         labelName.setBounds(25, 320, 80, 30);
         labelWriter.setBounds(25, 370, 80, 30);
         labelPrice.setBounds(25, 420, 80, 30);
@@ -47,8 +51,4 @@ public class BookClickView extends JPanel {
         //메인 창 출력 위치
         setSize(250,500);
     }
-    public static void main(String[] args) {
-        new BookClickView().setVisible(true);
-    }
-    
 }

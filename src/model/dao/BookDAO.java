@@ -1,31 +1,49 @@
 package model.dao;
 
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.sql.Blob;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-
+import javax.imageio.ImageIO;
 
 import db.util.DBConnManager;
 import model.vo.Book;
 
 public class BookDAO {
 
-    //addbookview와 mypage에 활용
-    public boolean insertBook(Book b) {
+    public boolean insertBook(String isbn, int category, String bName, String writer, int price, String summary, BufferedImage image) {
 
         PreparedStatement pstmt = DBConnManager.getInstance().getPreparedStatement(
-                "insert into book (book_id, isbn, category,b_name,writer,p_rent,origin_price,summary) values(?,?,?,?,?,?,?)");
+                "insert into book values(book_id.nextVal,?,?,?,?,?,?,?)");
         try {
-            pstmt.setString(1, b.getIsbn());
-            pstmt.setString(2, b.getIsbn());
-            pstmt.setInt(3, b.getCategory());
-            pstmt.setString(4, b.getBname());
-            pstmt.setString(5, b.getWriter());			  
-            pstmt.setInt(6, 0);
-            pstmt.setInt(7, b.getOriginPrice());
-            pstmt.setString(8, b.getSummary());
+            pstmt.setString(1, isbn);
+            pstmt.setInt(2, category);
+            pstmt.setString(3, bName);
+            pstmt.setString(4, writer);
+            pstmt.setInt(5, price);
+            pstmt.setString(6, summary);
+            try {
+                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                ImageIO.write(image, "png", baos);
+                ByteArrayInputStream is = new ByteArrayInputStream(baos.toByteArray());
+                pstmt.setBinaryStream(7, is);
+                System.out.println("이미지 성공");
+            } catch (IOException e1) {
+                System.out.println("이미지 실패");
+                pstmt.setNull(7, java.sql.Types.BLOB);
+                e1.printStackTrace();
+            }
             pstmt.executeUpdate();
             return true;
         } catch (SQLException e) {
@@ -38,7 +56,7 @@ public class BookDAO {
 
 
     //mypage에서 사용
-    public boolean deleteBook(int bookId) {
+    /*public boolean deleteBook(int bookId) {
 
         PreparedStatement pstmt = DBConnManager.getInstance().getPreparedStatement("delete from book where book_id =?");
         try {
@@ -136,7 +154,7 @@ public class BookDAO {
             DBConnManager.close(pstmt);
         }
         return b;
-    }//SelectSearchBook
+    }*///SelectSearchBook
 
     public ArrayList<Book> selectBookWithMemberIdWithRowNum(String id, int rowNum) {
 
@@ -151,16 +169,24 @@ public class BookDAO {
             pstmt.setInt(2, rowNum);
             rs = pstmt.executeQuery();
             while(rs.next()) {
+                InputStream imageStream = rs.getBinaryStream(8);
+                Image image = null;
+                if(imageStream != null) {
+                   try {
+                       image = ImageIO.read(imageStream);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
                 b = new Book(
                         rs.getInt(1),//book_id
                         rs.getString(2),//isbn
                         rs.getInt(3),//cat
                         rs.getString(4),//b_name
                         rs.getString(5),//wri
-                        rs.getInt(6),//prent
-                        rs.getInt(7),//price
-                        rs.getString(8),
-                        rs.getURL(9));
+                        rs.getInt(6),//price
+                        rs.getString(7),//summ
+                        image);//Image
                 list.add(b);
             }
         } catch (SQLException e) {
