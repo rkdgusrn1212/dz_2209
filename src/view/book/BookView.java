@@ -15,7 +15,7 @@ public class BookView extends View{
     public JTextField tfName, tfWriter, tfPrice;
     public JScrollPane spSummary;
     public JTextArea taSummary;
-    public JButton btnBack, btnPay;
+    public JButton btnBack, btnPay, btnUpdate, btnDelete;
     
 //    JTable table; //검색과 전체 보기를 위한 테이블 객체 생성
     public BookView() {
@@ -29,7 +29,11 @@ public class BookView extends View{
         labelWriter = new JLabel("저자명");
         labelPrice = new JLabel("원가");
         labelSummary = new JLabel("줄거리");
-        btnBack = new JButton("뒤로 가기");
+        btnBack = new JButton("이전");
+        btnUpdate = new JButton("수정");
+        btnUpdate.setVisible(false);//기본은 꺼둠. 오직 등록자만이 볼수 있음.
+        btnDelete = new JButton("삭제");
+        btnDelete.setVisible(false);//기본은 꺼둠. 오직 등록자만이 볼수 있음.
         btnPay = new JButton("결제");
         tfName = new JTextField();
         tfName.setFocusable(false);
@@ -42,7 +46,9 @@ public class BookView extends View{
         taSummary.setFocusable(false);
         
         // setBounds
-        btnBack.setBounds(680, 20, 130, 35);
+        btnUpdate.setBounds(600, 20, 65, 35);
+        btnDelete.setBounds(670, 20, 65, 35);
+        btnBack.setBounds(740, 20, 65, 35);
         btnPay.setBounds(830, 20, 130, 35);
         labelViewTitle.setBounds(400, 12, 200, 35);
         labelName.setBounds(40, 120, 105, 35);
@@ -56,7 +62,10 @@ public class BookView extends View{
         labelImage.setBounds(570, 90, 353, 500);
         
         Font font=new Font("맑은고딕", Font.BOLD, 16);
-        btnBack.setFont(font);
+        Font fontSmall=new Font("맑은고딕", Font.BOLD, 14);
+        btnUpdate.setFont(fontSmall);
+        btnDelete.setFont(fontSmall);
+        btnBack.setFont(fontSmall);
         btnPay.setFont(font);
         labelName.setFont(font);
         labelPrice.setFont(font);
@@ -70,6 +79,8 @@ public class BookView extends View{
         add(labelViewTitle);
         add(btnBack);
         add(btnPay);
+        add(btnUpdate);
+        add(btnDelete);
         add(labelName);
         add(labelWriter);
         add(labelPrice);

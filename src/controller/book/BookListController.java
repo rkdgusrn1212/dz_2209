@@ -17,7 +17,7 @@ public class BookListController extends Controller implements MouseListener{
     private BookTableModel tableModel;
 
     //filter가 null이면 그냥 전체조회.
-    protected BookListController(Controller controller, String id, String filter, String keyword) {
+    public BookListController(Controller controller, String id, String filter, String keyword) {
         super(controller, BookListView.class, id, filter, keyword);
     }
 
@@ -56,7 +56,9 @@ public class BookListController extends Controller implements MouseListener{
             case "ISBN":
                 list = new BookDAO().selectWithIsbn(keyword);
                 break;
-
+            case "등록자":
+                list = new BookDAO().selectWithRegisterId(keyword);
+                break;
             }
         }
         tableModel.update(list);

@@ -2,6 +2,7 @@ package controller.member;
 
 import java.awt.event.ActionEvent;
 import controller.Controller;
+import controller.book.BookListController;
 import model.dao.MemberDAO;
 import model.vo.Member;
 import view.View;
@@ -21,12 +22,12 @@ public class MyPageController extends Controller {
         if (s == viewMyPage.btnBack) {
             finish();
         } else if (s == viewMyPage.btnLogout) {
-            viewMyPage.setVisible(false);
-           // viewLogin.setVisible(true);
+            new LoginController(null);
+            finish();
         } else if (s == viewMyPage.btnUpdate) {
             new MemberUpdateController(this, getArgs(0));
         }else if (s == viewMyPage.btnEditBook) {
-        	
+        	new BookListController(this, getArgs(0), "등록자", getArgs(0));
         }else if (s == viewMyPage.btnCash) {
         	new CashController(this, getArgs(0));
         }

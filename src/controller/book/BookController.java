@@ -3,6 +3,8 @@ package controller.book;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 
+import javax.swing.JOptionPane;
+
 import controller.Controller;
 import controller.ImageHelper;
 import model.dao.BookDAO;
@@ -25,6 +27,15 @@ public class BookController extends Controller {
             finish();
         }else if(s==viewBook.btnPay) {
         	new BookPayController(this);
+        }else if(s == viewBook.btnUpdate) {
+            new AddBookController(this, getArgs(0));
+        }else if(s==viewBook.btnDelete) {
+            if(new BookDAO().deleteBook(Integer.parseInt(getArgs(0)))) {
+                JOptionPane.showMessageDialog(viewBook,"등록된 도서가 삭제되었습니다.");
+                finish();
+            }else {
+                JOptionPane.showMessageDialog(viewBook,"도서 삭제 실패!");
+            }
         }
     }
 
@@ -33,12 +44,18 @@ public class BookController extends Controller {
         viewBook = (BookView) windowView;
         viewBook.btnBack.addActionListener(this);
         viewBook.btnPay.addActionListener(this);
+        viewBook.btnUpdate.addActionListener(this);
+        viewBook.btnDelete.addActionListener(this);
     }
     
     @Override
     protected void resume() {
         super.resume();
         Book book = new BookDAO().selectBookWithId(Integer.parseInt(getArgs(0)));
+        if(book==null) {
+            JOptionPane.showMessageDialog(viewBook,"도서 정보 쿼리 실패!");
+            finish();
+        }
         viewBook.tfName.setText(book.getBname());
         viewBook.tfWriter.setText(book.getWriter());
         viewBook.tfPrice.setText(book.getPrice()+"₩");
@@ -50,6 +67,14 @@ public class BookController extends Controller {
             viewBook.labelImage.setIcon(ImageHelper.getDefaultImageIcon(
                     viewBook.labelImage.getBounds().width, 
                     viewBook.labelImage.getBounds().height));
+        }
+        //등록자가 본인일때
+        if(book.getRegisterId().equals(getArgs(1))) {
+            viewBook.btnUpdate.setVisible(true);
+            viewBook.btnDelete.setVisible(true);
+        }else {//아닐때
+            viewBook.btnUpdate.setVisible(false);
+            viewBook.btnDelete.setVisible(false);
         }
     }
 

@@ -57,14 +57,14 @@ public class BookDAO {
     }//InsertBook
 
 
-    //mypage에서 사용
+   
     public boolean deleteBook(int bookId) {
 
         PreparedStatement pstmt = DBConnManager.getInstance().getPreparedStatement("delete from book where book_id =?");
         try {
             pstmt.setInt(1, bookId);
             int t = pstmt.executeUpdate();
-            if(t == 1) {
+            if(t >0) {
                 return true;
             }
         } catch (SQLException e) {
@@ -85,6 +85,36 @@ public class BookDAO {
         ArrayList<Book> list = new ArrayList<>();
         try {
             pstmt.setInt(1, Integer.parseInt(isbn));
+            rs = pstmt.executeQuery();
+            while(rs.next()) {
+                list.add(new Book(
+                        rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getInt(4),
+                        rs.getString(5)));
+                bookList.add(b);
+            }
+            return list;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBConnManager.close(rs);
+            DBConnManager.close(pstmt);
+        }
+        return list;
+    }
+    
+    public ArrayList<Book> selectWithRegisterId(String rId) {
+
+        PreparedStatement pstmt = DBConnManager.getInstance().getPreparedStatement(
+                "select book_id, b_name, writer, category, lend_id from book where register_id = ?");
+        ArrayList<Book> bookList = new ArrayList<>();
+        ResultSet rs = null;
+        Book b = null;
+        ArrayList<Book> list = new ArrayList<>();
+        try {
+            pstmt.setString(1, rId);
             rs = pstmt.executeQuery();
             while(rs.next()) {
                 list.add(new Book(
