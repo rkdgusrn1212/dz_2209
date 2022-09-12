@@ -8,18 +8,21 @@ import isbn.ISBN;
 import model.vo.Book;
 
 public class BookTableModel extends AbstractTableModel {
-    
+
 
     private ArrayList<Book> bookList = new ArrayList<>();//오로지 제목, 저자, 카테고리, 대여여부만 가진다.
-    
+
     public void update(ArrayList<Book> book) {
         bookList = (ArrayList<Book>) book.clone();//이후 book의 수정에 독립적. 
     }
-    
+
     public Book getBook(int idx) {
-        return bookList.get(idx);
+        if(idx<getRowCount()) {
+            return bookList.get(idx);
+        }
+        return null;
     }
-    
+
     @Override
     public int getRowCount() {
         return bookList.size();
@@ -62,5 +65,5 @@ public class BookTableModel extends AbstractTableModel {
         }
         return super.getColumnName(column);
     }
-    
+
 }

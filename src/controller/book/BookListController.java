@@ -3,9 +3,11 @@ package controller.book;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
 
 import controller.Controller;
 import model.dao.BookDAO;
+import model.vo.Book;
 import view.View;
 import view.book.BookListView;
 
@@ -31,40 +33,65 @@ public class BookListController extends Controller implements MouseListener{
         viewBookList.table.setModel(tableModel = new BookTableModel());
         viewBookList.table.addMouseListener(this);
     }
-    
+
     @Override
     protected void resume(){
         super.resume();
-        tableModel.update(new BookDAO().selectAllBook());
+        String filter = getArgs(1);
+        String keyword = getArgs(2);
+        ArrayList<Book> list = null;
+        if(filter == null) {
+            list = new BookDAO().selectAll();
+        }else {
+            switch(filter) {
+            case "도서명":
+                list = new BookDAO().selectWithBName(keyword);
+                break;
+            case "저자명":
+                list = new BookDAO().selectWithWriter(keyword);
+                break;
+            case "분류":
+                list = new BookDAO().selectWithCategory(keyword);
+                break;
+            case "ISBN":
+                list = new BookDAO().selectWithIsbn(keyword);
+                break;
+
+            }
+        }
+        tableModel.update(list);
         viewBookList.table.updateUI();
     }
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        new BookController(this, tableModel.getBook(viewBookList.table.getSelectedRow()).getBookId(), getArgs(0));
+        Book book = tableModel.getBook(viewBookList.table.getSelectedRow());
+        if(book!=null) {
+            new BookController(this, book.getBookId(), getArgs(0));   
+        }
     }
 
     @Override
     public void mousePressed(MouseEvent e) {
         // TODO Auto-generated method stub
-        
+
     }
 
     @Override
     public void mouseReleased(MouseEvent e) {
         // TODO Auto-generated method stub
-        
+
     }
 
     @Override
     public void mouseEntered(MouseEvent e) {
         // TODO Auto-generated method stub
-        
+
     }
 
     @Override
     public void mouseExited(MouseEvent e) {
         // TODO Auto-generated method stub
-        
+
     }
 }

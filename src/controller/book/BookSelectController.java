@@ -47,7 +47,7 @@ public class BookSelectController extends Controller {
         }else if(s==viewBookSelect.btnAdd) {
             new AddBookController(this, getArgs(0));
         }else if(s==viewBookSelect.btnSearch) {
-        	//new BookListController(this, getArgs(0), viewBookSelect.cbSearchBook.getSelectedIndex(), null);
+        	new BookListController(this, getArgs(0), viewBookSelect.cbSearchBook.getSelectedItem().toString(), viewBookSelect.tfSearch.getText());
         }
     }
     

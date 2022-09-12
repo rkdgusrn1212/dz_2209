@@ -58,7 +58,7 @@ public class BookDAO {
 
 
     //mypage에서 사용
-    /*public boolean deleteBook(int bookId) {
+    public boolean deleteBook(int bookId) {
 
         PreparedStatement pstmt = DBConnManager.getInstance().getPreparedStatement("delete from book where book_id =?");
         try {
@@ -74,37 +74,128 @@ public class BookDAO {
         }
         return false;
     }//DeleteBook
-
-    //도서검색 조회  => booksearchview
-    public Book selectSearchBook(String bName) {
+    
+    public ArrayList<Book> selectWithIsbn(String isbn) {
 
         PreparedStatement pstmt = DBConnManager.getInstance().getPreparedStatement(
-                "select b_name, writer,category, p_rent from book where bname  like '%' || ? || '%'");
+                "select book_id, b_name, writer, category, lend_id from book where writer isbn = ?");
+        ArrayList<Book> bookList = new ArrayList<>();
         ResultSet rs = null;
         Book b = null;
-
+        ArrayList<Book> list = new ArrayList<>();
         try {
-            pstmt.setString(1, bName);
+            pstmt.setInt(1, Integer.parseInt(isbn));
             rs = pstmt.executeQuery();
-            if(rs.next()) {
-                b = new Book(
-                        rs.getString("b_name"),
-                        rs.getString("writer"),
-                        rs.getInt("category"),
-                        rs.getInt("p_rent"));
+            while(rs.next()) {
+                list.add(new Book(
+                        rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getInt(4),
+                        rs.getString(5)));
+                bookList.add(b);
             }
+            return list;
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
             DBConnManager.close(rs);
             DBConnManager.close(pstmt);
         }
-        return b;
-    }//SelectSearchBook
-*/
+        return list;
+    }
+    
+    public ArrayList<Book> selectWithWriter(String writer) {
+
+        PreparedStatement pstmt = DBConnManager.getInstance().getPreparedStatement(
+                "select book_id, b_name, writer, category, lend_id from book where writer like '%'||?||'%'");
+        ArrayList<Book> bookList = new ArrayList<>();
+        ResultSet rs = null;
+        Book b = null;
+        ArrayList<Book> list = new ArrayList<>();
+        try {
+            pstmt.setString(1, writer);
+            rs = pstmt.executeQuery();
+            while(rs.next()) {
+                list.add(new Book(
+                        rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getInt(4),
+                        rs.getString(5)));
+                bookList.add(b);
+            }
+            return list;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBConnManager.close(rs);
+            DBConnManager.close(pstmt);
+        }
+        return list;
+    }
+    public ArrayList<Book> selectWithCategory(String category) {
+
+        PreparedStatement pstmt = DBConnManager.getInstance().getPreparedStatement(
+                "select book_id, b_name, writer, category, lend_id from book where category = ?");
+        ArrayList<Book> bookList = new ArrayList<>();
+        ResultSet rs = null;
+        Book b = null;
+        ArrayList<Book> list = new ArrayList<>();
+        try {
+            pstmt.setString(1, category);
+            rs = pstmt.executeQuery();
+            while(rs.next()) {
+                list.add(new Book(
+                        rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getInt(4),
+                        rs.getString(5)));
+                bookList.add(b);
+            }
+            return list;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBConnManager.close(rs);
+            DBConnManager.close(pstmt);
+        }
+        return list;
+    }
+
+    public ArrayList<Book> selectWithBName(String bName) {
+
+        PreparedStatement pstmt = DBConnManager.getInstance().getPreparedStatement(
+                "select book_id, b_name, writer, category, lend_id from book where b_name like '%'||?||'%'");
+        ArrayList<Book> bookList = new ArrayList<>();
+        ResultSet rs = null;
+        Book b = null;
+        ArrayList<Book> list = new ArrayList<>();
+        try {
+            pstmt.setString(1, bName);
+            rs = pstmt.executeQuery();
+            while(rs.next()) {
+                list.add(new Book(
+                        rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getInt(4),
+                        rs.getString(5)));
+                bookList.add(b);
+            }
+            return list;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBConnManager.close(rs);
+            DBConnManager.close(pstmt);
+        }
+        return list;
+    }
 
     // 도서 전체 리스트 검색 booklistView 실패시 빈 리스트 반환.
-    public ArrayList<Book> selectAllBook() {
+    public ArrayList<Book> selectAll() {
 
         PreparedStatement pstmt = DBConnManager.getInstance().getPreparedStatement(
                 "select book_id, b_name, writer, category, lend_id from book ");
