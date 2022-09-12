@@ -15,6 +15,11 @@ public class BookTableModel extends AbstractTableModel {
     public void update(ArrayList<Book> book) {
         bookList = (ArrayList<Book>) book.clone();//이후 book의 수정에 독립적. 
     }
+    
+    public Book getBook(int idx) {
+        return bookList.get(idx);
+    }
+    
     @Override
     public int getRowCount() {
         return bookList.size();

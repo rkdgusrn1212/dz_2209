@@ -43,11 +43,11 @@ public class BookSelectController extends Controller {
         }else if (s == viewBookSelect.btnMyPage) {
             new MyPageController(this, getArgs(0));
         }else if(s==viewBookSelect.btnAllList) {  
-            new BookListController(this);
+            new BookListController(this, getArgs(0), null, null);
         }else if(s==viewBookSelect.btnAdd) {
             new AddBookController(this, getArgs(0));
         }else if(s==viewBookSelect.btnSearch) {
-        	new BookListController(this);
+        	//new BookListController(this, getArgs(0), viewBookSelect.cbSearchBook.getSelectedIndex(), null);
         }
     }
     
