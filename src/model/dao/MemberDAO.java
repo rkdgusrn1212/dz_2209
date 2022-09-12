@@ -139,21 +139,16 @@ public class MemberDAO {
         return null;
     }
 
-    public ArrayList<Member> selectMember(String id){
+    public Member selectWithId(String id){
         PreparedStatement pstmt = DBConnManager.getInstance().getPreparedStatement(
-                "select name, email,interest_category from member");
+                "select * from member where id = ?");
         ResultSet rs = null;
-        ArrayList<Member> list = new ArrayList<>();
+        Member m = null;
         try {
             pstmt.setString(1, id);
             rs = pstmt.executeQuery();
             if (rs.next()) {
-                Member m  = new Member();
-                m.setId(id);
-                m.setName(rs.getString("name"));
-                m.setEmail(rs.getString("email"));
-                m.setInterestCategory(rs.getInt("interest_category"));
-                list.add(m);
+                m = new Member(rs.getString(1), rs.getString(2),rs.getString(3), rs.getString(4), rs.getInt(5), rs.getInt(6));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -161,7 +156,7 @@ public class MemberDAO {
             DBConnManager.close(rs);
             DBConnManager.close(pstmt);
         }
-        return list;
+        return m;
     }
     
     public String selectIdWithEmail(String email){

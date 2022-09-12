@@ -5,8 +5,8 @@ public class Member {
 	private String pwd;
 	private String name;
 	private String email;
-	private int cash;
 	private int interestCategery;
+    private int cash;
 	
 	public Member() {
 		// TODO Auto-generated constructor stub
@@ -19,15 +19,13 @@ public class Member {
   	}	//selectPayBook
 
 
-	public Member(String id, String pass, String ename, String email, int cash, int interestCategory,
-			String passQ, String passA) {
-		super();
+	public Member(String id, String pass, String ename, String email, int interestCategory, int cash) {
 		this.id = id;
 		this.pwd = pass;
 		this.name = ename;
 		this.email = email;
+        this.interestCategery = interestCategory;
 		this.cash = cash;
-		this.interestCategery = interestCategory;
 	}
 
 	

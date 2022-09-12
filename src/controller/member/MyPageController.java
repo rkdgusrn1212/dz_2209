@@ -24,7 +24,7 @@ public class MyPageController extends Controller {
             viewMyPage.setVisible(false);
            // viewLogin.setVisible(true);
         } else if (s == viewMyPage.btnUpdate) {
-            new PwdUpdateController(this, getArgs(0));
+            new MemberUpdateController(this, getArgs(0));
         }else if (s == viewMyPage.btnEditBook) {
         	
         }else if (s == viewMyPage.btnCash) {
@@ -52,9 +52,6 @@ public class MyPageController extends Controller {
     @Override
     protected void resume() {
         super.resume();
-        model.vo.Member m = new model.dao.MemberDAO().selectMyPage("회원 ID: " +getArgs(0));
-        //viewBookPay.labelId.setText(m.getId());
-        //viewBookPay.labelGrade.setText("회원 등급: "+grade[m.getGrade()-1]);
-        //viewBookPay.labelPoint.setText("회원 포인트: "+m.getPoint()+"P");
+        
     }
 }

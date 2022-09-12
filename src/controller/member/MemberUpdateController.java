@@ -3,19 +3,21 @@ package controller.member;
 import java.awt.event.ActionEvent;
 import java.util.regex.Pattern;
 
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 import controller.Controller;
 import model.dao.MemberDAO;
+import model.vo.Member;
 import view.View;
-import view.member.PwdUpdateView;
+import view.member.MemberUpdateView;
 
-public class PwdUpdateController extends Controller {
+public class MemberUpdateController extends Controller {
     
-    PwdUpdateView pwdUpdateView;
+    MemberUpdateView pwdUpdateView;
 
-    protected PwdUpdateController(Controller controller, String id) {
-        super(controller, PwdUpdateView.class, id);
+    protected MemberUpdateController(Controller controller, String id) {
+        super(controller, MemberUpdateView.class, id);
     }
 
     @Override
@@ -53,9 +55,21 @@ public class PwdUpdateController extends Controller {
 
     @Override
     protected void create(View windowView) {
-        pwdUpdateView = (PwdUpdateView) windowView;
+        pwdUpdateView = (MemberUpdateView) windowView;
         pwdUpdateView.btnReset.addActionListener(this);
         pwdUpdateView.btnSubmit.addActionListener(this);
+    }
+    
+    @Override
+    protected void resume() {
+        Member member = new model.dao.MemberDAO().selectWithId(getArgs(0));
+        if( member==null) {
+            JOptionPane.showMessageDialog(pwdUpdateView,"계정정보 쿼리 실패!");
+            finish();
+        }
+        pwdUpdateView.tfId.setText(member.getId());
+        pwdUpdateView.tfEmail.setText(member.getEmail());
+        pwdUpdateView.tfName.setText(member.getName());
     }
 
     private void showMsgWithResetText(JTextField tf, String msg) {

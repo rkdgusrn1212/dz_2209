@@ -25,7 +25,7 @@ public class BookDAO {
     public boolean insertBook(String isbn, int category, String bName, String writer, int price, String summary, BufferedImage image, String registerId, String lendId) {
 
         PreparedStatement pstmt = DBConnManager.getInstance().getPreparedStatement(
-                "insert into book values(book_id.nextVal,?,?,?,?,?,?,?)");
+                "insert into book values(book_id.nextVal,?,?,?,?,?,?,?,?,?)");
         try {
             pstmt.setString(1, isbn);
             pstmt.setInt(2, category);
