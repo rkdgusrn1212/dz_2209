@@ -9,7 +9,7 @@ public class Book {
     private int category;
     private String bName;
     private String writer;
-    private int originPrice;
+    private int price;
     private String summary;
     private Image img;
     private String registerId;
@@ -23,13 +23,13 @@ public class Book {
         this.lendId = lendId;
     }
     
-    public Book(int bookId, String isbn, int category, String bName, String writer, int originPrice, String summary, Image img, String registerId, String lendId) {
+    public Book(int bookId, String isbn, int category, String bName, String writer, int price, String summary, Image img, String registerId, String lendId) {
         this.bookId =  bookId;
         this.isbn = isbn;
         this.category = category;
         this.bName = bName;
         this.writer = writer;
-        this.originPrice = originPrice;
+        this.price = price;
         this.summary = summary;
         this.img = img;
         this.registerId = registerId;
@@ -73,7 +73,7 @@ public class Book {
     }
 
 
-    public int getOriginPrice() {
-        return originPrice;
+    public int getPrice() {
+        return price;
     }
 }

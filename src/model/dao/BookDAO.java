@@ -159,6 +159,47 @@ public class BookDAO {
         }
         return b;
     }*/
+    
+    public Book selectBookWithId(int bookId) {
+
+        PreparedStatement pstmt = DBConnManager.getInstance().getPreparedStatement(
+                "select * from book where book_id = ?");
+        ResultSet rs = null;
+        Book b = null;
+
+        try {
+            pstmt.setInt(1, bookId);
+            rs = pstmt.executeQuery();
+            if(rs.next()) {
+                InputStream imageStream = rs.getBinaryStream(8);
+                Image image = null;
+                if(imageStream != null) {
+                   try {
+                       image = ImageIO.read(imageStream);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+                b = new Book(
+                        rs.getInt(1),//book_id
+                        rs.getString(2),//isbn
+                        rs.getInt(3),//cat
+                        rs.getString(4),//b_name
+                        rs.getString(5),//wri
+                        rs.getInt(6),//price
+                        rs.getString(7),//summ
+                        image,
+                        rs.getString(9),
+                        rs.getString(10));//reg_id
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBConnManager.close(rs);
+            DBConnManager.close(pstmt);
+        }
+        return b;
+    }
 
     public ArrayList<Book> selectBookWithMemberIdWithRowNum(String id, int rowNum) {
 
@@ -203,70 +244,5 @@ public class BookDAO {
             DBConnManager.close(pstmt);
         }
         return list;
-    }//SelectSearchBook
-
-    //  public boolean updatePrent(Book b) {
-    //
-    //     PreparedStatement pstmt = DBConnManager.getInstance().getPreparedStatement("update book set p_rent=?"
-    //                 +"where isbn=?");
-    //     try {
-    //         pstmt.setInt(1, b.getPrent() + 1);
-    //         pstmt.setInt(2, b.getIsbn());
-    //         pstmt.executeUpdate();
-    //         return true;
-    //     } catch (SQLException e) {
-    //         e.printStackTrace();
-    //     } finally {
-    //         DBConnManager.close(pstmt);
-    //     }
-    //     return false;
-    // }
-
-    //  public ArrayList<Book> recommendBook(String genre) {
-    //
-    //      PreparedStatement pstmt = DBConnManager.getInstance().getPreparedStatement(
-    //              "select b_name, writer, origin_price, summary from book where genre=?");
-    //      ArrayList<Book> bookList = new ArrayList<>();
-    //      ResultSet rs = null;
-    //
-    //      try {
-    //          pstmt.setString(1, genre);
-    //          rs = pstmt.executeQuery();
-    //          if(rs.next()) {
-    //              Book b = new Book(
-    //                      rs.getString("b_name"),
-    //                      rs.getString("writer"),
-    //                      rs.getInt("origin_price"),
-    //                      rs.getString("summary"));
-    //              bookList.add(b);
-    //          }
-    //      } catch (SQLException e) {
-    //          e.printStackTrace();
-    //      } finally {
-    //          DBConnManager.close(rs);
-    //          DBConnManager.close(pstmt);
-    //      }
-    //      return bookList;
-    //  }//recommendBook
-
-    //    public boolean selectDuplicatedIsbn(String isbn) {
-    //        PreparedStatement pstmt = DBConnManager.getInstance().getPreparedStatement(
-    //                "select count(*) count from book where isbn=?");
-    //        ResultSet rs = null;
-    //        try {
-    //            pstmt.setString(1,isbn);
-    //            rs = pstmt.executeQuery();
-    //            rs.next();
-    //            int count = rs.getInt("count");
-    //            if(count==1) return true;
-    //        } catch (SQLException e) {
-    //            e.printStackTrace();
-    //        } finally {
-    //            DBConnManager.close(rs);
-    //            DBConnManager.close(pstmt);
-    //        }
-    //        return false;
-    //    }//selectDuplicatedIsbn
-
-
+    }
 }

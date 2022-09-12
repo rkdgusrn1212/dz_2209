@@ -5,11 +5,16 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
 
 import view.View;
 
 public class BookView extends View{
-    public JLabel labelBook, labelName, labelWriter, labelPrice, labelSummary, labelImage;
+    public JLabel labelViewTitle, labelName, labelWriter, labelPrice, labelSummary, labelImage;
+    public JTextField tfName, tfWriter, tfPrice;
+    public JScrollPane spSummary;
+    public JTextArea taSummary;
     public JButton btnBack, btnPay;
     
 //    JTable table; //검색과 전체 보기를 위한 테이블 객체 생성
@@ -17,35 +22,52 @@ public class BookView extends View{
     	setTitle("도서상세보기");
         setLayout(null);
         labelImage = new JLabel("이미지삽입예정 210*297");
-        labelBook = new JLabel("도서 상세 보기");
+        labelViewTitle = new JLabel("도서 상세");
+        labelViewTitle.setAlignmentX(CENTER_ALIGNMENT);
+        labelViewTitle.setFont(new Font("맑은고딕", Font.BOLD, 32));
         labelName = new JLabel("도서명");
         labelWriter = new JLabel("저자명");
         labelPrice = new JLabel("원가");
         labelSummary = new JLabel("줄거리");
-        btnBack = new JButton("메인페이지");
+        btnBack = new JButton("뒤로 가기");
         btnPay = new JButton("결제");
+        tfName = new JTextField();
+        tfName.setFocusable(false);
+        tfWriter = new JTextField();
+        tfWriter.setFocusable(false);
+        tfPrice = new JTextField();
+        tfPrice.setFocusable(false);
+        spSummary = new JScrollPane(taSummary = new JTextArea());
+        taSummary.setLineWrap(true);
+        taSummary.setFocusable(false);
         
         // setBounds
         btnBack.setBounds(680, 20, 130, 35);
         btnPay.setBounds(830, 20, 130, 35);
-        labelBook.setBounds(450, 12, 105, 35);
+        labelViewTitle.setBounds(400, 12, 200, 35);
         labelName.setBounds(40, 120, 105, 35);
-        labelPrice.setBounds(40, 280, 105, 35);
+        tfName.setBounds(160, 120, 250, 35);
         labelWriter.setBounds(40, 200, 50, 35);
+        tfWriter.setBounds(160, 200, 250, 35);
+        labelPrice.setBounds(40, 280, 105, 35);
+        tfPrice.setBounds(160, 280, 250, 35);
         labelSummary.setBounds(40, 360, 50, 35);
-        labelImage.setBounds(680, 120, 210, 297);
+        spSummary.setBounds(160, 360, 250, 200);
+        labelImage.setBounds(570, 90, 353, 500);
         
         Font font=new Font("맑은고딕", Font.BOLD, 16);
         btnBack.setFont(font);
         btnPay.setFont(font);
-        labelBook.setFont(font);
         labelName.setFont(font);
         labelPrice.setFont(font);
         labelWriter.setFont(font);
         labelSummary.setFont(font);
-        
+        tfName.setFont(font);
+        tfPrice.setFont(font);
+        tfWriter.setFont(font);
+        taSummary.setFont(font);
         //테이블 객체 생성
-        add(labelBook);
+        add(labelViewTitle);
         add(btnBack);
         add(btnPay);
         add(labelName);
@@ -53,6 +75,10 @@ public class BookView extends View{
         add(labelPrice);
         add(labelSummary);
         add(labelImage);
+        add(tfName);
+        add(tfWriter);
+        add(tfPrice);
+        add(spSummary);
         
         setBounds(500,200,1000,700);
         

@@ -82,7 +82,7 @@ public class BookSelectController extends Controller {
             
             view.labelName.setText(book.getBname());
             view.labelWriter.setText(book.getWriter());
-            view.labelPrice.setText(book.getOriginPrice()+"₩");
+            view.labelPrice.setText(book.getPrice()+"₩");
             view.taContent.setText(book.getSummary());
         }
         //데이터가 없으면 남은 칸은 지운다.

@@ -28,7 +28,6 @@ public class BookClickView extends JPanel {
         labelWriter = new JLabel("저자명");
         spContent = new JScrollPane(taContent = new JTextArea("간단줄거리"));
         taContent.setLineWrap(true);
-        spContent.setAutoscrolls(true);
         labelPrice = new JLabel("가격");
         btnPick = new JButton("자세히 보기");
         
