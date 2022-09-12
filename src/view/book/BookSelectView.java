@@ -15,7 +15,7 @@ public class BookSelectView extends View {
     public BookClickView[] viewBookClick;
     public JTextField tfSearch;
     public JComboBox<String> cbSearchBook;
-    String books[] = {"선택", "도서명", "저자명", "도서원가", "isbn"};
+    String books[] = {"도서명", "저자명", "분류", "ISBN"};
     
     public BookSelectView() {
         setTitle("메인페이지");
