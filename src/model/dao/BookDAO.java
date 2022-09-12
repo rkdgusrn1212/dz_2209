@@ -21,6 +21,41 @@ import db.util.DBConnManager;
 import model.vo.Book;
 
 public class BookDAO {
+    
+    public boolean updateWithBookId(int bookId, String isbn, int category, String bName, String writer, int price, String summary, BufferedImage image) {
+
+        PreparedStatement pstmt = DBConnManager.getInstance().getPreparedStatement(
+                "update book set isbn=?, category=?, b_name=?, writer=?, price = ?, summary=?, image=? where book_id = ?");
+        try {
+            pstmt.setString(1, isbn);
+            pstmt.setInt(2, category);
+            pstmt.setString(3, bName);
+            pstmt.setString(4, writer);
+            pstmt.setInt(5, price);
+            pstmt.setString(6, summary);
+            pstmt.setInt(8, bookId);
+            if(image!=null) {
+                try {
+                    ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                    ImageIO.write(image, "png", baos);
+                    ByteArrayInputStream is = new ByteArrayInputStream(baos.toByteArray());
+                    pstmt.setBinaryStream(7, is);
+                    System.out.println("이미지 성공");
+                } catch (IOException e1) {
+                    System.out.println("이미지 실패");
+                    e1.printStackTrace();
+                }   
+            }
+            pstmt.setNull(7, java.sql.Types.BLOB);
+            pstmt.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }finally {
+            DBConnManager.close(pstmt);
+        }
+        return false;
+    }
 
     public boolean insertBook(String isbn, int category, String bName, String writer, int price, String summary, BufferedImage image, String registerId, String lendId) {
 
@@ -33,19 +68,21 @@ public class BookDAO {
             pstmt.setString(4, writer);
             pstmt.setInt(5, price);
             pstmt.setString(6, summary);
-            try {
-                ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                ImageIO.write(image, "png", baos);
-                ByteArrayInputStream is = new ByteArrayInputStream(baos.toByteArray());
-                pstmt.setBinaryStream(7, is);
-                System.out.println("이미지 성공");
-            } catch (IOException e1) {
-                System.out.println("이미지 실패");
-                pstmt.setNull(7, java.sql.Types.BLOB);
-                e1.printStackTrace();
-            }
             pstmt.setString(8, registerId);
             pstmt.setString(9, lendId);
+            if(image!=null) {
+                try {
+                    ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                    ImageIO.write(image, "png", baos);
+                    ByteArrayInputStream is = new ByteArrayInputStream(baos.toByteArray());
+                    pstmt.setBinaryStream(7, is);
+                    System.out.println("이미지 성공");
+                } catch (IOException e1) {
+                    System.out.println("이미지 실패");
+                    e1.printStackTrace();
+                }   
+            }
+            pstmt.setNull(7, java.sql.Types.BLOB);
             pstmt.executeUpdate();
             return true;
         } catch (SQLException e) {
@@ -78,7 +115,7 @@ public class BookDAO {
     public ArrayList<Book> selectWithIsbn(String isbn) {
 
         PreparedStatement pstmt = DBConnManager.getInstance().getPreparedStatement(
-                "select book_id, b_name, writer, category, lend_id from book where writer isbn = ?");
+                "select book_id, b_name, writer, category, lend_id from book where isbn = ?");
         ArrayList<Book> bookList = new ArrayList<>();
         ResultSet rs = null;
         Book b = null;
@@ -253,33 +290,6 @@ public class BookDAO {
         }
         return list;
     }//SelectAllBook
-
-    //도서상세내용 조회  => booksearchview
-    /*public Book selectBookWithName(String bName) {
-
-        PreparedStatement pstmt = DBConnManager.getInstance().getPreparedStatement(
-                "select b_name,  origin_price, writer, summary from book where bname like '%' || ? || '%'");
-        ResultSet rs = null;
-        Book b = null;
-
-        try {
-            pstmt.setString(1, bName);
-            rs = pstmt.executeQuery();
-            if(rs.next()) {
-                b = new Book(
-                        rs.getString("b_name"),
-                        rs.getInt("origin_price"),
-                        rs.getString("writer"),
-                        rs.getString("summary"));
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            DBConnManager.close(rs);
-            DBConnManager.close(pstmt);
-        }
-        return b;
-    }*/
     
     public Book selectBookWithId(int bookId) {
 

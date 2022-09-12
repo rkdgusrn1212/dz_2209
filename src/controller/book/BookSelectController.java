@@ -19,7 +19,6 @@ import controller.Controller;
 import controller.ImageHelper;
 import controller.member.LoginController;
 import controller.member.MyPageController;
-import controller.quiz.QuizController;
 import model.dao.BookDAO;
 import model.vo.Book;
 import view.View;
@@ -45,7 +44,7 @@ public class BookSelectController extends Controller {
         }else if(s==viewBookSelect.btnAllList) {  
             new BookListController(this, getArgs(0), null, null);
         }else if(s==viewBookSelect.btnAdd) {
-            new AddBookController(this, getArgs(0));
+            new AddBookController(this, getArgs(0), null);
         }else if(s==viewBookSelect.btnSearch) {
         	new BookListController(this, getArgs(0), viewBookSelect.cbSearchBook.getSelectedItem().toString(), viewBookSelect.tfSearch.getText());
         }

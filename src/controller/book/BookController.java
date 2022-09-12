@@ -28,7 +28,7 @@ public class BookController extends Controller {
         }else if(s==viewBook.btnPay) {
         	new BookPayController(this);
         }else if(s == viewBook.btnUpdate) {
-            new AddBookController(this, getArgs(0));
+            new AddBookController(this, getArgs(1), getArgs(0));
         }else if(s==viewBook.btnDelete) {
             if(new BookDAO().deleteBook(Integer.parseInt(getArgs(0)))) {
                 JOptionPane.showMessageDialog(viewBook,"등록된 도서가 삭제되었습니다.");
