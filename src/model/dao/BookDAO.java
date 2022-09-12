@@ -22,7 +22,7 @@ import model.vo.Book;
 
 public class BookDAO {
 
-    public boolean insertBook(String isbn, int category, String bName, String writer, int price, String summary, BufferedImage image) {
+    public boolean insertBook(String isbn, int category, String bName, String writer, int price, String summary, BufferedImage image, String registerId, String lendId) {
 
         PreparedStatement pstmt = DBConnManager.getInstance().getPreparedStatement(
                 "insert into book values(book_id.nextVal,?,?,?,?,?,?,?)");
@@ -44,6 +44,8 @@ public class BookDAO {
                 pstmt.setNull(7, java.sql.Types.BLOB);
                 e1.printStackTrace();
             }
+            pstmt.setString(8, registerId);
+            pstmt.setString(9, lendId);
             pstmt.executeUpdate();
             return true;
         } catch (SQLException e) {
@@ -99,38 +101,40 @@ public class BookDAO {
         }
         return b;
     }//SelectSearchBook
+*/
 
-
-    // 도서 전체 리스트 검색 booklistView  
-    public Book selectAllBook() {
+    // 도서 전체 리스트 검색 booklistView 실패시 빈 리스트 반환.
+    public ArrayList<Book> selectAllBook() {
 
         PreparedStatement pstmt = DBConnManager.getInstance().getPreparedStatement(
-                "select b_name, writer,category, p_rent from book ");
+                "select book_id, b_name, writer, category, lend_id from book ");
         ArrayList<Book> bookList = new ArrayList<>();
         ResultSet rs = null;
         Book b = null;
-
+        ArrayList<Book> list = new ArrayList<>();
         try {
             rs = pstmt.executeQuery();
             while(rs.next()) {
-                b = new Book(
-                        rs.getString("b_name"),
-                        rs.getString("writer"),
-                        rs.getInt("category"),
-                        rs.getInt("p_rent"));
+                list.add(new Book(
+                        rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getInt(4),
+                        rs.getString(5)));
                 bookList.add(b);
             }
+            return list;
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
             DBConnManager.close(rs);
             DBConnManager.close(pstmt);
         }
-        return b;
+        return list;
     }//SelectAllBook
 
     //도서상세내용 조회  => booksearchview
-    public Book selectBookWithName(String bName) {
+    /*public Book selectBookWithName(String bName) {
 
         PreparedStatement pstmt = DBConnManager.getInstance().getPreparedStatement(
                 "select b_name,  origin_price, writer, summary from book where bname like '%' || ? || '%'");
@@ -154,7 +158,7 @@ public class BookDAO {
             DBConnManager.close(pstmt);
         }
         return b;
-    }*///SelectSearchBook
+    }*/
 
     public ArrayList<Book> selectBookWithMemberIdWithRowNum(String id, int rowNum) {
 
@@ -187,7 +191,9 @@ public class BookDAO {
                         rs.getInt(6),//price
                         rs.getString(7),//summ
                         image,
-                        rs.getString(9));//reg_id
+                        rs.getString(9),
+                        rs.getString(10));//reg_id
+                        
                 list.add(b);
             }
         } catch (SQLException e) {

@@ -11,6 +11,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import controller.Controller;
+import isbn.ISBN;
 import view.View;
 
 public class JoinView extends View 
@@ -20,7 +21,6 @@ public class JoinView extends View
     public JButton btnSubmit,btnReset,btnCheckId, btnValidEmail;
     JLabel labelId,labelPwd,labelPwd2,labelName,labelEmail, labelInterestCategory;
     public JComboBox<String> cbInterestCategory;
-    String items[] = {"종류", "철학, 심리학, 윤리학", "종교", "사회과학", "순수과학", "기술과학", "예술", "어학", "문학", "역사, 지리, 관광"};
     public JoinView(){
         setTitle("신규가입");
 
@@ -30,7 +30,7 @@ public class JoinView extends View
         tfName= new JTextField();
         tfEmail = new JTextField();
 
-        cbInterestCategory = new JComboBox<>(items);
+        cbInterestCategory = new JComboBox<>(ISBN.CATEGORY_ARRAY);
 
         btnSubmit = new JButton("등록");
         btnReset = new JButton("취소");

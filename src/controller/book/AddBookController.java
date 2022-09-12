@@ -64,7 +64,7 @@ public class AddBookController extends Controller implements MouseListener {
     		String summary=addbookView.taContent.getText();
     		if(!bic.isValidSummary(addbookView.taContent, price))return;
     		
-    		new BookDAO().insertBook(isbn, category, bName, writer, Integer.parseInt(price), summary, bookImage);
+    		new BookDAO().insertBook(isbn, category, bName, writer, Integer.parseInt(price), summary, bookImage, getArgs(0), null);
         }
     }
 
