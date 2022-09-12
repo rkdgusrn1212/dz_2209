@@ -2,6 +2,8 @@ package controller.member;
 
 import java.awt.event.ActionEvent;
 import controller.Controller;
+import model.dao.MemberDAO;
+import model.vo.Member;
 import view.View;
 import view.member.MyPageView;
 
@@ -23,9 +25,12 @@ public class MyPageController extends Controller {
            // viewLogin.setVisible(true);
         } else if (s == viewMyPage.btnUpdate) {
             new PwdUpdateController(this, getArgs(0));
+        }else if (s == viewMyPage.btnEditBook) {
+        	
         }else if (s == viewMyPage.btnCash) {
-            //Member m = new MemberDAO().selectMypage(userId);
-            //viewCash.la_nowcash.setText("현재 캐시: " + m.getCash()+"원");
+        	new CashController(this);
+            //Member m = new MemberDAO().selectMypage(id);
+            //viewCash.la_nowcash.setText("보유 캐시: " + m.getCash()+"원");
             //viewCash.tf_cash.setText("");
             //viewCash.tf_cash.requestFocus();
             //viewCash.setVisible(true);
@@ -39,6 +44,7 @@ public class MyPageController extends Controller {
         viewMyPage.btnBack.addActionListener(this);
         viewMyPage.btnLogout.addActionListener(this);
         viewMyPage.btnUpdate.addActionListener(this);
+        viewMyPage.btnEditBook.addActionListener(this);
         viewMyPage.btnCash.addActionListener(this);
         viewMyPage.labelMsg.setText(getArgs(0) + "의 MyPage");
     }
