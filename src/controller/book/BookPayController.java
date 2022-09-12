@@ -3,6 +3,7 @@ package controller.book;
 import java.awt.event.ActionEvent;
 
 import controller.Controller;
+import controller.member.CashController;
 import view.View;
 import view.book.BookPayView;
 
@@ -20,6 +21,8 @@ public class BookPayController extends Controller {
             finish();
         }else if(s==viewBookPay.btnPay) {
         	
+        }else if(s==viewBookPay.btnCash) {
+        	new CashController(this);
         }
     }
 
@@ -28,6 +31,7 @@ public class BookPayController extends Controller {
         viewBookPay = (BookPayView) windowView;
         viewBookPay.btnBack.addActionListener(this);
         viewBookPay.btnPay.addActionListener(this);
+        viewBookPay.btnCash.addActionListener(this);
     }
 
 }

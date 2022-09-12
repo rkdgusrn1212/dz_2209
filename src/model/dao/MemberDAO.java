@@ -14,7 +14,7 @@ public class MemberDAO {
     public Member selectPayBook(String id) {
 
         PreparedStatement pstmt = DBConnManager.getInstance().getPreparedStatement(
-                "select point, cash from member  where id = ? ");
+                "select cash from member  where id = ? ");
         ResultSet rs = null;
         Member m = null;
 
@@ -23,7 +23,7 @@ public class MemberDAO {
             rs = pstmt.executeQuery();
             if(rs.next()) {
               m = new Member(
-                        id, rs.getInt("point"),
+                        id,
                         rs.getInt("cash"));
             }
         } catch (SQLException e) {
@@ -58,7 +58,7 @@ public class MemberDAO {
 
     public boolean insertJoin(Member m) {
         PreparedStatement pstmt = DBConnManager.getInstance().getPreparedStatement(
-                "insert into member values (?,?,?,?,?,?,?)");
+                "insert into member values (?,?,?,?,?,?)");
         try {
             pstmt.setString(1, m.getId());
             pstmt.setString(2, m.getPwd());
@@ -66,7 +66,6 @@ public class MemberDAO {
             pstmt.setString(4, m.getEmail());
             pstmt.setInt(5, m.getInterestCategory());
             pstmt.setInt(6, 0);
-            pstmt.setInt(7, 0);
             int t = pstmt.executeUpdate();
             if (t > 0)
                 return true;
@@ -80,14 +79,13 @@ public class MemberDAO {
 
     public Member selectMyPage(String id) {
         PreparedStatement pstmt = DBConnManager.getInstance().getPreparedStatement(
-                "select name, point ,cash from member where id=?");
+                "select name, cash from member where id=?");
         ResultSet rs = null;
         try {
             pstmt.setString(1, id);
             rs = pstmt.executeQuery();
             if (rs.next()) {
                 return new Member(rs.getString("name"),
-                        rs.getInt("point"), 
                         rs.getInt("cash"));
             }
         } catch (SQLException e) {
@@ -336,11 +334,10 @@ public boolean isEmailExist(String checkStr) {
 
     public boolean updateAfterPay(Member m) {
         PreparedStatement pstmt = DBConnManager.getInstance().getPreparedStatement(
-                "update member set cash = cash-?, point = point-? where id=?");
+                "update member set cash = cash-? where id=?");
         try {
             pstmt.setInt(1, m.getCash());
-            pstmt.setInt(2, m.getPoint());
-            pstmt.setString(3, m.getId());
+            pstmt.setString(2, m.getId());
             int t = pstmt.executeUpdate();
             if(t>0) return true;
         } catch (SQLException e) {
