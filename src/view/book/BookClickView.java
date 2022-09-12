@@ -2,6 +2,7 @@ package view.book;
 import java.awt.Font;
 
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -15,6 +16,7 @@ public class BookClickView extends JPanel {
     public JLabel labelName, labelWriter, labelPrice;
     public JScrollPane spContent;
     public JTextArea taContent;
+    public JButton btnPick;
     public BookClickView() {
         setLayout(null);
         
@@ -28,13 +30,15 @@ public class BookClickView extends JPanel {
         taContent.setLineWrap(true);
         spContent.setAutoscrolls(true);
         labelPrice = new JLabel("가격");
+        btnPick = new JButton("자세히 보기");
         
         //setBounds
-        tglBtnImage.setBounds(25, 100, btnWidth, btnHeight);
+        tglBtnImage.setBounds(54, 100, btnWidth, btnHeight);
         labelName.setBounds(25, 320, 80, 30);
         labelWriter.setBounds(25, 370, 80, 30);
         labelPrice.setBounds(25, 420, 80, 30);
         spContent.setBounds(25, 300, 200, 200);
+        btnPick.setBounds(70, 60, 120, 30);
         
         //폰트 추가
         Font font=new Font("맑은고딕", Font.BOLD, 13);
@@ -42,12 +46,14 @@ public class BookClickView extends JPanel {
         labelName.setFont(font);
         labelWriter.setFont(font);
         labelPrice.setFont(font);
+        btnPick.setFont(font);
         
 
         Font fontContent=new Font("맑은고딕", Font.PLAIN, 10);
         spContent.setFont(fontContent);
         
         //add
+        add(btnPick);
         add(tglBtnImage);
         add(spContent);
         add(labelName);

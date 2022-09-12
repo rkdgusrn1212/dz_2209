@@ -11,7 +11,7 @@ import view.View;
 
 public class BookSelectView extends View {
     public JLabel labelMsg, labelId;
-    public JButton btnAdd, btnAllList, btnSearch, btnMyPage, btnLogout, btnPick1, btnPick2, btnPick3;
+    public JButton btnAdd, btnAllList, btnSearch, btnMyPage, btnLogout;
     public BookClickView[] viewBookClick;
     public JTextField tfSearch;
     public JComboBox<String> cbSearchBook;
@@ -30,16 +30,11 @@ public class BookSelectView extends View {
         viewBookClick = new BookClickView[3];
         btnMyPage = new JButton("마이페이지");
         btnLogout = new JButton("로그아웃");
-        btnPick1 = new JButton("선 택");
-        btnPick2 = new JButton("선 택");
-        btnPick3 = new JButton("선 택");
         cbSearchBook = new JComboBox<>(books);
         
         
         //setBounds
-        btnPick1.setBounds(140, 140, 100, 35);
-        btnPick2.setBounds(450, 140, 100, 35);
-        btnPick3.setBounds(760, 140, 100, 35);
+
         labelId.setBounds(70, 40, 120, 35);
         labelMsg.setBounds(460, 50, 180, 35);
         tfSearch.setBounds(609, 700, 210, 35);
@@ -54,9 +49,6 @@ public class BookSelectView extends View {
         Font font=new Font("맑은고딕", Font.BOLD, 16);
         Font font2=new Font("맑은고딕", Font.ITALIC, 16);
         labelMsg.setFont(font);
-        btnPick1.setFont(font);
-        btnPick2.setFont(font);
-        btnPick3.setFont(font);
         labelId.setFont(font);
         labelMsg.setFont(font);
         tfSearch.setFont(font2);
@@ -68,9 +60,6 @@ public class BookSelectView extends View {
         cbSearchBook.setFont(font);
         
         //add
-        add(btnPick1);
-        add(btnPick2);
-        add(btnPick3);
         add(labelId);
         add(labelMsg);
         add(tfSearch);

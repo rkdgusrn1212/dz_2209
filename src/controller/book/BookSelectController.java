@@ -1,6 +1,7 @@
 package controller.book;
 
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.MouseAdapter;
@@ -30,7 +31,7 @@ public class BookSelectController extends Controller {
     private BookSelectView viewBookSelect;
 
     public BookSelectController(Controller controller, String id) {
-        super(controller, BookSelectView.class,  id);
+        super(controller, BookSelectView.class, id);
     }
 
     @Override
@@ -45,12 +46,6 @@ public class BookSelectController extends Controller {
             new BookListController(this);
         }else if(s==viewBookSelect.btnAdd) {
             new AddBookController(this, getArgs(0));
-        }else if(s==viewBookSelect.btnPick1) {
-            new BookController(this);
-        }else if(s==viewBookSelect.btnPick2) {
-            new BookController(this);
-        }else if(s==viewBookSelect.btnPick3) {
-            new BookController(this);
         }else if(s==viewBookSelect.btnSearch) {
         	new BookListController(this);
         }
@@ -64,23 +59,20 @@ public class BookSelectController extends Controller {
         viewBookSelect.btnMyPage.addActionListener(this);
         viewBookSelect.btnAllList.addActionListener(this);
         viewBookSelect.btnAdd.addActionListener(this);
-        viewBookSelect.btnPick1.addActionListener(this);
-        viewBookSelect.btnPick2.addActionListener(this);
-        viewBookSelect.btnPick3.addActionListener(this);
         viewBookSelect.btnSearch.addActionListener(this);
-        for (int i = 0; i < viewBookSelect.viewBookClick.length; i++) {
-            viewBookSelect.viewBookClick[i].tglBtnImage.addItemListener(new BSCItemListener(
-                    viewBookSelect.viewBookClick[i].spContent));
-        }
     }
     
     @Override
     protected void resume() {
         super.resume();
         ArrayList<Book> list = new BookDAO().selectBookWithMemberIdWithRowNum(getArgs(0), 3);
-        for(int i=0 ;i<list.size(); i++) {
+        int i=0;
+        for(;i<list.size(); i++) {
             Book book = list.get(i);
             BookClickView view = viewBookSelect.viewBookClick[i];
+            view.btnPick.addActionListener(new ClickPickListener(this,book.getBookId(), getArgs(0)));
+            view.tglBtnImage.addItemListener(new SelectTglBtnListener(view.spContent));
+           
             if(book.getImg()!=null) {
                 view.tglBtnImage.setIcon(ImageHelper.getFitImageIcon(view.tglBtnImage, book.getImg()));
             }else {
@@ -93,22 +85,43 @@ public class BookSelectController extends Controller {
             view.labelPrice.setText(book.getOriginPrice()+"₩");
             view.taContent.setText(book.getSummary());
         }
+        //데이터가 없으면 남은 칸은 지운다.
+        for(;i<3; i++) {
+            viewBookSelect.viewBookClick[i].setVisible(false);
+        }
+        
     }
     
-    private class BSCItemListener implements ItemListener{
-        JScrollPane taContent;
-        
-        BSCItemListener(JScrollPane taContent){
-            this.taContent = taContent;
-        }
+    private static class SelectTglBtnListener implements ItemListener{
 
+        private JScrollPane spContent;
+        SelectTglBtnListener(JScrollPane spContent){
+            this.spContent = spContent;
+        }
         @Override
         public void itemStateChanged(ItemEvent e) {  
             if(e.getStateChange()==e.SELECTED) {
-                taContent.setVisible(true);
+                spContent.setVisible(true);
             }else {
-                taContent.setVisible(false);
+                spContent.setVisible(false);
             }
+        }
+        
+    }
+    
+    private static class ClickPickListener implements ActionListener{
+        
+        private int bookId;
+        private String id;
+        private Controller controller;
+        ClickPickListener(Controller controller, int bookId, String id){
+            this.bookId = bookId;
+            this.id = id;
+            this.controller = controller;
+        }
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            new BookController(controller, bookId, id);
         }
         
     }

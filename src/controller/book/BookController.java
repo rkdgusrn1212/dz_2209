@@ -9,8 +9,13 @@ import view.book.BookView;
 public class BookController extends Controller {
 
     private BookView viewBook;
-    public BookController(Controller controller, String... args) {
-        super(controller, BookView.class, args);
+    private int bookId;
+    private String id;
+    
+    public BookController(Controller controller, int bookId , String id) {
+        super(controller, BookView.class);
+        this.bookId = bookId;
+        this.id = id;
     }
 
     @Override
