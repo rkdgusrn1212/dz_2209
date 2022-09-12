@@ -8,7 +8,7 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 public class BookPayView extends JFrame {
 	public JTable table;
-    public JLabel labelId, labelCash, labelPoint, labelLend, labelUsePoint;
+    public JLabel labelId, labelCash, labelLend, labelUseCash;
     public JTextField tfPoint;
     public JButton btnPay, btnBack;
     public BookPayView() {
@@ -18,38 +18,30 @@ public class BookPayView extends JFrame {
         //p_book
         labelId = new JLabel("회원 ID");
         labelCash = new JLabel("회원 보유 캐시");
-        labelPoint = new JLabel("회원 보유 포인트");
-        labelUsePoint= new JLabel("사용 포인트");
+        labelUseCash= new JLabel("결제 후 보유 캐시");
         labelLend = new JLabel("대여 가격");
-        tfPoint = new JTextField(10);
         btnPay = new JButton("결제");
       	btnBack = new JButton("이전으로");
         
         labelId.setBounds(50, 30, 180, 50);
         labelCash.setBounds(50, 100, 180, 50);
-        labelPoint.setBounds(50, 170, 180, 50);
         labelLend.setBounds(390, 30, 70, 50);
-        labelUsePoint.setBounds(390, 100, 90, 50);
-        tfPoint.setBounds(490, 110, 180, 35);
+        labelUseCash.setBounds(390, 100, 150, 50);
         btnPay.setBounds(390, 180, 135, 35);
         btnBack.setBounds(570, 180, 135, 35);
         
         Font font=new Font("맑은고딕", Font.BOLD, 16);
         labelId.setFont(font);
         labelCash.setFont(font);
-        labelPoint.setFont(font);
         labelLend.setFont(font);
-        labelUsePoint.setFont(font);
-        tfPoint.setFont(font);
+        labelUseCash.setFont(font);
         btnPay.setFont(font);
         btnBack.setFont(font);
         
         add(labelId);
         add(labelCash);
-        add(labelPoint);
         add(labelLend);
-        add(labelUsePoint);
-        add(tfPoint);
+        add(labelUseCash);
         add(btnPay);
         add(btnBack);
 
