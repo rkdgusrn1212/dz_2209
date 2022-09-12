@@ -48,7 +48,22 @@ public class MemberUpdateController extends Controller {
                 showMsgWithResetText(pwdUpdateView.tfPwd,"입력한 패스워드가 서로 다릅니다.\n다시 입력해 주십시오.");
                 return;
             }
-            new MemberDAO().updatePwd(getArgs(0), pwd);
+            //이름 검사
+            String name = pwdUpdateView.tfName.getText();
+            if(name.length()<1) {
+                showMsgWithResetText(pwdUpdateView.tfName, "이름이 비어있습니다.");
+                return;
+            }
+            if(name.length()>20){
+                showMsgWithResetText(pwdUpdateView.tfName,"이름은 20자 이하만 입력 가능합니다.\n다시 입력해 주십시오.");
+                return;
+            }
+            if(new MemberDAO().updateWithId(getArgs(0), name, pwd)) {
+                JOptionPane.showMessageDialog(pwdUpdateView, "회원 정보가 변경 되었습니다.");
+            }else {
+                JOptionPane.showMessageDialog(pwdUpdateView, "회원 정보 변경 실패!");
+                return;
+            }
             finish();
         }
     }
@@ -62,8 +77,9 @@ public class MemberUpdateController extends Controller {
     
     @Override
     protected void resume() {
+        super.resume();
         Member member = new model.dao.MemberDAO().selectWithId(getArgs(0));
-        if( member==null) {
+        if(member==null) {
             JOptionPane.showMessageDialog(pwdUpdateView,"계정정보 쿼리 실패!");
             finish();
         }

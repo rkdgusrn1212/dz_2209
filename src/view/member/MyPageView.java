@@ -17,7 +17,7 @@ public class MyPageView extends View {
         setLayout(null);
         labelMsg = new JLabel(); //ID 띄우는 label
         labelCash = new JLabel("보유 캐시: ");
-        btnUpdate = new JButton("비밀번호 수정");
+        btnUpdate = new JButton("회원 정보 수정");
         btnEditBook = new JButton("도서 정보 수정");
         btnCash = new JButton("캐시 충전");
         btnLogout = new JButton("로그아웃");

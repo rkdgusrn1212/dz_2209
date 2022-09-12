@@ -218,6 +218,24 @@ public class MemberDAO {
         return false;
     }
     
+    public boolean updateWithId(String id, String name, String pwd) {
+        PreparedStatement pstmt = DBConnManager.getInstance().getPreparedStatement(
+                "update member set name=?, pwd=? where id=?");
+        try {
+            pstmt.setString(1, name);
+            pstmt.setString(2, pwd);
+            pstmt.setString(3, id);
+            int t = pstmt.executeUpdate();
+            if(t>0) return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBConnManager.close(pstmt);
+        }
+        return false;
+    }
+    
+    
     public boolean updatePwdWithEmail(String email,String pwd) {
         PreparedStatement pstmt = DBConnManager.getInstance().getPreparedStatement(
                 "update member set pwd=? where email=?");
