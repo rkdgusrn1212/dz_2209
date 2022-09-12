@@ -26,7 +26,7 @@ public class BookController extends Controller {
         if(s == viewBook.btnBack) {
             finish();
         }else if(s==viewBook.btnPay) {
-        	new BookPayController(this);
+        	new BookPayController(this, getArgs(1), getArgs(0));
         }else if(s == viewBook.btnUpdate) {
             new AddBookController(this, getArgs(1), getArgs(0));
         }else if(s==viewBook.btnDelete) {

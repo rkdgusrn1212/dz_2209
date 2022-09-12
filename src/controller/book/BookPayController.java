@@ -10,8 +10,8 @@ import view.book.BookPayView;
 public class BookPayController extends Controller {
 
     private BookPayView viewBookPay;
-    public BookPayController(Controller controller, String... args) {
-        super(controller, BookPayView.class, args);
+    public BookPayController(Controller controller, String id, String bookId) {
+        super(controller, BookPayView.class, id, bookId);
     }
 
     @Override
@@ -22,7 +22,7 @@ public class BookPayController extends Controller {
         }else if(s==viewBookPay.btnPay) {
         	
         }else if(s==viewBookPay.btnCash) {
-        	new CashController(this);
+        	new CashController(this, getArgs(0));
         }
     }
 

@@ -121,7 +121,7 @@ public class BookDAO {
         Book b = null;
         ArrayList<Book> list = new ArrayList<>();
         try {
-            pstmt.setInt(1, Integer.parseInt(isbn));
+            pstmt.setString(1,isbn);
             rs = pstmt.executeQuery();
             while(rs.next()) {
                 list.add(new Book(
