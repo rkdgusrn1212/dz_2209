@@ -9,13 +9,14 @@ import javax.swing.JScrollPane;
 import view.View;
 
 public class BookView extends View{
-    JLabel labelBook, labelName, labelWriter, labelPrice, labelSummary;
+    public JLabel labelBook, labelName, labelWriter, labelPrice, labelSummary, labelImage;
     public JButton btnBack, btnPay;
     
 //    JTable table; //검색과 전체 보기를 위한 테이블 객체 생성
     public BookView() {
     	setTitle("도서상세보기");
         setLayout(null);
+        labelImage = new JLabel("이미지삽입예정 210*297");
         labelBook = new JLabel("도서 상세 보기");
         labelName = new JLabel("도서명");
         labelWriter = new JLabel("저자명");
@@ -32,6 +33,7 @@ public class BookView extends View{
         labelPrice.setBounds(40, 280, 105, 35);
         labelWriter.setBounds(40, 200, 50, 35);
         labelSummary.setBounds(40, 360, 50, 35);
+        labelImage.setBounds(680, 120, 210, 297);
         
         Font font=new Font("맑은고딕", Font.BOLD, 16);
         btnBack.setFont(font);
@@ -50,6 +52,7 @@ public class BookView extends View{
         add(labelWriter);
         add(labelPrice);
         add(labelSummary);
+        add(labelImage);
         
         setBounds(500,200,1000,700);
         
