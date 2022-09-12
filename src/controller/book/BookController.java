@@ -18,6 +18,8 @@ public class BookController extends Controller {
         Object s = e.getSource();
         if(s == viewBook.btnBack) {
             finish();
+        }else if(s==viewBook.btnPay) {
+        	new BookPayController(this);
         }
     }
 
@@ -25,6 +27,7 @@ public class BookController extends Controller {
     protected void create(View windowView) {
         viewBook = (BookView) windowView;
         viewBook.btnBack.addActionListener(this);
+        viewBook.btnPay.addActionListener(this);
     }
 
 }
