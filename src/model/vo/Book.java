@@ -12,9 +12,10 @@ public class Book {
     private int originPrice;
     private String summary;
     private Image img;
+    private String registerId;
 
     
-    public Book(int bookId, String isbn, int category, String bName, String writer, int originPrice, String summary, Image img) {
+    public Book(int bookId, String isbn, int category, String bName, String writer, int originPrice, String summary, Image img, String registerId) {
         this.bookId =  bookId;
         this.isbn = isbn;
         this.category = category;
@@ -23,6 +24,11 @@ public class Book {
         this.originPrice = originPrice;
         this.summary = summary;
         this.img = img;
+        this.registerId = registerId;
+    }
+    
+    public String getRegisterId() {
+        return registerId;
     }
     
     public Image getImg() {

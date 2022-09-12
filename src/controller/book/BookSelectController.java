@@ -14,12 +14,12 @@ import javax.swing.ImageIcon;
 import javax.swing.JTextArea;
 
 import controller.Controller;
+import controller.ImageHelper;
 import controller.member.LoginController;
 import controller.member.MyPageController;
 import controller.quiz.QuizController;
 import model.dao.BookDAO;
 import model.vo.Book;
-import util.ImageHelper;
 import view.View;
 import view.book.BookClickView;
 import view.book.BookSelectView;
@@ -83,16 +83,13 @@ public class BookSelectController extends Controller {
             if(book.getImg()!=null) {
                 view.tglBtnImage.setIcon(ImageHelper.getFitImageIcon(view.tglBtnImage, book.getImg()));
             }else {
-                try {
-                    view.tglBtnImage.setIcon(ImageHelper.getFitImageIcon(view.tglBtnImage, ImageIO.read(new File("asset/no_image.jpg"))));
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+                
             }
             
             view.labelName.setText(book.getBname());
             view.labelWriter.setText(book.getWriter());
             view.labelPrice.setText(book.getOriginPrice()+"₩");
+            view.taContent.setText(book.getSummary());
         }
     }
     

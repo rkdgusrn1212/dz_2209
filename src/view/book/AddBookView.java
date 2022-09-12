@@ -17,7 +17,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-import util.ImageHelper;
+import controller.ImageHelper;
 import view.View;
 
 public class AddBookView extends View 
@@ -52,9 +52,6 @@ public class AddBookView extends View
         labelContent = new JLabel("줄거리");
         labelImage = new JLabel("도서 사진");
         bookImgLabel = new JLabel();
-
-        ImageIcon icon = new ImageIcon("asset/no_image.jpg");
-        bookImgLabel.setIcon(ImageHelper.getResizedImageIcon(icon, 350, 495));
         
         cbInterestCategory = new JComboBox<>(items);
 

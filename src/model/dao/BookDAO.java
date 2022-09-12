@@ -186,7 +186,8 @@ public class BookDAO {
                         rs.getString(5),//wri
                         rs.getInt(6),//price
                         rs.getString(7),//summ
-                        image);//Image
+                        image,
+                        rs.getString(9));//reg_id
                 list.add(b);
             }
         } catch (SQLException e) {

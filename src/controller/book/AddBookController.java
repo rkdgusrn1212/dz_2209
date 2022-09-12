@@ -18,10 +18,10 @@ import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import controller.Controller;
+import controller.ImageHelper;
 import db.util.DBConnManager;
 import model.dao.BookDAO;
 import model.vo.Book;
-import util.ImageHelper;
 import view.View;
 import view.book.AddBookView;
 
@@ -74,6 +74,8 @@ public class AddBookController extends Controller implements MouseListener {
         addbookView.btnReset.addActionListener(this);
         addbookView.btnSubmit.addActionListener(this);
         addbookView.tfImage.addMouseListener(this);
+        addbookView.bookImgLabel.setIcon(ImageHelper.getDefaultImageIcon(
+                addbookView.bookImgLabel.getBounds().width, addbookView.bookImgLabel.getBounds().height));
     }
 
     @Override
