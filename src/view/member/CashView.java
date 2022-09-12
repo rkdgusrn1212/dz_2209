@@ -17,22 +17,19 @@ public class CashView extends View{
     public CashView() {
         setTitle("캐시충전");
         setLayout(null);
-        labelMsg = new JLabel("충전 금액");
+        labelMsg = new JLabel("충전 금액(₩):");
         labelNowcash = new JLabel("");
-        //labelAftercash = new JLabel("충전 후 캐시: "); //충전 후 캐시는 팝업으로 띄워주는게 나을듯?
         tfCash = new JTextField("");
         btnSubmit = new JButton("충전");
         btnBack = new JButton("취소");
         
-        labelMsg.setBounds(30, 98, 300, 35);
+        labelMsg.setBounds(30, 95, 300, 35);
         labelNowcash.setBounds(30, 40, 200, 35);
-        tfCash.setBounds(120, 100, 180, 30);
-        //labelAftercash.setBounds(30, 160,200,35);
+        tfCash.setBounds(140, 100, 180, 30);
         btnSubmit.setBounds(30, 220, 130, 35);
         btnBack.setBounds(250, 220, 130, 35);
         add(labelMsg);
         add(labelNowcash);
-        //add(labelAftercash);
         add(tfCash);
         add(btnSubmit);
         add(btnBack);
@@ -40,7 +37,6 @@ public class CashView extends View{
         Font font=new Font("맑은고딕", Font.BOLD, 16);
         labelMsg.setFont(font);
         labelNowcash.setFont(font);
-        //labelAftercash.setFont(font);
         tfCash.setFont(font);
         btnSubmit.setFont(font);
         btnBack.setFont(font);
@@ -55,7 +51,4 @@ public class CashView extends View{
     public void showMsg(String msg) {
         JOptionPane.showMessageDialog(this, msg);
     }
-    public static void main(String[] args) {
-		new CashView().setVisible(true);
-	}
 }

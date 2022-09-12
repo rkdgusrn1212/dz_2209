@@ -28,12 +28,7 @@ public class MyPageController extends Controller {
         }else if (s == viewMyPage.btnEditBook) {
         	
         }else if (s == viewMyPage.btnCash) {
-        	new CashController(this);
-            //Member m = new MemberDAO().selectMypage(id);
-            //viewCash.la_nowcash.setText("보유 캐시: " + m.getCash()+"원");
-            //viewCash.tf_cash.setText("");
-            //viewCash.tf_cash.requestFocus();
-            //viewCash.setVisible(true);
+        	new CashController(this, getArgs(0));
         }
     }
 
@@ -52,6 +47,7 @@ public class MyPageController extends Controller {
     @Override
     protected void resume() {
         super.resume();
-        
+        Member member = new MemberDAO().selectWithId(getArgs(0));
+        viewMyPage.labelCash.setText("보유 캐시: "+member.getCash()+"₩");
     }
 }
