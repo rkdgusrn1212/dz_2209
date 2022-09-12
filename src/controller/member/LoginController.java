@@ -33,11 +33,13 @@ public class LoginController extends Controller implements ItemListener{
             String id = viewLogin.tfId.getText();
             String pass = new String(viewLogin.tfPwd.getPassword());
             if(isAdmin) {
-                if (new AdminDAO().checkIdPwd(viewLogin.tfId.getText(), viewLogin.tfPwd.getPassword().toString())) {
+                if (new AdminDAO().checkIdPwd(viewLogin.tfId.getText(), new String(viewLogin.tfPwd.getPassword()))) {
                     viewLogin.showMsg("관리자 로그인 성공!!");
                     new AdminController(null);
-                    return;
+                }else {
+                    viewLogin.showMsg("해당 관리자 계정이 없거나 비밀번호가 일치하지 않습니다!!");   
                 }
+                return;
             }
 
             if ((new MemberDAO().loginCheck(id, pass))) { // 1.로그인 성공!
@@ -62,7 +64,7 @@ public class LoginController extends Controller implements ItemListener{
         viewLogin.btnLogin.addActionListener(this);
         viewLogin.btnJoin.addActionListener(this);
         viewLogin.btnFindIdPw.addActionListener(this);
-        viewLogin.adminCheckBox.addActionListener(this);
+        viewLogin.adminCheckBox.addItemListener(this);
     }
 
 

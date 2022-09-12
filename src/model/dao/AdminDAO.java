@@ -14,8 +14,11 @@ public class AdminDAO {
         try {
             pstmt.setString(1, id);
             ResultSet rs = pstmt.executeQuery();
+
+            System.out.println("select pwd from admin where id = "+id);
             if(rs.next()) {
                 if(rs.getString(1).equals(pwd)) {
+                    System.out.println(rs.getString(1));
                     return true;
                 }
             }
