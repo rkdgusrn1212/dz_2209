@@ -38,7 +38,7 @@ public class BookSelectController extends Controller {
         }else if(s==viewBookSelect.btnAllList) {
             new BookListController(this);
         }else if(s==viewBookSelect.btnAdd) {
-            new AddBookController(this);
+            new AddBookController(this, getArgs(0));
         }else if(s==viewBookSelect.btnPick1) {
             new BookController(this);
         }else if(s==viewBookSelect.btnPick2) {
