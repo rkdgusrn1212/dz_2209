@@ -23,9 +23,6 @@ public class MyPageController extends Controller {
            // viewLogin.setVisible(true);
         } else if (s == viewMyPage.btnUpdate) {
             new PwdUpdateController(this, getArgs(0));
-        }else if (s == viewMyPage.btnHistory) {
-
-           // viewHistory.setVisible(true);
         }else if (s == viewMyPage.btnCash) {
             //Member m = new MemberDAO().selectMypage(userId);
             //viewCash.la_nowcash.setText("현재 캐시: " + m.getCash()+"원");
@@ -42,7 +39,6 @@ public class MyPageController extends Controller {
         viewMyPage.btnBack.addActionListener(this);
         viewMyPage.btnLogout.addActionListener(this);
         viewMyPage.btnUpdate.addActionListener(this);
-        viewMyPage.btnHistory.addActionListener(this);
         viewMyPage.btnCash.addActionListener(this);
         viewMyPage.labelMsg.setText(getArgs(0) + "의 MyPage");
     }
