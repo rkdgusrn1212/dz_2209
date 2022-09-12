@@ -11,6 +11,7 @@ import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
 import controller.Controller;
@@ -69,7 +70,7 @@ public class BookSelectController extends Controller {
         viewBookSelect.btnSearch.addActionListener(this);
         for (int i = 0; i < viewBookSelect.viewBookClick.length; i++) {
             viewBookSelect.viewBookClick[i].tglBtnImage.addItemListener(new BSCItemListener(
-                    viewBookSelect.viewBookClick[i].taContent));
+                    viewBookSelect.viewBookClick[i].spContent));
         }
     }
     
@@ -83,7 +84,8 @@ public class BookSelectController extends Controller {
             if(book.getImg()!=null) {
                 view.tglBtnImage.setIcon(ImageHelper.getFitImageIcon(view.tglBtnImage, book.getImg()));
             }else {
-                
+                view.tglBtnImage.setIcon(ImageHelper.getDefaultImageIcon(
+                        view.tglBtnImage.getBounds().width, view.tglBtnImage.getBounds().height));
             }
             
             view.labelName.setText(book.getBname());
@@ -94,9 +96,9 @@ public class BookSelectController extends Controller {
     }
     
     private class BSCItemListener implements ItemListener{
-        JTextArea taContent;
+        JScrollPane taContent;
         
-        BSCItemListener(JTextArea taContent){
+        BSCItemListener(JScrollPane taContent){
             this.taContent = taContent;
         }
 
