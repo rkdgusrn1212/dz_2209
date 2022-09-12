@@ -1,16 +1,13 @@
 package view.member;
 import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
 import javax.swing.JTextField;
-import view.quiz.AddQuizView;
-public class CashView extends JFrame{
+
+import view.View;
+public class CashView extends View{
   
   //객체 선언
     public JLabel labelMsg, labelNowcash, labelAftercash;
@@ -21,7 +18,7 @@ public class CashView extends JFrame{
         setTitle("캐시충전");
         setLayout(null);
         labelMsg = new JLabel("충전 금액");
-        labelNowcash = new JLabel("보유 캐시: ");
+        labelNowcash = new JLabel("");
         //labelAftercash = new JLabel("충전 후 캐시: "); //충전 후 캐시는 팝업으로 띄워주는게 나을듯?
         tfCash = new JTextField("");
         btnSubmit = new JButton("충전");
@@ -49,7 +46,7 @@ public class CashView extends JFrame{
         btnBack.setFont(font);
         
         //메인 창 출력 위치
-        setBounds(800,300,430,350);
+        setBounds(800,300,425,350);
         
         
         
@@ -58,4 +55,7 @@ public class CashView extends JFrame{
     public void showMsg(String msg) {
         JOptionPane.showMessageDialog(this, msg);
     }
+    public static void main(String[] args) {
+		new CashView().setVisible(true);
+	}
 }
