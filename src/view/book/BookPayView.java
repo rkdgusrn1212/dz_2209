@@ -2,11 +2,12 @@ package view.book;
 import java.awt.Font;
 
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.JTextField;
-public class BookPayView extends JFrame {
+
+import view.View;
+public class BookPayView extends View { // 수정
 	public JTable table;
     public JLabel labelId, labelCash, labelLend, labelUseCash;
     public JTextField tfPoint;
