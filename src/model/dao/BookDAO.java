@@ -21,7 +21,7 @@ import db.util.DBConnManager;
 import model.vo.Book;
 
 public class BookDAO {
-    
+
     public boolean updateWithBookId(int bookId, String isbn, int category, String bName, String writer, int price, String summary, BufferedImage image) {
 
         PreparedStatement pstmt = DBConnManager.getInstance().getPreparedStatement(
@@ -70,19 +70,23 @@ public class BookDAO {
             pstmt.setString(6, summary);
             pstmt.setString(8, registerId);
             pstmt.setString(9, lendId);
+            System.out.println("image는 null이 아님");
+            boolean imgSuccess = false;
             if(image!=null) {
                 try {
                     ByteArrayOutputStream baos = new ByteArrayOutputStream();
                     ImageIO.write(image, "png", baos);
                     ByteArrayInputStream is = new ByteArrayInputStream(baos.toByteArray());
                     pstmt.setBinaryStream(7, is);
-                    System.out.println("이미지 성공");
+                    imgSuccess = true;
                 } catch (IOException e1) {
                     System.out.println("이미지 실패");
                     e1.printStackTrace();
                 }   
             }
-            pstmt.setNull(7, java.sql.Types.BLOB);
+            if(!imgSuccess) {
+                pstmt.setNull(7, java.sql.Types.BLOB);
+            }
             pstmt.executeUpdate();
             return true;
         } catch (SQLException e) {
@@ -94,7 +98,7 @@ public class BookDAO {
     }//InsertBook
 
 
-   
+
     public boolean deleteBook(int bookId) {
 
         PreparedStatement pstmt = DBConnManager.getInstance().getPreparedStatement("delete from book where book_id =?");
@@ -111,7 +115,7 @@ public class BookDAO {
         }
         return false;
     }//DeleteBook
-    
+
     public ArrayList<Book> selectWithIsbn(String isbn) {
 
         PreparedStatement pstmt = DBConnManager.getInstance().getPreparedStatement(
@@ -141,7 +145,7 @@ public class BookDAO {
         }
         return list;
     }
-    
+
     public ArrayList<Book> selectWithRegisterId(String rId) {
 
         PreparedStatement pstmt = DBConnManager.getInstance().getPreparedStatement(
@@ -171,7 +175,7 @@ public class BookDAO {
         }
         return list;
     }
-    
+
     public ArrayList<Book> selectWithWriter(String writer) {
 
         PreparedStatement pstmt = DBConnManager.getInstance().getPreparedStatement(
@@ -290,7 +294,7 @@ public class BookDAO {
         }
         return list;
     }//SelectAllBook
-    
+
     public Book selectBookWithId(int bookId) {
 
         PreparedStatement pstmt = DBConnManager.getInstance().getPreparedStatement(
@@ -305,8 +309,8 @@ public class BookDAO {
                 InputStream imageStream = rs.getBinaryStream(8);
                 Image image = null;
                 if(imageStream != null) {
-                   try {
-                       image = ImageIO.read(imageStream);
+                    try {
+                        image = ImageIO.read(imageStream);
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
@@ -331,9 +335,9 @@ public class BookDAO {
         }
         return b;
     }
-    
-    
-    
+
+
+
     public boolean returnBook(int bookId) {
 
         PreparedStatement pstmt = DBConnManager.getInstance().getPreparedStatement(
@@ -366,8 +370,8 @@ public class BookDAO {
                 InputStream imageStream = rs.getBinaryStream(8);
                 Image image = null;
                 if(imageStream != null) {
-                   try {
-                       image = ImageIO.read(imageStream);
+                    try {
+                        image = ImageIO.read(imageStream);
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
@@ -383,7 +387,7 @@ public class BookDAO {
                         image,
                         rs.getString(9),
                         rs.getString(10));//reg_id
-                        
+
                 list.add(b);
             }
         } catch (SQLException e) {
