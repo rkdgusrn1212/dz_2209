@@ -345,12 +345,12 @@ public boolean isEmailExist(String checkStr) {
         return false;
     }
 
-    public boolean updateAfterPay(Member m) {
+    public boolean updateAfterPay(String id, int pay) {
         PreparedStatement pstmt = DBConnManager.getInstance().getPreparedStatement(
                 "update member set cash = cash-? where id=?");
         try {
-            pstmt.setInt(1, m.getCash());
-            pstmt.setString(2, m.getId());
+            pstmt.setInt(1, pay);
+            pstmt.setString(2, id);
             int t = pstmt.executeUpdate();
             if(t>0) return true;
         } catch (SQLException e) {
