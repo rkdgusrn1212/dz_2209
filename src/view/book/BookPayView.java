@@ -25,10 +25,10 @@ public class BookPayView extends View { // 수정
       	btnBack = new JButton("이전으로");
       	btnCash = new JButton("캐시 충전");
         
-        labelId.setBounds(50, 30, 180, 50);
-        labelCash.setBounds(50, 100, 180, 50);
-        labelLend.setBounds(390, 30, 70, 50);
-        labelUseCash.setBounds(390, 100, 150, 50);
+        labelId.setBounds(50, 30, 220, 50);
+        labelCash.setBounds(50, 100, 220, 50);
+        labelLend.setBounds(390, 30, 200, 50);
+        labelUseCash.setBounds(390, 100, 250, 50);
         btnPay.setBounds(400, 180, 135, 35);
         btnBack.setBounds(570, 180, 135, 35);
         btnCash.setBounds(230, 180, 135, 35);
