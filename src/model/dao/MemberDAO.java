@@ -12,6 +12,24 @@ import model.vo.Member;
 
 public class MemberDAO {
     
+    public boolean deleteWithId(String id) {
+        PreparedStatement pstmt = DBConnManager.getInstance().getPreparedStatement(
+                "delete from member where id=?");
+        ResultSet rs = null;
+        try {
+            pstmt.setString(1, id);
+            int r = pstmt.executeUpdate();
+            if(r>0)
+                return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBConnManager.close(rs);
+            DBConnManager.close(pstmt);
+        }
+        return false;
+    }
+    
     //도서 결제시 포인트 및 캐쉬 확인
     public Member selectPayBook(String id) {
 

@@ -73,9 +73,13 @@ public class AdminController extends Controller implements MouseListener{
             if(member!=null) {
                 int result = JOptionPane.showConfirmDialog(view, member.getId()+" 회원을 삭제 하시겠습니까?", "회원 삭제", JOptionPane.YES_NO_OPTION);
                 if(result == JOptionPane.YES_OPTION) {
-                    JOptionPane.showMessageDialog(view, member.getId()+" 회원이 삭제 되었습니다.");
-                    memberTableModel.update(new MemberDAO().selectAll());
-                    view.table.updateUI();
+                    if(new MemberDAO().deleteWithId(member.getId())){
+                        JOptionPane.showMessageDialog(view, member.getId()+" 회원이 삭제 되었습니다.");
+                        memberTableModel.update(new MemberDAO().selectAll());
+                        view.table.updateUI();
+                    }else {
+                        JOptionPane.showMessageDialog(view, "회원 삭제 실패!");
+                    }
                 }
             }
         }else if(s==view.table2) {
@@ -83,9 +87,13 @@ public class AdminController extends Controller implements MouseListener{
             if(book!=null) {
                 int result = JOptionPane.showConfirmDialog(view, book.getBname()+" 도서를 삭제 하시겠습니까?", "도서 삭제", JOptionPane.YES_NO_OPTION);
                 if(result == JOptionPane.YES_OPTION) {
-                    JOptionPane.showMessageDialog(view, book.getBname()+" 도서가 삭제 되었습니다.");
-                    bookTableModel.update(new BookDAO().selectAllWithPrice());
-                    view.table2.updateUI();
+                    if(new BookDAO().deleteBook(book.getBookId())){
+                        JOptionPane.showMessageDialog(view, book.getBname()+" 도서가 삭제 되었습니다.");
+                        bookTableModel.update(new BookDAO().selectAllWithPrice());
+                        view.table2.updateUI();
+                    }else {
+                        JOptionPane.showMessageDialog(view, "도서 삭제 실패!");
+                    }
                 }
             }
         }
