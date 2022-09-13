@@ -29,7 +29,7 @@ public class AddBookController extends Controller implements MouseListener {
 
     private AddBookView addbookView;
     private BufferedImage bookImage = null;//불러온 이미지 파일
-    private boolean isUpdateMode = false;
+    private boolean isUpdateMode;
 
     public AddBookController(Controller controller, String id, String bookId) {
         super(controller, AddBookView.class, id, bookId);

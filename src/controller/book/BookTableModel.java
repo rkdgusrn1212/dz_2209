@@ -44,7 +44,7 @@ public class BookTableModel extends AbstractTableModel {
         case 2:
             return ISBN.convertCategory(book.getCategory());
         case 3:
-            return book.getRegisterId()==null?"대여가능":"대여중";
+            return book.getLendId()==null?"대여가능":"대여중";
         }
         return null;
     }
