@@ -331,6 +331,24 @@ public class BookDAO {
         }
         return b;
     }
+    
+    
+    
+    public boolean returnBook(int bookId) {
+
+        PreparedStatement pstmt = DBConnManager.getInstance().getPreparedStatement(
+                "update book set lend_id = null where book_id = ?");
+        try {
+            pstmt.setInt(1, bookId);
+            pstmt.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }finally {
+            DBConnManager.close(pstmt);
+        }
+        return false;
+    }
 
     public ArrayList<Book> selectBookWithMemberIdWithRowNum(String id, int rowNum) {
 

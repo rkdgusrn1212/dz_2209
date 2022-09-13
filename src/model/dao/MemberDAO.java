@@ -352,7 +352,7 @@ public boolean isEmailExist(String checkStr) {
         PreparedStatement pstmt = manager.getPreparedStatement(
                 "update member set cash = cash-(select price from book where book_id = ?) where id=?");
         PreparedStatement pstmt2 = manager.getPreparedStatement(
-                "update book set register_id = (select id from member where id = ?) where book_id = ?");
+                "update book set lend_id = ? where book_id = ?");
         boolean success = false;
         try {
             pstmt.setInt(1, bookId);

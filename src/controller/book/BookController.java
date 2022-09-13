@@ -36,6 +36,13 @@ public class BookController extends Controller {
             }else {
                 JOptionPane.showMessageDialog(viewBook,"도서 삭제 실패!");
             }
+        }else if(s==viewBook.btnReturn) {
+            if(new BookDAO().returnBook(Integer.parseInt(getArgs(0)))) {
+                JOptionPane.showMessageDialog(viewBook,"도서가 반납 되었습니다.");
+                finish();
+            }else {
+                JOptionPane.showMessageDialog(viewBook,"도서 반납 실패!");
+            }
         }
     }
 
@@ -46,6 +53,7 @@ public class BookController extends Controller {
         viewBook.btnPay.addActionListener(this);
         viewBook.btnUpdate.addActionListener(this);
         viewBook.btnDelete.addActionListener(this);
+        viewBook.btnReturn.addActionListener(this);
     }
     
     @Override
@@ -75,6 +83,19 @@ public class BookController extends Controller {
         }else {//아닐때
             viewBook.btnUpdate.setVisible(false);
             viewBook.btnDelete.setVisible(false);
+        }
+        //대여가자 있으면
+        if(book.getLendId()!=null) {
+            viewBook.btnPay.setVisible(false);
+            //대여자가 본인.
+            if(book.getLendId().equals(getArgs(1))) {
+                viewBook.btnReturn.setVisible(true);
+            }else {
+                viewBook.btnReturn.setVisible(false);
+            }
+        }else {
+            viewBook.btnReturn.setVisible(false);
+            viewBook.btnPay.setVisible(true);
         }
     }
 

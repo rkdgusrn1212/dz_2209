@@ -15,7 +15,7 @@ public class BookView extends View{
     public JTextField tfName, tfWriter, tfPrice;
     public JScrollPane spSummary;
     public JTextArea taSummary;
-    public JButton btnBack, btnPay, btnUpdate, btnDelete;
+    public JButton btnBack, btnPay, btnUpdate, btnDelete, btnReturn;
     
 //    JTable table; //검색과 전체 보기를 위한 테이블 객체 생성
     public BookView() {
@@ -34,6 +34,8 @@ public class BookView extends View{
         btnUpdate.setVisible(false);//기본은 꺼둠. 오직 등록자만이 볼수 있음.
         btnDelete = new JButton("삭제");
         btnDelete.setVisible(false);//기본은 꺼둠. 오직 등록자만이 볼수 있음.
+        btnReturn = new JButton("반납");
+        btnReturn.setVisible(false);
         btnPay = new JButton("결제");
         tfName = new JTextField();
         tfName.setFocusable(false);
@@ -50,6 +52,7 @@ public class BookView extends View{
         btnDelete.setBounds(670, 20, 65, 35);
         btnBack.setBounds(740, 20, 65, 35);
         btnPay.setBounds(830, 20, 130, 35);
+        btnReturn.setBounds(830, 20, 130, 35);
         labelViewTitle.setBounds(400, 12, 200, 35);
         labelName.setBounds(40, 120, 105, 35);
         tfName.setBounds(160, 120, 250, 35);
@@ -67,6 +70,7 @@ public class BookView extends View{
         btnDelete.setFont(fontSmall);
         btnBack.setFont(fontSmall);
         btnPay.setFont(font);
+        btnReturn.setFont(font);
         labelName.setFont(font);
         labelPrice.setFont(font);
         labelWriter.setFont(font);
@@ -79,6 +83,7 @@ public class BookView extends View{
         add(labelViewTitle);
         add(btnBack);
         add(btnPay);
+        add(btnReturn);
         add(btnUpdate);
         add(btnDelete);
         add(labelName);
