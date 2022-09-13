@@ -32,6 +32,15 @@ public class LoginController extends Controller implements ItemListener{
         if(s==viewLogin.btnLogin) {
             String id = viewLogin.tfId.getText();
             String pass = new String(viewLogin.tfPwd.getPassword());
+            
+            if(id.length()<1) {
+                viewLogin.showMsg("아이디를 입력해 주세요.");   
+                viewLogin.tfId.setText("");
+                viewLogin.tfId.requestFocus();
+                viewLogin.tfPwd.setText("");
+                return;
+            }
+            
             if(isAdmin) {
                 if (new AdminDAO().checkIdPwd(viewLogin.tfId.getText(), new String(viewLogin.tfPwd.getPassword()))) {
                     viewLogin.showMsg("관리자 로그인 성공!!");
