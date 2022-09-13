@@ -34,19 +34,21 @@ public class BookDAO {
             pstmt.setInt(5, price);
             pstmt.setString(6, summary);
             pstmt.setInt(8, bookId);
+            boolean success = false;
             if(image!=null) {
                 try {
                     ByteArrayOutputStream baos = new ByteArrayOutputStream();
                     ImageIO.write(image, "png", baos);
                     ByteArrayInputStream is = new ByteArrayInputStream(baos.toByteArray());
                     pstmt.setBinaryStream(7, is);
-                    System.out.println("이미지 성공");
+                    success = true;
                 } catch (IOException e1) {
-                    System.out.println("이미지 실패");
                     e1.printStackTrace();
                 }   
             }
-            pstmt.setNull(7, java.sql.Types.BLOB);
+            if(!success) {
+                pstmt.setNull(7, java.sql.Types.BLOB);
+            }
             pstmt.executeUpdate();
             return true;
         } catch (SQLException e) {
@@ -291,7 +293,7 @@ public class BookDAO {
         }
         return list;
     }//SelectAllBook
-    
+
     public ArrayList<Book> selectAllWithPrice() {
 
         PreparedStatement pstmt = DBConnManager.getInstance().getPreparedStatement(
@@ -330,7 +332,7 @@ public class BookDAO {
             rs = pstmt.executeQuery();
             if(rs.next()) {
                 InputStream imageStream = rs.getBinaryStream(8);
-                Image image = null;
+                BufferedImage image = null;
                 if(imageStream != null) {
                     try {
                         image = ImageIO.read(imageStream);
@@ -391,7 +393,7 @@ public class BookDAO {
             rs = pstmt.executeQuery();
             while(rs.next()) {
                 InputStream imageStream = rs.getBinaryStream(8);
-                Image image = null;
+                BufferedImage image = null;
                 if(imageStream != null) {
                     try {
                         image = ImageIO.read(imageStream);

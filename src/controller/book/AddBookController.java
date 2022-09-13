@@ -28,7 +28,7 @@ import view.book.AddBookView;
 public class AddBookController extends Controller implements MouseListener {
 
     private AddBookView addbookView;
-    private BufferedImage bookImage = null;//불러온 이미지 파일
+    private BufferedImage bookImage;//불러온 이미지 파일
     private boolean isUpdateMode;
 
     public AddBookController(Controller controller, String id, String bookId) {
@@ -111,10 +111,12 @@ public class AddBookController extends Controller implements MouseListener {
             addbookView.tfWriter.setText(book.getWriter());
             addbookView.tfPrice.setText(""+book.getPrice());
             addbookView.taContent.setText(book.getSummary());
-            Image image = book.getImg();
-            if(image!=null) {
-                addbookView.bookImgLabel.setIcon(ImageHelper.getFitImageIcon(addbookView.bookImgLabel, image));
+            addbookView.cbInterestCategory.setSelectedIndex(book.getCategory());
+            bookImage = book.getImg();
+            if(bookImage!=null) {
+                addbookView.bookImgLabel.setIcon(ImageHelper.getFitImageIcon(addbookView.bookImgLabel, bookImage));
             }else {
+                bookImage = null;
                 addbookView.bookImgLabel.setIcon(ImageHelper.getDefaultImageIcon(
                         addbookView.bookImgLabel.getBounds().width, 
                         addbookView.bookImgLabel.getBounds().height));

@@ -1,6 +1,5 @@
 package model.vo;
-import java.awt.Image;
-import java.io.File;
+import java.awt.image.BufferedImage;
 
 public class Book {
     
@@ -11,7 +10,7 @@ public class Book {
     private String writer;
     private int price;
     private String summary;
-    private Image img;
+    private BufferedImage img;
     private String registerId;
     private String lendId;
 
@@ -32,7 +31,7 @@ public class Book {
     }
     
     
-    public Book(int bookId, String isbn, int category, String bName, String writer, int price, String summary, Image img, String registerId, String lendId) {
+    public Book(int bookId, String isbn, int category, String bName, String writer, int price, String summary, BufferedImage img, String registerId, String lendId) {
         this.bookId =  bookId;
         this.isbn = isbn;
         this.category = category;
@@ -53,7 +52,7 @@ public class Book {
         return registerId;
     }
     
-    public Image getImg() {
+    public BufferedImage getImg() {
         return img;
     }
 
