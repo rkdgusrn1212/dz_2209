@@ -1,5 +1,6 @@
 package model.dao;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -345,19 +346,36 @@ public boolean isEmailExist(String checkStr) {
         return false;
     }
 
-    public boolean updateAfterPay(String id, int pay) {
-        PreparedStatement pstmt = DBConnManager.getInstance().getPreparedStatement(
-                "update member set cash = cash-? where id=?");
+    public boolean pay(String id, int bookId) {
+        DBConnManager manager = DBConnManager.getInstance();
+        manager.setAutoCommit(false);
+        PreparedStatement pstmt = manager.getPreparedStatement(
+                "update member set cash = cash-(select price from book where book_id = ?) where id=?");
+        PreparedStatement pstmt2 = manager.getPreparedStatement(
+                "update book set register_id = (select id from member where id = ?) where book_id = ?");
+        boolean success = false;
         try {
-            pstmt.setInt(1, pay);
+            pstmt.setInt(1, bookId);
             pstmt.setString(2, id);
+            pstmt2.setString(1, id);
+            pstmt2.setInt(2, bookId);
             int t = pstmt.executeUpdate();
-            if(t>0) return true;
+            int t2 = pstmt2.executeUpdate();
+            if(t>0&&t2>0) {
+                manager.commit();
+                success = true;
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
             DBConnManager.close(pstmt);
-        }   
-        return false;
+        }
+        if(!success) {
+            manager.rollback();
+        }else {
+            manager.commit();
+        }
+        manager.setAutoCommit(true);
+        return success;
     }
 }

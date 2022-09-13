@@ -140,4 +140,40 @@ public class DBConnManager {
             e.printStackTrace();
         }
     }
+    
+    public void setAutoCommit(boolean auto) {
+        try {
+            if(mConn==null||mConn.isClosed()) {//mConn객체가 GC 대상(혹은 진짜 없거나)이거나, 닫혀있다면.
+                mConn = DriverManager.getConnection(mURL, mUser, mPwd);//새로 연결해서 래퍼런스 저장.
+            }
+            mConn.setAutoCommit(auto);
+        } catch (SQLException e) {
+            System.out.println("DB 연결 생성 실패");
+            e.printStackTrace();
+        }
+    }
+    
+    public void commit() {
+        try {
+            if(mConn==null||mConn.isClosed()) {//mConn객체가 GC 대상(혹은 진짜 없거나)이거나, 닫혀있다면.
+                mConn = DriverManager.getConnection(mURL, mUser, mPwd);//새로 연결해서 래퍼런스 저장.
+            }
+            mConn.commit();
+        } catch (SQLException e) {
+            System.out.println("DB 연결 생성 실패");
+            e.printStackTrace();
+        }
+    }
+    
+    public void rollback() {
+        try {
+            if(mConn==null||mConn.isClosed()) {//mConn객체가 GC 대상(혹은 진짜 없거나)이거나, 닫혀있다면.
+                mConn = DriverManager.getConnection(mURL, mUser, mPwd);//새로 연결해서 래퍼런스 저장.
+            }
+            mConn.rollback();
+        } catch (SQLException e) {
+            System.out.println("DB 연결 생성 실패");
+            e.printStackTrace();
+        }
+    }
 }

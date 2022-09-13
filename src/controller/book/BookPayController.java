@@ -27,7 +27,12 @@ public class BookPayController extends Controller {
         if(s == viewBookPay.btnBack) {
             finish();
         }else if(s==viewBookPay.btnPay) {
-            //new MemberDAO().updateAtferPay(id);
+            if(new MemberDAO().pay(getArgs(0), Integer.parseInt(getArgs(1)))) {
+                JOptionPane.showMessageDialog(viewBookPay,"구매 완료");
+                finish();
+            }else {
+                JOptionPane.showMessageDialog(viewBookPay,"구매 실패");
+            }
         }else if(s==viewBookPay.btnCash) {
             new CashController(this, getArgs(0));
         }
