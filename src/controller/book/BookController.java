@@ -80,23 +80,24 @@ public class BookController extends Controller {
         if(book.getRegisterId().equals(getArgs(1))) {
             viewBook.btnUpdate.setVisible(true);
             viewBook.btnDelete.setVisible(true);
+            viewBook.btnPay.setVisible(false);
+            viewBook.btnReturn.setVisible(false);
         }else {//아닐때
             viewBook.btnUpdate.setVisible(false);
             viewBook.btnDelete.setVisible(false);
-        }
-        //대여가자 있으면
-        if(book.getLendId()!=null) {
-            viewBook.btnPay.setVisible(false);
-            //대여자가 본인.
-            if(book.getLendId().equals(getArgs(1))) {
-                viewBook.btnReturn.setVisible(true);
-            }else {
-                viewBook.btnReturn.setVisible(false);
+            //대여가자 있을때
+            if(book.getLendId()!=null) {
+                viewBook.btnPay.setVisible(false);
+                //그 대여자가 본인일때
+                if(book.getLendId().equals(getArgs(1))) {
+                    viewBook.btnReturn.setVisible(true);
+                }else {
+                    viewBook.btnReturn.setVisible(false);               
+                }
+            }else {//대여가자 없을때,
+                viewBook.btnPay.setVisible(true);
+                viewBook.btnReturn.setVisible(false);    
             }
-        }else {
-            viewBook.btnReturn.setVisible(false);
-            viewBook.btnPay.setVisible(true);
         }
     }
-
 }

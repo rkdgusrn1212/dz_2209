@@ -28,6 +28,8 @@ import view.book.BookSelectView;
 public class BookSelectController extends Controller {
 
     private BookSelectView viewBookSelect;
+    private ClickPickListener cpListener;
+    private SelectTglBtnListener stbListener;
 
     public BookSelectController(Controller controller, String id) {
         super(controller, BookSelectView.class, id);
@@ -59,6 +61,13 @@ public class BookSelectController extends Controller {
         viewBookSelect.btnAllList.addActionListener(this);
         viewBookSelect.btnAdd.addActionListener(this);
         viewBookSelect.btnSearch.addActionListener(this);
+        stbListener = new SelectTglBtnListener();
+        cpListener = new ClickPickListener();
+        for(int i=0 ;i<3; i++) {
+            BookClickView view = viewBookSelect.viewBookClick[i];
+            view.btnPick.addActionListener(cpListener);
+            view.tglBtnImage.addItemListener(stbListener);
+        }
     }
     
     @Override
@@ -69,8 +78,8 @@ public class BookSelectController extends Controller {
         for(;i<list.size(); i++) {
             Book book = list.get(i);
             BookClickView view = viewBookSelect.viewBookClick[i];
-            view.btnPick.addActionListener(new ClickPickListener(this,book.getBookId(), getArgs(0)));
-            view.tglBtnImage.addItemListener(new SelectTglBtnListener(view.spContent));
+            stbListener.update(view.spContent);
+            cpListener.update(this,book.getBookId(), getArgs(0));
            
             if(book.getImg()!=null) {
                 view.tglBtnImage.setIcon(ImageHelper.getFitImageIcon(view.tglBtnImage, book.getImg()));
@@ -94,7 +103,8 @@ public class BookSelectController extends Controller {
     private static class SelectTglBtnListener implements ItemListener{
 
         private JScrollPane spContent;
-        SelectTglBtnListener(JScrollPane spContent){
+        
+        void update(JScrollPane spContent){
             this.spContent = spContent;
         }
         @Override
@@ -113,7 +123,7 @@ public class BookSelectController extends Controller {
         private int bookId;
         private String id;
         private Controller controller;
-        ClickPickListener(Controller controller, int bookId, String id){
+        void update(Controller controller, int bookId, String id){
             this.bookId = bookId;
             this.id = id;
             this.controller = controller;
