@@ -1,4 +1,4 @@
-package controller.book;
+package controller.admin;
 
 import java.util.ArrayList;
 
@@ -7,10 +7,10 @@ import javax.swing.table.AbstractTableModel;
 import isbn.ISBN;
 import model.vo.Book;
 
-public class BookTableModel extends AbstractTableModel {
+public class AdminBookTableModel extends AbstractTableModel {
 
 
-    private ArrayList<Book> bookList = new ArrayList<>();//오로지 제목, 저자, 카테고리, 대여여부만 가진다.
+    private ArrayList<Book> bookList = new ArrayList<>();//오로지 제목, 저자, 카테고리, 도서원가만 가진다.
 
     public void update(ArrayList<Book> book) {
         bookList = (ArrayList<Book>) book.clone();//이후 book의 수정에 독립적. 
@@ -44,7 +44,7 @@ public class BookTableModel extends AbstractTableModel {
         case 2:
             return ISBN.convertCategory(book.getCategory());
         case 3:
-            return book.getRegisterId()==null?"대여가능":"대여중";
+            return book.getPrice();
         }
         return null;
     }
@@ -61,7 +61,7 @@ public class BookTableModel extends AbstractTableModel {
         case 2:
             return "분 류";
         case 3:
-            return "대여 여부";
+            return "도서 원가";
         }
         return super.getColumnName(column);
     }

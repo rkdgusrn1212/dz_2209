@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import db.util.DBConnManager;
+import model.vo.Book;
 import model.vo.Member;
 
 public class MemberDAO {
@@ -76,6 +77,27 @@ public class MemberDAO {
             DBConnManager.close(pstmt);
         }
         return false;
+    }
+    
+    public ArrayList<Member> selectAll() {
+        PreparedStatement pstmt = DBConnManager.getInstance().getPreparedStatement(
+                "select id, name, email, interest_category from member ");
+        ResultSet rs = null;
+        Book b = null;
+        ArrayList<Member> list = new ArrayList<>();
+        try {
+            rs = pstmt.executeQuery();
+            while(rs.next()) {
+                list.add(new Member(rs.getString(1), rs.getString(2), rs.getString(3), rs.getInt(4)));
+            }
+            return list;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBConnManager.close(rs);
+            DBConnManager.close(pstmt);
+        }
+        return list;
     }
 
     public Member selectMyPage(String id) {

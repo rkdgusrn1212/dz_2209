@@ -21,9 +21,6 @@ public class MyPageController extends Controller {
         Object s = e.getSource();
         if (s == viewMyPage.btnBack) {
             finish();
-        } else if (s == viewMyPage.btnLogout) {
-            new LoginController(null);
-            finish();
         } else if (s == viewMyPage.btnUpdate) {
             new MemberUpdateController(this, getArgs(0));
         }else if (s == viewMyPage.btnEditBook) {
@@ -38,7 +35,6 @@ public class MyPageController extends Controller {
     protected void create(View windowView) {
         viewMyPage = (MyPageView) windowView;
         viewMyPage.btnBack.addActionListener(this);
-        viewMyPage.btnLogout.addActionListener(this);
         viewMyPage.btnUpdate.addActionListener(this);
         viewMyPage.btnEditBook.addActionListener(this);
         viewMyPage.btnCash.addActionListener(this);

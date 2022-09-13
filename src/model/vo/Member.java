@@ -19,10 +19,18 @@ public class Member {
   	}	//selectPayBook
 
 
-	public Member(String id, String pass, String ename, String email, int interestCategory, int cash) {
+    public Member(String id, String name, String email, int interestCategory) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+        this.interestCategery = interestCategory;
+    }
+
+
+	public Member(String id, String pass, String name, String email, int interestCategory, int cash) {
 		this.id = id;
 		this.pwd = pass;
-		this.name = ename;
+		this.name = name;
 		this.email = email;
         this.interestCategery = interestCategory;
 		this.cash = cash;

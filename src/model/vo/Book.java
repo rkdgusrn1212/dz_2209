@@ -23,6 +23,15 @@ public class Book {
         this.lendId = lendId;
     }
     
+    public Book(int bookId, String bName, String writer, int category, int price) {
+        this.bookId = bookId;
+        this.bName = bName;
+        this.writer = writer;
+        this.category = category;
+        this.price = price;
+    }
+    
+    
     public Book(int bookId, String isbn, int category, String bName, String writer, int price, String summary, Image img, String registerId, String lendId) {
         this.bookId =  bookId;
         this.isbn = isbn;

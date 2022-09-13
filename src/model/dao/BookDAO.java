@@ -270,9 +270,7 @@ public class BookDAO {
 
         PreparedStatement pstmt = DBConnManager.getInstance().getPreparedStatement(
                 "select book_id, b_name, writer, category, lend_id from book ");
-        ArrayList<Book> bookList = new ArrayList<>();
         ResultSet rs = null;
-        Book b = null;
         ArrayList<Book> list = new ArrayList<>();
         try {
             rs = pstmt.executeQuery();
@@ -283,7 +281,32 @@ public class BookDAO {
                         rs.getString(3),
                         rs.getInt(4),
                         rs.getString(5)));
-                bookList.add(b);
+            }
+            return list;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBConnManager.close(rs);
+            DBConnManager.close(pstmt);
+        }
+        return list;
+    }//SelectAllBook
+    
+    public ArrayList<Book> selectAllWithPrice() {
+
+        PreparedStatement pstmt = DBConnManager.getInstance().getPreparedStatement(
+                "select book_id, b_name, writer, category, price from book ");
+        ResultSet rs = null;
+        ArrayList<Book> list = new ArrayList<>();
+        try {
+            rs = pstmt.executeQuery();
+            while(rs.next()) {
+                list.add(new Book(
+                        rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getInt(4),
+                        rs.getInt(5)));
             }
             return list;
         } catch (SQLException e) {
